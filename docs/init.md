@@ -9,6 +9,11 @@
     ```console
     > pip install mysql
     ```
+- [Crispy form](https://django-crispy-forms.readthedocs.io/en/latest/install.html)
+    ```console
+    pip install django-crispy-forms
+    pip install crispy-bootstrap4
+    ```
     
 ## 💻장고 프로젝트 생성
 - 프로젝트 디렉토리 생성
