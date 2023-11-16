@@ -1,0 +1,22 @@
+{% extends "coverletter_site/base/main.html" %}
+
+{% block title %}문서 업로드{% endblock%}
+
+{% block main_area %}
+<div>
+   <div> <!-- 이력서 입력 또는 파일 첨부 -->
+      <label>이력서 입력 또는 파일첨부 위치</label>
+      <br>
+      <input type="textarea">
+   </div>
+   <hr> <!-- 구분용 -->
+   <div>
+      <label>표절 기준 : </label>
+      <p>표절율 15% 이상</p>
+   </div>
+   <hr>
+   <div>
+      <button type="submit">검사하기</button>
+   </div>
+</div>
+{% endblock%}

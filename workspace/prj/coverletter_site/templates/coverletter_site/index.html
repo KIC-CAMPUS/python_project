@@ -1,0 +1,20 @@
+{% extends "coverletter_site/base/main.html" %}
+
+{% block title %}메인 페이지{% endblock%}
+
+{% block main_area %}
+<ul>
+   <li>
+      <a href="{% url 'login' %}" class="btn btn-primary">
+         로그인</a>
+   </li>
+   <li>
+      <a href="{% url 'upload' %}" class="btn btn-primary">
+         문서 업로드</a>
+   </li>
+   <li>
+      <a href="{% url 'result_list' %}" class="btn btn-outline-primary">
+         결과 목록</a>
+   </li>
+</ul>
+{% endblock%}
