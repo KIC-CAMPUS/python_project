@@ -7,8 +7,9 @@ from .forms import *
 def index(request):
    return render(request, "coverletter_site/index.html")
 
-def login(request):
-   return render(request, "coverletter_site/login.html")
+def join(request):
+   form = UserForm
+   return render(request, "coverletter_site/join.html", {'form':form})
 
 def coverletter_upload(request):
    return render(request, "coverletter_site/coverletter_upload.html")
