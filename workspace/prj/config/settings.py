@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
 ]
 
-# 로그인 성공 시 이동할 URL
+# 로그인, 로그아웃 성공 시 이동할 URL
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Crispy-bootstrap4 세팅
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
