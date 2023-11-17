@@ -6,7 +6,7 @@
 {% block main_area %}
    <form method="post" enctype="application/x-www-form-urlencoded">
       {% csrf_token %}
-      {{ userForm | crispy }}
+      {{ form | crispy }}
       <input type="submit" class="btn btn-primary">
    </form>
 {% endblock%}

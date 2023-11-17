@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 # 로그인, 로그아웃 성공 시 이동할 URL
+AUTH_USER_MODEL = 'coverletter_site.User'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 

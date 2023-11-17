@@ -15,11 +15,11 @@ def join(request):
       form = UserForm(request.POST)
       if form.is_valid():
          form.save()
-         print(form)
          return redirect('login')
    # GET
-   form = UserForm()
-   return render(request, "coverletter_site/join.html", {'userForm':form})
+   else :
+      form = UserForm()
+   return render(request, "coverletter_site/join.html", {'form': form})
 
 # 문서 업로드
 def coverletter_upload(request):
