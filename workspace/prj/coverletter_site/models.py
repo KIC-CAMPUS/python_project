@@ -9,7 +9,7 @@ class User(AbstractUser):
 
 # 자소서
 class CoverLetter(models.Model):
-   company = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+   user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
    title = models.CharField(max_length=100)
    content = models.TextField(max_length=500)
    status = models.BooleanField()
