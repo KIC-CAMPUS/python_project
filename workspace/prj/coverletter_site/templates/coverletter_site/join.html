@@ -4,9 +4,11 @@
 {% block title %}메인 페이지{% endblock%}
 
 {% block main_area %}
+<div class="container">
    <form method="post" enctype="application/x-www-form-urlencoded">
       {% csrf_token %}
       {{ form | crispy }}
       <input type="submit" class="btn btn-primary">
    </form>
+</div>
 {% endblock%}
