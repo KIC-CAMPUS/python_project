@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from django.contrib.auth import login, authenticate
 
 from .models import *
 from .forms import *
@@ -14,8 +15,9 @@ def join(request):
    if request.method == "POST":
       form = UserForm(request.POST)
       if form.is_valid():
-         form.save()
-         return redirect('login')
+         join_user = form.save()
+         login(request, join_user)
+         return render(request, "coverletter_site/join_success.html")
    # GET
    else :
       form = UserForm()

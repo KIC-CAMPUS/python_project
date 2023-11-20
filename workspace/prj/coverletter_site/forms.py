@@ -1,13 +1,17 @@
 from .models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm 
+from django.core.validators import RegexValidator
 
 class UserForm(UserCreationForm):
 
    username = forms.CharField(label="ID")
-   email = forms.EmailField()
-   conpany_name = forms.CharField(label="회사명")
+   last_name = forms.CharField(label="닉네임")
+   phone = forms.CharField(label="전화번호")
+   birthday = forms.DateField(label="생일")
 
    class Meta:
       model = User
-      fields = ("username", "conpany_name", "email")
+      fields = ("first_name", "last_name",
+                "birthday", "phone",
+                "username", "password1", "password2",)

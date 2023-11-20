@@ -1,11 +1,10 @@
 from django.db import models
-
-from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # 유저
 class User(AbstractUser):
-   conpany_name = models.TextField(max_length=100, null=True)
+   birthday =  models.DateField()
+   phone = models.CharField(max_length=16)
 
 # 자소서
 class CoverLetter(models.Model):

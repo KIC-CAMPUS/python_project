@@ -1,0 +1,15 @@
+{% extends "coverletter_site/base/main.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}메인 페이지{% endblock%}
+
+{% block main_area %}
+<div class="container">
+   <h1>환영합니다.</h1>
+   <h3>회원 가입을 축하합니다.</h3>
+   {% if user.is_authenticated %}
+      <p>{{user.username}}님, [사이트이름]을 마음껏 이용해보세요.</p>
+   {% endif %}
+   <a href="{% url 'main' %}" class="btn btn-primary">시작하기</a>
+</div>
+{% endblock%}
