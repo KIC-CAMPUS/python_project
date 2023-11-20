@@ -1,6 +1,6 @@
-from .models import User
+from .models import User, CoverLetter
 from django import forms
-from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm
 
 class UserForm(UserCreationForm):
 
@@ -14,3 +14,8 @@ class UserForm(UserCreationForm):
       fields = ("first_name", "last_name",
                 "birthday", "phone",
                 "username", "password1", "password2",)
+      
+class CoverLetterForm(forms.ModelForm):
+   class Meta:
+      model = CoverLetter
+      fields = ("document_type", "content", "document_file")

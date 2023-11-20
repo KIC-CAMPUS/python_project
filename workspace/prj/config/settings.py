@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +47,10 @@ INSTALLED_APPS = [
 # 로그인, 로그아웃 성공 시 이동할 URL
 AUTH_USER_MODEL = 'coverletter_site.User'
 LOGOUT_REDIRECT_URL = "/"
+
+# 파일 업로드를 위한 미디어 설정
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Crispy-bootstrap4 세팅
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

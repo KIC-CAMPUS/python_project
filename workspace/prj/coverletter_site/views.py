@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
-from django.contrib.auth import login, authenticate
+from django.views.generic import ListView, CreateView
+from django.contrib.auth import login
 
 from .models import *
 from .forms import *
@@ -24,10 +24,12 @@ def join(request):
    return render(request, "coverletter_site/join.html", {'form': form})
 
 # 문서 업로드
-def coverletter_upload(request):
-   return render(request, "coverletter_site/coverletter_upload.html")
+class CoverLetterCreated(CreateView):
+   model = CoverLetter
+   form_class = CoverLetterForm
 
 # 자소서 목록
 class CoverLetterList(ListView):
    model = CoverLetter
    ordering = ['-pk']
+   paginate_by = 5
