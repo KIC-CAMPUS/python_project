@@ -54,10 +54,15 @@
     - `USER`, `PASSWORD` : 수업 때 만들었던 django라는 계정을 사용해도 무방함.
     - `HOST`, `PORT` : MySql 설치 시 기본으로 설정된 호스트와 포트 번호를 씀.
 
-- 로그인, 로그아웃 성공 후, 리다이렉션 URL 지정
-    ```PY
-    LOGIN_REDIRECT_URL = "/"
+- 로그아웃 성공 후, 리다이렉션 URL 지정
+    ```py
     LOGOUT_REDIRECT_URL = "/"
+    ```
+
+- 업로드한 파일의 디렉토리 경로 지정
+    ```py
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     ```
 
 - Crispy-bootstrap4 세팅

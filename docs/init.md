@@ -32,3 +32,25 @@
     mysql> create database bigdata_django_prj default character set UTF8;
     Query OK, 1 row affected, 1 warning (0.00 sec)
     ```
+
+## 🗄️데이터 베이스 마이그레이션
+- makemigrations
+    ```console
+    ../prj> python manage.py makemigrations
+    ```
+- migrate
+    ```console
+    ../prj> python manage.py migrate
+    ```
+
+## 🏃장고 서버 시작
+- runserver
+    ```console
+    ../prj> python manage.py runserver
+    ```
+
+## 🧑‍💼관리자 계정 생성
+- createsuperuser
+    ```console
+    ../prj> python manage.py createsuperuser
+    ```
