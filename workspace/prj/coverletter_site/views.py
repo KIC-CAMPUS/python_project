@@ -3,10 +3,9 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
-from django.contrib.auth import login
 
-from .models import User, CoverLetter
-from .forms import UserForm, CoverLetterForm
+from .models import CoverLetter
+from .forms import CoverLetterForm
 
 # 메인
 def index(request):
@@ -25,20 +24,6 @@ def spelling_check(requset):
 
 def characters_count(requset):
    return render(requset, "coverletter_site/count.html")
-
-# 회원가입
-def join(request):
-   # POST
-   if request.method == "POST":
-      form = UserForm(request.POST)
-      if form.is_valid():
-         join_user = form.save()
-         login(request, join_user)
-         return render(request, "coverletter_site/join_success.html")
-   # GET
-   else :
-      form = UserForm()
-   return render(request, "coverletter_site/join.html", {'form': form})
 
 # 문서 업로드
 class CoverLetterCreated(CreateView):
