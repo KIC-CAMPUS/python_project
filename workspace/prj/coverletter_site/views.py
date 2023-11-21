@@ -1,6 +1,5 @@
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.views import View
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
@@ -13,8 +12,13 @@ from .forms import UserForm, CoverLetterForm
 def index(request):
    return render(request, "coverletter_site/index.html")
 
+# 마이페이지
 def mypage(request):
    return render(request, "coverletter_site/mypage.html")
+
+# 이용방법
+def howtouse(request):
+   return render(request, "coverletter_site/howtouse.html")
 
 # 회원가입
 def join(request):
@@ -37,6 +41,9 @@ class CoverLetterCreated(CreateView):
    success_url = reverse_lazy('result_list')
 
    def get_success_url(self) -> str:
+      obj = self.object
+      obj.user = self.request.user
+      obj.save()
       return reverse('result_list')
 
 # 자소서 목록
@@ -45,7 +52,6 @@ class CoverLetterList(ListView):
    ordering = ['-pk']
    paginate_by = 5
 
-class Howtouse(View):
-   template_name = 'howtouse.html'
-   def get(self, request, *args, **kwargs):
-      return render(request, 'coverletter_site/howtouse.html')
+   def get_queryset(self) -> QuerySet[Any]:
+      user = self.request.user
+      return super().get_queryset().filter(user=user)
