@@ -2,21 +2,18 @@
 {% block main_area %}
 
 <div class="container">
-    <label>후기 요약문</label>
-    <div>
-        <input type="text">
-    </div>
-    <label>후기 작성</label>
-    <div>
-        <input type="textarea">
-    </div>
-    <label>첨부 파일</label>
-    <div>
-        <input type="button" value="파일 첨부">
-    </div>
-    <div>
-        <a href="/review_list"><button type="submit">후기 등록</button></a>
-    </div>
+    <h1>후기 작성</h1>
+    <form method="post" enctype="multipart/form-data" class="mt-3">
+        <table class="table">
+            {% csrf_token %}
+            {{ form }}
+        </table>
+    
+        <div class="d-flex justify-content-end">
+            <div class="m-2">
+                <button type="submit" class="btn btn-primary">후기 등록</button>
+            </div>
+        </div>
+    </form>
 </div>
-
 {% endblock %}

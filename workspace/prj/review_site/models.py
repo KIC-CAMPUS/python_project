@@ -6,7 +6,7 @@ class Review(models.Model):
    author = models.ForeignKey(User, on_delete=models.CASCADE)
    title = models.CharField(max_length=100)
    content = models.TextField()
-   upload_file = models.FileField(upload_to="review/%Y/%m/%d/", null=True)
+   upload_file = models.FileField(upload_to="review/%Y/%m/%d/", null=True, blank=True)
 
    create_at = models.DateTimeField(auto_now_add=True)
    updated_at = models.DateTimeField(auto_now=True)

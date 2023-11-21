@@ -1,7 +1,9 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 
 from .models import CoverLetter
@@ -31,11 +33,10 @@ class CoverLetterCreated(CreateView):
    form_class = CoverLetterForm
    success_url = reverse_lazy('result_list')
 
-   def get_success_url(self) -> str:
-      obj = self.object
-      obj.user = self.request.user
-      obj.save()
-      return reverse('result_list')
+   def form_valid(self, form: BaseModelForm) -> HttpResponse:
+      coverletter = form.save(commit=False)
+      coverletter.user = self.request.user
+      return super().form_valid(form)
 
 # 자소서 목록
 class CoverLetterList(ListView):
