@@ -6,9 +6,6 @@ class User(AbstractUser):
    birthday =  models.DateField()
    phone = models.CharField(max_length=16)
 
-   def __str__(self) -> str:
-      return f'[{self.pk}] {self.user}'
-
 # 자소서
 class CoverLetter(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
