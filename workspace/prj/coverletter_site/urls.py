@@ -16,4 +16,8 @@ urlpatterns = [
    path("review_create/", views.review_create),
    path("check/", views.check),
    path("count/", views.count),
+
+   # 변경용 백단 끝나면 풀받고 변경해서 푸시
+   path("detail/", views.detail),
+   path("detail/1/", views.details),
 ]

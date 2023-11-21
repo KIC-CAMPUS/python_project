@@ -50,3 +50,12 @@ def check(requset):
 
 def count(requset):
     return render(requset, "coverletter_site/count.html")
+
+
+# 풀받고 변경해야됨
+def detail(requset):
+    return render(requset, "coverletter_site/detail.html")
+
+
+def details(requset):
+    return render(requset, "coverletter_site/details.html")

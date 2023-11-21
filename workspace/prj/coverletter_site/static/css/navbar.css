@@ -1,3 +1,14 @@
+ nav{
+    margin-bottom: 10px;
+    height: 80px
+ }
+
+ .nav_line{
+    margin-bottom: 60px;
+    background-color: #01aaef;
+    height: 3px;
+ }
+
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
@@ -13,20 +24,18 @@
 .dropdown-menu2{
     min-width: 0px;
     position: relative;
-    left : 15px;
+    left : 30px;
 }
 
 .menubox{
     position: relative;
-    left: 120px;
-
+    left: 60px;
+    /*font-weight: bold;*/
 }
 
 .marginbox{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
-
-
 
 

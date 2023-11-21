@@ -3,6 +3,7 @@
     upload말고도 사용되고는 있습니다.
 
  */
+
 .upload_title{
     border-left: #01aaef 4px solid;
     padding-left: 20px;
@@ -27,7 +28,7 @@
 /* 문서 업로드 화면의 검사설정 부분 패딩값 추가와 '제외' 글씨 컬러 */
 
 .upload_tr{
-    height: 10px
+    height: 20px
 }
 
 /* 테이블 tr마다 높이 지정해서 벌려놓았습니다. */
@@ -51,3 +52,8 @@
 }
 
 /* 테이블 밑에 들어가는 선입니다. */
+
+#button_list{
+    position: relative;
+    left: 400px;
+}
