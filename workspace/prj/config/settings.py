@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'coverletter_site.apps.CoverletterSiteConfig',
+    'review_site.apps.ReviewSiteConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +52,7 @@ LOGOUT_REDIRECT_URL = "/"
 
 # 파일 업로드를 위한 미디어 설정
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = [BASE_DIR / 'media']
 
 # Crispy-bootstrap4 세팅
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
@@ -72,7 +73,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

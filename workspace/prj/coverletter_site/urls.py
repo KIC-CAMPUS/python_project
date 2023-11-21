@@ -11,8 +11,6 @@ urlpatterns = [
    path("result_list/", views.CoverLetterList.as_view(), name='result_list'),
    path("mypage/", views.mypage, name='mypage'),
    path("howtouse/", views.howtouse, name='howtouse'),
-   path("review_list/", views.review_list),
-   path("review_create/", views.review_create),
    path("check/", views.spelling_check),
    path("count/", views.characters_count),
 ]

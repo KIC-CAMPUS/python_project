@@ -20,12 +20,6 @@ def mypage(request):
 def howtouse(request):
    return render(request, "coverletter_site/howtouse.html")
 
-def review_list(requset):
-   return render(requset, "coverletter_site/review_list.html")
-
-def review_create(requset):
-   return render(requset, "coverletter_site/review_create.html")
-
 def spelling_check(requset):
    return render(requset, "coverletter_site/check.html")
 
