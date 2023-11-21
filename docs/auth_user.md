@@ -1,41 +1,35 @@
-# 1. 장고의 Auth 세팅및 URI 매핑
+# User 모델
 
-- `coverletter_site/urls.py`
+### `member_site/models.py`
+```py
+class User(AbstractUser):
+   birthday =  models.DateField()
+   phone = models.CharField(max_length=16)
+```
+- `AbstractUser`: 장고에서 기본적으로 지원해주는 User을 확장하기 위한 class
+   - 기존 장고 User가 가지고 있던 필드 등을 이어받고, 새로운 필드를 추가하여 확장하였음.
+- `birthday`: 생일
+   - 형식 예시 :2023-11-21
+- `phone`: 전화번호
+
+# 장고의 Auth 세팅및 URI 매핑
+
+- `member_site/urls.py`
    ```py
    from django.urls import path
    from django.contrib.auth import views as auth_views
    from . import views
 
    urlpatterns = [
-      path("login/", auth_views.LoginView.as_view(template_name='coverletter_site/login.html'), name='login'),
+      path("login/", auth_views.LoginView.as_view(template_name='member/login.html'), name='login'),
       path("logout/", auth_views.LogoutView.as_view(), name='logout'),
       path("join/", views.join, name='join'),
    ]
    ```
 
-- `config/settings.py`
-   ```py
-   INSTALLED_APPS = [
-      'django.contrib.auth',
-      #...
-   ]
-   
-   LOGOUT_REDIRECT_URL = "/"
-   ```
+# 회원가입
 
-# 2. 회원가입
-
-- `coverletter_site/models.py`
-   ```py
-   from django.db import models
-   from django.contrib.auth.models import AbstractUser
-   
-   class User(AbstractUser):
-      birthday =  models.DateField()
-      phone = models.CharField(max_length=16)
-   ```
-
-- `coverletter_site/forms.py`
+- `member_site/forms.py`
    ```py
    from django import forms
    from .models import User
@@ -55,7 +49,7 @@
                   "username", "password1", "password2",)
    ```
 
-- `coverletter_site/views.py`
+- `member_site/views.py`
    ```py
    from django.shortcuts import render, redirect
    from .models import User
@@ -75,7 +69,7 @@
       return render(request, "coverletter_site/join.html", {'form': form})
    ```
 
-- `coverletter_site/templates/coverletter_site/join.html`
+- `templates/member/join.html`
    ```html
    <form method="post" enctype="application/x-www-form-urlencoded">
       {% csrf_token %}
@@ -84,8 +78,8 @@
    </form>
    ```
 
-# 3. 로그인
-- `coverletter_site/templates/coverletter_site/login.html`
+# 로그인
+- `templates/member/login.html`
    ```html
    <form method="post">
       {% csrf_token %}

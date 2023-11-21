@@ -9,6 +9,7 @@
 ├─📁coverletter_site
 ├─📁media
 │  └─📁documents
+├─📁member_site
 ├─📁review_site
 ├─📁static
 │  ├─📁css
@@ -17,6 +18,7 @@
 └─📁templates
     ├─📁base
     ├─📁coverletter_site
+    ├─📁member
     └─📁review
 ```
 - `config/` : 장고 프로젝트 디렉토리
@@ -35,6 +37,7 @@
     ```py
     INSTALLED_APPS = [
     'coverletter_site.apps.CoverletterSiteConfig',
+    'member_site.apps.MemberSiteConfig',
     'review_site.apps.ReviewSiteConfig',
     # ...
     'crispy_forms',
@@ -42,7 +45,8 @@
     ]
     ```
     - `coverletter_site.apps.CoverletterSiteConfig`: 자소서 표절 검증
-    - `coverletter_site.apps.CoverletterSiteConfig`: 이용 후기
+    - `member_site.apps.CoverletterSiteConfig`: 회원 기능
+    - `review_site.apps.CoverletterSiteConfig`: 이용 후기
     - `crispy_forms, crispy_bootstrap4` : HTML 폼 태그, 부트스트립 css 자동 적용 시켜주는 라이브러리
 
 - 데이터 베이스 설정
