@@ -29,3 +29,24 @@ def coverletter_upload(request):
 class CoverLetterList(ListView):
    model = CoverLetter
    ordering = ['-pk']
+
+
+def mypage(requset):
+    return render(requset, "coverletter_site/mypage.html")
+
+
+# 화면 확인용으로 임시로 만들었습니다. 편하신대로 바꾸시면 될 것 같습니다.
+def review_list(requset):
+    return render(requset, "coverletter_site/review_list.html")
+
+
+def review_create(requset):
+    return render(requset, "coverletter_site/review_create.html")
+
+
+def check(requset):
+    return render(requset, "coverletter_site/check.html")
+
+
+def count(requset):
+    return render(requset, "coverletter_site/count.html")

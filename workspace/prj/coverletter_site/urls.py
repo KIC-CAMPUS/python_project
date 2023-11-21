@@ -9,4 +9,11 @@ urlpatterns = [
    path("join/", views.join, name='join'),
    path("upload/", views.coverletter_upload, name='upload'),
    path("result_list/", views.CoverLetterList.as_view(), name='result_list'),
+   path("mypage/", views.mypage),
+
+   # 화면 확인용으로 임시로 만들었습니다. 편하신대로 바꾸시면 될 것 같습니다.
+   path("review_list/", views.review_list),
+   path("review_create/", views.review_create),
+   path("check/", views.check),
+   path("count/", views.count),
 ]
