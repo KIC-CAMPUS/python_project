@@ -6,21 +6,26 @@
 ```console
 🖥️prj
 ├─📁config
-└─📁coverletter_site
-    ├─📁static
-    │  ├─📁css
-    │  └─📁js
-    └─📁templates
-       └─📁coverletter_site
-           └─📁base
+├─📁coverletter_site
+│  ├─📁migrations
+│  └─📁templates
+│     └─📁coverletter_site
+│         └─📁base
+└─📁media
+│  └─📁documents
+└─📁static
+    ├─📁css
+    └─📁js
 ```
 - `config/` : 장고 프로젝트 디렉토리
 - `coverletter_site/` : 장고 웹 앱 디렉토리
-    - `static/` : 정적 웹 리소스
-        - `css/` : css 모음
-        - `js/` : 자바스크립트 모음
     - `templates/` : 동적 웹 리소스
         - `base/` : 웹 페이지의 뼈대가 되는 html 파일 모음
+- `media/` : 웹상의 업로드된 파일을 저장하는 디렉토리
+    - `documents/` : 자소서 문서
+- `static/` : 정적 웹 리소스
+        - `css/` : css 모음
+        - `js/` : 자바스크립트 모음
 
 ## ⚙️`settings.py`
 
