@@ -65,6 +65,11 @@
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     ```
 
+- 정적 페이지(css, js) 디렉토리 경로 지정
+    ```py
+    STATICFILES_DIRS = [BASE_DIR / 'static']
+    ```
+
 - Crispy-bootstrap4 세팅
     ```py
     CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
