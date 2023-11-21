@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import ListView, CreateView
 from django.contrib.auth import login
 
@@ -33,3 +34,8 @@ class CoverLetterList(ListView):
    model = CoverLetter
    ordering = ['-pk']
    paginate_by = 5
+
+class Howtouse(View):
+   template_name = 'howtouse.html'
+   def get(self, request, *args, **kwargs):
+      return render(request, 'coverletter_site/howtouse.html')
