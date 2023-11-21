@@ -3,25 +3,47 @@
 {% block title %}결과{% endblock%}
 
 {% block main_area %}
-<h1>검사 결과</h1>
-<form>
-   <div> <!-- 검색바 -->
-      <label>검색어</label>
-      <input type="text" value="검색어를 입력해주세요">
-   </div>
-   <hr> <!-- 구분용 -->
-   <div>
-      <input type="text">
-   </div>
-</form>
-
-<table>
-   {% for cl in coverletter_list %}
-   <tr>
-      <td>
-         <a>{{cl}}</a>
-      </td>
-   </tr>
-   {% endfor %}
-</table>
+<div class="container">
+    <h1>검사 결과</h1>
+    <br>
+    <div>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control" type="search" placeholder="검색" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
+        </form>
+        <br>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>no</th>
+                <th>이력서 이름</th>
+                <th>표절율</th>
+                <th>검사 결과</th>
+                <th>날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for coverletter in coverletter_list %}
+            <tr>
+                <td>{{ coverletter.pk }}</td>
+                <td>{{ coverletter.document_type }}</td>
+                <td>{{ coverletter.rate }}</td>
+                <td>표절</td>
+                <td>{{ coverletter.create_at }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
 {% endblock%}
