@@ -1,0 +1,71 @@
+{% extends "coverletter_site/base/main.html" %}
+{% load static %}
+{% block main_area %}
+<link href="{% static 'css/howtouse.css' %}" rel="stylesheet" type="text/css">
+<h2 style="margin-left: 360px; margin-top: 20px;">이용 방법</h2>
+
+<div class="circle" >
+    <p>
+        <span>01<br>회원가입 & 로그인</span>
+    </p>
+    <p>
+        <span>02<br>문서 업로드</span>
+    </p>
+    <p>
+        <span>03<br>표절 검사</span>
+    </p>
+    <p>
+        <span>04<br>검사 결과 확인</span>
+    </p>
+</div>
+<br><br>
+<div class="container">
+  <div class="content-box">
+    <img src="{% static 'images/login.png' %}" alt="로그인 이미지">
+    <div id="signup-text">
+      <h5>&nbsp;&nbsp;회원가입 후 로그인!</h5>
+      <ul>
+        <li>인증 확인 후 회원가입 완료!</li>
+        <li>아이디/비밀번호 찾기 가능</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="content-box">
+    <img src="{% static 'images/upload.png' %}" alt="로그인 이미지">
+    <div id="signup-text">
+      <h5>&nbsp;&nbsp;1일 1건 무료 검사 가능합니다.</h5>
+      <ul>
+        <li>파일 업로드(txt, hwp, docx)가능</li>
+        <li>직접 입력 가능</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="content-box">
+    <img src="{% static 'images/inspect.png' %}" alt="로그인 이미지">
+    <div id="signup-text">
+      <h5>&nbsp;&nbsp;3만 건 이상의 자기소개서와 비교합니다!</h5>
+      <ul>
+        <li>텍스트 추출을 통한 검사 가능</li>
+        <li>빠른 검사 가능</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="content-box">
+    <img src="{% static 'images/result.png' %}" alt="로그인 이미지">
+    <div id="signup-text">
+      <h5>&nbsp;&nbsp;정확하고 빠른 검사 결과 확인!</h5>
+      <ul>
+        <li>실시간 온라인 표절률 확인</li>
+        <li>문장 단위 표절률 확인 가능</li>
+        <li>문장별 상세 검사 결과 보기 가능</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
