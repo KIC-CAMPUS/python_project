@@ -7,15 +7,17 @@
 🖥️prj
 ├─📁config
 ├─📁coverletter_site
-│  ├─📁migrations
-│  └─📁templates
-│     └─📁coverletter_site
-│         └─📁base
-└─📁media
+├─📁media
 │  └─📁documents
-└─📁static
-    ├─📁css
-    └─📁js
+├─📁review_site
+├─📁static
+│  ├─📁css
+│  ├─📁images
+│  └─📁js
+└─📁templates
+    ├─📁base
+    ├─📁coverletter_site
+    └─📁review
 ```
 - `config/` : 장고 프로젝트 디렉토리
 - `coverletter_site/` : 장고 웹 앱 디렉토리
@@ -33,12 +35,14 @@
     ```py
     INSTALLED_APPS = [
     'coverletter_site.apps.CoverletterSiteConfig',
+    'review_site.apps.ReviewSiteConfig',
     # ...
     'crispy_forms',
     'crispy_bootstrap4',
     ]
     ```
-    - `coverletter_site.apps.CoverletterSiteConfig`: 자소서 표절 검증 사이트 앱
+    - `coverletter_site.apps.CoverletterSiteConfig`: 자소서 표절 검증
+    - `coverletter_site.apps.CoverletterSiteConfig`: 이용 후기
     - `crispy_forms, crispy_bootstrap4` : HTML 폼 태그, 부트스트립 css 자동 적용 시켜주는 라이브러리
 
 - 데이터 베이스 설정
@@ -59,20 +63,29 @@
     - `USER`, `PASSWORD` : 수업 때 만들었던 django라는 계정을 사용해도 무방함.
     - `HOST`, `PORT` : MySql 설치 시 기본으로 설정된 호스트와 포트 번호를 씀.
 
-- 로그아웃 성공 후, 리다이렉션 URL 지정
+- 회원의 모델 지정과 로그인, 로그아웃 성공 시, 이동할 URL
     ```py
+    AUTH_USER_MODEL = 'coverletter_site.User'
+    LOGIN_REDIRECT_URL = "/"
     LOGOUT_REDIRECT_URL = "/"
     ```
 
-- 업로드한 파일의 디렉토리 경로 지정
+- 업로드한 파일의 디렉토리 경로와 URL 지정
     ```py
     MEDIA_URL = "/media/"
-    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    MEDIA_ROOT = [BASE_DIR / 'media']
     ```
 
 - 정적 페이지(css, js) 디렉토리 경로 지정
     ```py
     STATICFILES_DIRS = [BASE_DIR / 'static']
+    ```
+
+- 템플릿 페이지(html) 디렉토리 경로 지정
+    ```py
+    TEMPLATES = [
+        'DIRS': [BASE_DIR / 'templates'],
+    ]
     ```
 
 - Crispy-bootstrap4 세팅
