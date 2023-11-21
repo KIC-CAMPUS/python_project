@@ -12,6 +12,9 @@ from .forms import UserForm, CoverLetterForm
 def index(request):
    return render(request, "coverletter_site/index.html")
 
+def mypage(request):
+   return render(request, "coverletter_site/mypage.html")
+
 # 회원가입
 def join(request):
    # POST

@@ -9,4 +9,5 @@ urlpatterns = [
    path("join/", views.join, name='join'),
    path("upload/", views.CoverLetterCreated.as_view(), name='upload'),
    path("result_list/", views.CoverLetterList.as_view(), name='result_list'),
+   path("mypage/", views.mypage, name='mypage')
 ]
