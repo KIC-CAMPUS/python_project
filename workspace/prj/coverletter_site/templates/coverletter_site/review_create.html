@@ -1,0 +1,22 @@
+{% extends "coverletter_site/base/main.html" %}
+{% block main_area %}
+
+<div class="container">
+    <label>후기 요약문</label>
+    <div>
+        <input type="text">
+    </div>
+    <label>후기 작성</label>
+    <div>
+        <input type="textarea">
+    </div>
+    <label>첨부 파일</label>
+    <div>
+        <input type="button" value="파일 첨부">
+    </div>
+    <div>
+        <a href="/review_list"><button type="submit">후기 등록</button></a>
+    </div>
+</div>
+
+{% endblock %}

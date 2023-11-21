@@ -1,0 +1,24 @@
+{% extends "coverletter_site/base/main.html" %}
+{% block main_area %}
+
+<div class="container">
+    <div class="row d-flex align-items-center h-100">
+        <div class="col-lg-12">
+            <span class="upload_title"><h1>맞춤법 검사</h1></span>
+        </div>
+    </div>
+    <div class="linebox"></div>
+    <form>
+        <div>
+            <input type="textarea" placeholder="내용을 입력해주세요"><!-- 이력서 글 넣는 곳 -->
+        </div>
+        <button type="reset">초기화</button>
+    </form>
+    <div>
+        <input type="textarea" placeholder="검사시작을 눌러주세요, 최대 4000자가 까지 가능합니다" readonly>
+        <!-- 검사하기를 누르면 맞춤법 검사가 되는 곳 readonly로 일단 해놓았습니다. -->
+    </div>
+    <button type="button">검사 시작</button>
+</div>
+
+{% endblock %}

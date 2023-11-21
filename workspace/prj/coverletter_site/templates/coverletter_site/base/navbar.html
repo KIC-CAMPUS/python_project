@@ -1,14 +1,74 @@
-<div class="container">
-    <nav class="navbar navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light align-center">
+    <div class="container">
         <div>
             <a href="/">
-                <img src="/static/header/dog.jpg" width="200px" height="50px"> <!-- 로고 이미지 -->
+                <img src="/static/header/dog.jpg" width="200px" height="50px">
             </a>
         </div>
-        <div>
-            <a type="button" class="btn btn-outline-primary" href="{% url 'upload' %}">문서 업로드</a>
-            <a type="button" class="btn btn-outline-primary" href="{% url 'result_list' %}">검사 결과</a>
+        <!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+        <!--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+        <!--            <span class="navbar-toggler-icon"></span>-->
+        <!--        </button>-->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container d-flex align-items-center">
+                <div class="menubox">
+                    <div class="navbar-nav mr-auto d-flex align-items-center">
+                        <div class="marginbox">
+                            <div class="nav-item active">
+                                <a class="nav-link" href="#">이용 방법<span class="sr-only">(current)</span></a>
+                            </div>
+                        </div>
+                        <div class="marginbox">
+                            <div class="dropdown show">
+                                <button class="btn dropdown" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    표절 검사
+                                </button>
+                                <div class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/upload">문서 업로드</a>
+                                    <a class="dropdown-item" href="/result_list">검사 결과</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marginbox">
+                            <div class="nav-item active">
+                                <a class="nav-link " href="/review_list">이용 후기</a>
+                            </div>
+                        </div>
+                        <div class="dropdown show">
+                            <div class="marginbox">
+                                <button class="btn dropdown" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    글쓰기 도구
+                                </button>
+                            </div>
+                            <div class="dropdown-menu2">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/check">맞춤법 검사</a>
+                                    <a class="dropdown-item" href="/count">글자수 세기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-nav" style="font-size: 14px;">
+                    {% if user.is_authenticated %}
+                    <div class="d-flex align-items-center">
+                        <a href="/mypage" class="nav-link">마이페이지</a>
+                        <span class="mx-2"> </span>
+                        <a href="{% url 'logout' %}" class="nav-link">로그아웃</a>
+                    </div>
+                    {% else %}
+                    <div class="d-flex align-items-center">
+                        <a href="{% url 'login' %}" class="nav-link">로그인</a>
+                        <span class="mx-2"> </span>
+                        <a href="{% url 'join' %}" class="nav-link">회원가입</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </nav>
-    <br><br>
-</div>
+    </div>
+</nav>
+<br><br><br>
