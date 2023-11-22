@@ -8,6 +8,7 @@ from django.views.generic import ListView, CreateView
 
 from .models import CoverLetter
 from .forms import CoverLetterForm
+from .plagiarism_check_model import document_rate_check
 
 # 메인
 def index(request):
@@ -36,7 +37,11 @@ class CoverLetterCreated(CreateView):
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
-      return super().form_valid(form)
+      reps = super().form_valid(form)
+      if coverletter.document_file != None:
+         docs_path = r'%s' % coverletter.document_file.name
+         document_rate_check(docs_path)
+      return reps
 
 # 자소서 목록
 class CoverLetterList(ListView):

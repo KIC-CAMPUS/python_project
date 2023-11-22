@@ -14,6 +14,11 @@
     pip install django-crispy-forms
     pip install crispy-bootstrap4
     ```
+
+- 워드와 같은 문서 파일을 다루는 라이브러리
+    ```console
+    pip install python-docx
+    ```
     
 ## 💻장고 프로젝트 생성
 - 프로젝트 디렉토리 생성

@@ -1,10 +1,7 @@
 from typing import Any
-from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
-from django.urls import reverse_lazy
 
 from .models import Review, Reply
 
