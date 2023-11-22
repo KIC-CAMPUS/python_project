@@ -25,6 +25,12 @@ def spelling_check(requset):
 def characters_count(requset):
    return render(requset, "coverletter_site/count.html")
 
+def detail(requset):
+   return render(requset, "coverletter_site/detail.html")
+
+def details(requset):
+   return render(requset, "coverletter_site/details.html")
+
 # 문서 업로드
 class CoverLetterCreated(LoginRequiredMixin, CreateView):
    model = CoverLetter

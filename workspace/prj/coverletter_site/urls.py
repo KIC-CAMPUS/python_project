@@ -9,4 +9,6 @@ urlpatterns = [
    path("howtouse/", views.howtouse, name='howtouse'),
    path("check/", views.spelling_check),
    path("count/", views.characters_count),
+   path("detail/", views.detail),
+   path("details/", views.details),
 ]
