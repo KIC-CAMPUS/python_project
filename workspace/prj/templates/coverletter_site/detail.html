@@ -30,22 +30,16 @@
                 </tr>
                 </thead>
                 <tbody> <!-- 테이블 바디부분을 누르면 상세창으로 이동 -->
+                {% for coverletter in coverletter_list %}
                 <tr>
-                    <td>1</td>
-                    <td>김자바의 이력서</td>
-                    <td>60%</td>
+                    <td>{{ coverletter.pk }}</td>
+                    <td>{{ coverletter.title }}</td>
+                    <td>{{ coverletter.rate }}</td>
                     <td>카피킬러피셜 표절의심</td>
                     <td><a class="btn btn-outline-secondary align-middle" type="button"
-                           style="width:70px; height:30px; font-size:11px" href="/detail/1">상세보기</a></td>
+                           style="width:70px; height:30px; font-size:11px" href="{% url 'detail_detail' pk=coverletter.pk %}">상세보기</a></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>보노보노의 이력서</td>
-                    <td>0%</td>
-                    <td>표절 아님</td>
-                    <td><a class="btn btn-outline-secondary align-middle" type="button"
-                           style="width:70px; height:30px; font-size:11px" href="/detail/1">상세보기</a></td>
-                </tr>
+                {% endfor %}
                 </tbody>
             </table>
             <div class="container d-flex justify-content-end">
@@ -64,11 +58,29 @@
         <div class="linebox_table"></div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.previous_page_number }}">
+                        Previous
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for page_no in page_obj.paginator.page_range %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'result_list' %}?page={{page_no}}">
+                            {{ page_no }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.next_page_number }}">
+                        Next
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </div>

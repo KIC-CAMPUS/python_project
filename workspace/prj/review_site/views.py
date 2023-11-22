@@ -33,7 +33,8 @@ class ReviewDetail(DetailView):
       context = super().get_context_data(**kwargs)
       context['reply_list'] = Reply.objects.filter(review = self.get_object()).all()
       return context
-   
+
+# 이용 후기 수정
 class ReviewEdit(UpdateView):
    model = Review
    fields = ('title', 'content', 'upload_file')
