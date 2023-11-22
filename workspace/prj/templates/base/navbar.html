@@ -26,14 +26,14 @@
                                     표절 검사
                                 </button>
                                 <div class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="/upload">문서 업로드</a>
-                                    <a class="dropdown-item" href="/result_list">검사 결과</a>
+                                    <a class="dropdown-item" href="{% url 'upload' %}">문서 업로드</a>
+                                    <a class="dropdown-item" href="{% url 'result_list' %}">검사 결과</a>
                                 </div>
                             </div>
                         </div>
                         <div class="marginbox">
                             <div class="nav-item active">
-                                <a class="nav-link " href="/review_list">이용 후기</a>
+                                <a class="nav-link " href="{% url 'review_list' %}">이용 후기</a>
                             </div>
                         </div>
                         <div class="dropdown show">

@@ -1,5 +1,6 @@
 from django.db import models
 from member_site.models import User
+from django.urls import reverse
 
 # 이용 후기
 class Review(models.Model):
@@ -10,6 +11,9 @@ class Review(models.Model):
 
    create_at = models.DateTimeField(auto_now_add=True)
    updated_at = models.DateTimeField(auto_now=True)
+
+   def get_absolute_url(self):
+      return reverse('review_detail', kwargs={'pk' : self.pk})
 
 # 이용 후기 댓글
 class Reply(models.Model):

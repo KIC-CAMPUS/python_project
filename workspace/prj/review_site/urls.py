@@ -1,9 +1,9 @@
 from django.urls import path
-from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-   path("review_list/", views.ReviewList.as_view(), name="review_list"),
-   path("review_create/", views.ReviewCreated.as_view(), name="review_create"),
-   path("review/<int:pk>", views.ReviewDetail.as_view(), name="review_detail"),
+   path("list/", views.ReviewList.as_view(), name="review_list"),
+   path("write/", views.ReviewCreated.as_view(), name="review_create"),
+   path("<int:pk>/", views.ReviewDetail.as_view(), name="review_detail"),
+   path("<int:pk>/edit", views.ReviewEdit.as_view(), name="review_edit"),
 ]
