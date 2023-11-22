@@ -8,17 +8,28 @@
         </div>
     </div>
     <div class="linebox"></div>
-    <form>
-        <div>
-            <input type="textarea" placeholder="내용을 입력해주세요"><!-- 이력서 글 넣는 곳 -->
+    <div class="card">
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-2">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold">이력서 작성</h5>
+                        <div class="linebox_detail"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card border-primary">
+                    <div class="card-body ">
+                        <h5 class="card-title" style="font-weight: bold">검사</h5>
+                        <div class="linebox_detail"></div>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="reset">초기화</button>
-    </form>
-    <div>
-        <input type="textarea" placeholder="검사시작을 눌러주세요, 최대 4000자가 까지 가능합니다" readonly>
-        <!-- 검사하기를 누르면 맞춤법 검사가 되는 곳 readonly로 일단 해놓았습니다. -->
     </div>
-    <button type="button">검사 시작</button>
 </div>
 
 {% endblock %}
