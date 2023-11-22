@@ -7,97 +7,170 @@
     <!--<div>
         <span>검사 설정</span>
     </div>-->
-    <div class="row row-cols-1 row-cols-md-2" >
+    <div class="row row-cols-1 row-cols-md-2">
         <div class="col mb-4">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
-                    <h5 class="card-title"><span>김자바</span>의 이력서</h5>
-                    <div class="linebox"></div>
-                    <table class="table table-hover">
+                    <h5 class="card-title" style="font-weight: bold"><span>김자바</span>의 이력서</h5>
+                    <div class="linebox_detail"></div>
+                    <table class="table">
                         <tr>
-                            <th>표절률</th>
-                            <td>60%</td>
+                            <th class="table_border_bottom" style="border-top: 0;">표절률</th>
+                            <td class="table_border_bottom" style="border-top: 0;">8.7%</td>
                         </tr>
                         <tr>
-                            <th>최고 표절률</th>
-                            <td>80%</td>
+                            <th class="table_border_bottom" style="border-top: 0;">최고 표절률</th>
+                            <td class="table_border_bottom" style="border-top: 0;">80.0%</td>
                         </tr>
                         <tr>
-                            <th>전체 문장</th>
-                            <td><span>52</span>문장</td>
+                            <th class="table_border_bottom" style="border-top: 0;">전체 문장</th>
+                            <td class="table_border_bottom" style="border-top: 0;"><span>40</span>문장</td>
                         </tr>
                         <tr>
-                            <th>의심 문장</th>
-                            <td><span>45</span>문장</td>
+                            <th class="table_border_bottom" style="border-top: 0;">의심 문장</th>
+                            <td class="table_border_bottom" style="border-top: 0;"><span>10</span>문장</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
         <div class="col mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">그래프같이 시각화 할수 있는 자료놓는 곳</h5>
-                    <div class="linebox"></div>
+            <div class="card border-primary">
+                <div class="card-body ">
+                    <h5 class="card-title" style="font-weight: bold">그래프같이 시각화 할수 있는 자료놓는 곳</h5>
+                    <div class="linebox_detail"></div>
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                 </div>
             </div>
         </div>
-        <div class="col mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">검사 문서</h5>
-                    <div class="linebox"></div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(226, 226, 226)">문장 표절률 : <span>80</span>%</h6>
-                            <span>물류업계의 첫 발을 세방에서 내딛고 싶습니다.</span>
+        <div id="detail_list" class="list-group">
+            <div class="col mb-4">
+                <div class="card border-primary overflow-auto" style="max-height: 800px">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold">검사 문장</h5>
+                        <div class="linebox_detail"></div>
+                        <div class="card">
+                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
+                                <h6 class="card-title">문장 표절률 : <span>80.0</span>%</h6>
+                            </div>
+                            <a class="list-group-item list-group-item-action" href="#detail_1">
+                                <!-- 검사문서의 카드 바디부분을 클릭하면 표절 검사 결과 문장의 번호에 맞게 이동합니다. -->
+                                <div class="card-body">
+                                    <span>저에게 패션이란, 인간이 매일 만나게 되는 "가장 가까운 문화 예술"입니다.</span>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(226, 226, 226)">문장 표절률 : <span>60</span>%</h6>
-                            <span>얼마 전 저는 우연히 유튜브에서 세방그룹의 광고를 접하였습니다.</span>
+                        <div class="details_br"></div>
+                        <div class="card">
+                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
+                                <h6 class="card-title">문장 표절률 : <span>0.08</span>%</h6>
+                            </div>
+                            <a class="list-group-item list-group-item-action" href="#detail_2">
+                                <div class="card-body">
+                                    <span>오늘 입은 옷이 마음에 들면 그날 하루 기분이 좋아지는 일상적 경험부터, 미적 가치를 표현하기 위해 짓는 오트쿠튀르 의상에 이르기까지, 다양한 경험과 가치를 담을 수 있다고 생각합니다.</span>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(226, 226, 226)">문장 표절률 : <span>40</span>%</h6>
-                            <span>0초 남짓한 짧은 영상이었지만 정말 많은 것을 느낄 수 있었습니다.</span>
+                        <div class="details_br"></div>
+                        <div class="card">
+                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
+                                <h6 class="card-title">문장 표절률 : <span>0.0</span>%</h6>
+                            </div>
+                            <a class="list-group-item list-group-item-action" href="#detail_3">
+                                <div class="card-body">
+                                    <span>대학교를 다니면서 느낀 것은 패션이 위치해있는 자리가 모호하다는 것이었습니다.</span>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(226, 226, 226)">문장 표절률 : <span>80</span>%</h6>
-                            <span>물류업계의 첫 발을 세방에서 내딛고 싶습니다.</span>
+                        <div class="details_br"></div>
+                        <div class="card">
+                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
+                                <h6 class="card-title">문장 표절률 : <span>0.0</span>%</h6>
+                            </div>
+                            <a class="list-group-item list-group-item-action" href="#detail_4">
+                                <div class="card-body">
+                                    <span>패션은 산업적으로는 소비자의 마음을 끌어야하는 "상업적 대상"이지만, 미술적으로는 작가의 의도를 담는 "예술적 대상"이 되기도 했습니다.</span>
+                                </div>
+                            </a>
                         </div>
+                        <div class="details_br"></div>
+                        <div class="card">
+                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
+                                <h6 class="card-title">문장 표절률 : <span>0.2</span>%</h6>
+                            </div>
+                            <a class="list-group-item list-group-item-action" href="#detail_5">
+                                <div class="card-body">
+                                    <span>처음엔 두 대상이 겹쳐질 수 없다고 생각했습니다.</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="details_br"></div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">비교 문서</h5>
-                    <div class="linebox"></div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(253, 101, 101)">문장 표절률 : <span>80</span>%</h6>
-                            <span>물류업계의 첫 발을 세방에서 내딛기 싫습니다.</span>
+            <div data-spy="scroll" data-target="#detail_list" data-offset="0" class="scrollspy-example">
+                <div class="card border-info overflow-auto" style="max-height: 800px">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold">표절 검사 결과</h5>
+                        <div class="linebox_detail"></div>
+                        <div class="card border-danger">
+                            <div class="card-header text-white bg-danger border-danger align-middle"
+                                 style="height: 40px">
+                                <h6 class="card-title" id="detail_1">1번 문장</h6>
+                                <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
+                            </div>
+                            <div class="card-body">
+                                <span>저에게 패션이란, 인간이 매일 만나게 되는 "가장 가까운 문화 예술"입니다.</span>
+                            </div>
+                            <div class="card-body">
+                                <span>'저'</span>,<span>'패션'</span>,<span
+                                    style="color: red">'인간'</span>,<span>'매일'</span>,<span>'가장'</span>,<span>'문화'</span>,<span>'예술'</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(226, 226, 226)">문장 표절률 : <span>60</span>%</h6>
-                            <span>얼마 전 저는 우연히 유튜브에서 세방그룹의 광고를 접하였습니다.</span>
+                        <div class="details_br"></div>
+                        <div class="card border-success">
+                            <div class="card-header text-white bg-success border-danger align-middle"
+                                 style="height: 40px">
+                                <h6 class="card-title" id="detail_2">2번 문장</h6>
+                            </div>
+                            <div class="card-body">
+                                <span>오늘 입은 옷이 마음에 들면 그날 하루 기분이 좋아지는 일상적 경험부터, 미적 가치를 표현하기 위해 짓는 오트쿠튀르 의상에 이르기까지, 다양한 경험과 가치를 담을 수 있다고 생각합니다.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title" style="background-color: rgb(226, 226, 226)">문장 표절률 : <span>40</span>%</h6>
-                            <span>0초 남짓한 짧은 영상이었지만 정말 많은 것을 느낄 수 있었습니다.</span>
+                        <div class="details_br"></div>
+                        <div class="card border-success">
+                            <div class="card-header text-white bg-success border-danger align-middle"
+                                 style="height: 40px">
+                                <h6 class="card-title" id="detail_3">3번 문장</h6>
+                            </div>
+                            <div class="card-body">
+                                <span>대학교를 다니면서 느낀 것은 패션이 위치해있는 자리가 모호하다는 것이었습니다.</span>
+                            </div>
                         </div>
+                        <div class="details_br"></div>
+                        <div class="card border-success">
+                            <div class="card-header text-white bg-success border-danger align-middle"
+                                 style="height: 40px">
+                                <h6 class="card-title" id="detail_4">4번 문장</h6>
+                            </div>
+                            <div class="card-body">
+                                <span>패션은 산업적으로는 소비자의 마음을 끌어야하는 "상업적 대상"이지만, 미술적으로는 작가의 의도를 담는 "예술적 대상"이 되기도 했습니다.</span>
+                            </div>
+                        </div>
+                        <div class="details_br"></div>
+                        <div class="card border-success">
+                            <div class="card-header text-white bg-success border-danger align-middle"
+                                 style="height: 40px">
+                                <h6 class="card-title" id="detail_5">5번 문장</h6>
+                            </div>
+                            <div class="card-body">
+                                <span>처음엔 두 대상이 겹쳐질 수 없다고 생각했습니다.</span>
+                            </div>
+                        </div>
+                        <div class="details_br"></div>
                     </div>
                 </div>
             </div>
