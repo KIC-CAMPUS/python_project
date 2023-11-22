@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'web_site.apps.WebSiteConfig',
     'coverletter_site.apps.CoverletterSiteConfig',
     'member_site.apps.MemberSiteConfig',
     'review_site.apps.ReviewSiteConfig',

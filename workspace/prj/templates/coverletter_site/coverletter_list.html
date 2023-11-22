@@ -24,12 +24,13 @@
                     <th>번호</th>
                     <th>등록일</th>
                     <th>문서 구분</th>
-                    <th>검사 명</th>
+                    <th>이력서 명</th>
                     <th>표절률</th>
+                    <th>#</th>
                     <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll"></th>
                 </tr>
                 </thead>
-                <tbody onclick="location.href='/detail'"> <!-- 테이블 바디부분을 누르면 상세창으로 이동 -->
+                <tbody>
                 {% for coverletter in coverletter_list %}
                 <tr>
                     <td>{{ coverletter.pk }}</td>
@@ -37,6 +38,8 @@
                     <td>{{ coverletter.document_type }}</td>
                     <td>{{ coverletter.title }}</td>
                     <td>{{ coverletter.rate }}</td>
+                    <td><a class="btn btn-outline-secondary align-middle" type="button"
+                        style="width:70px; height:30px; font-size:11px" href="{% url 'coverletter_detail' pk=coverletter.pk %}">상세보기</a></td>
                     <td onclick="event.stopPropagation();"><input type="checkbox" name="chk" style="width: 15px; height: 15px;">
                     </td>
                 </tr>

@@ -12,26 +12,6 @@ from .models import CoverLetter
 from .forms import CoverLetterForm
 from .plagiarism_check_model import document_rate_check
 
-# 메인
-def index(request):
-   return render(request, "coverletter_site/index.html")
-
-# 이용방법
-def howtouse(request):
-   return render(request, "coverletter_site/howtouse.html")
-
-def spelling_check(requset):
-   return render(requset, "coverletter_site/check.html")
-
-def characters_count(requset):
-   return render(requset, "coverletter_site/count.html")
-
-def detail(requset):
-   return render(requset, "coverletter_site/detail.html")
-
-def details(requset):
-   return render(requset, "coverletter_site/details.html")
-
 # 문서 업로드
 class CoverLetterCreated(LoginRequiredMixin, CreateView):
    model = CoverLetter
@@ -59,15 +39,14 @@ class CoverLetterList(LoginRequiredMixin, ListView):
       user = self.request.user
       return super().get_queryset().filter(user=user)
 
-# 자소서 표절 결과 목록
-class CoverLetterResultList(CoverLetterList):
-   template_name = "coverletter_site/detail.html"
-
-   def get_queryset(self) -> QuerySet[Any]:
-      user = self.request.user
-      return super(ListView, self).get_queryset().filter(~Q(rate__exact=None), user=user)
-   
 # 자소서 표절 결과 상세 페이지
 class CoverLetterDetail(DetailView):
    model = CoverLetter
-   template_name = "coverletter_site/details.html"
+
+# 자소서 표절 결과 목록
+# class CoverLetterResultList(CoverLetterList):
+#    template_name = "coverletter_site/detail.html"
+
+#    def get_queryset(self) -> QuerySet[Any]:
+#       user = self.request.user
+#       return super(ListView, self).get_queryset().filter(~Q(rate__exact=None), user=user)
