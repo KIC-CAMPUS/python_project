@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light align-center">
+<nav class="navbar navbar-expand-lg navbar-light align-center">
     <div class="container">
         <div>
             <a href="/">
@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="container d-flex align-items-center">
                 <div class="menubox">
-                    <div class="navbar-nav mr-auto d-flex align-items-center">
+                    <div class="navbar-nav mr-auto d-flex align-items-center font-weight-bold">
                         <div class="marginbox">
                             <div class="nav-item active">
                                 <a class="nav-link" href="#">이용 방법<span class="sr-only">(current)</span></a>
@@ -21,24 +21,24 @@
                         </div>
                         <div class="marginbox">
                             <div class="dropdown show">
-                                <button class="btn dropdown" role="button" id="dropdownMenuLink"
+                                <button class="btn dropdown font-weight-bold" role="button" id="dropdownMenuLink"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     표절 검사
                                 </button>
                                 <div class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="{% url 'upload' %}">문서 업로드</a>
-                                    <a class="dropdown-item" href="{% url 'result_list' %}">검사 결과</a>
+                                    <a class="dropdown-item" href="/upload">문서 업로드</a>
+                                    <a class="dropdown-item" href="/result_list">검사 목록</a>
                                 </div>
                             </div>
                         </div>
                         <div class="marginbox">
                             <div class="nav-item active">
-                                <a class="nav-link " href="{% url 'review_list' %}">이용 후기</a>
+                                <a class="nav-link " href="/review_list">이용 후기</a>
                             </div>
                         </div>
                         <div class="dropdown show">
                             <div class="marginbox">
-                                <button class="btn dropdown" role="button" id="dropdownMenuLink"
+                                <button class="btn dropdown font-weight-bold" role="button" id="dropdownMenuLink"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     글쓰기 도구
                                 </button>
@@ -71,4 +71,4 @@
         </div>
     </div>
 </nav>
-<br><br><br>
+<div class="nav_line"></div>
