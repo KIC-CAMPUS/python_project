@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.contrib.auth import login
-from .models import User
 from .forms import UserForm
 
 # 회원가입
@@ -16,3 +15,7 @@ def join(request):
    else :
       form = UserForm()
    return render(request, "member/join.html", {'form': form})
+
+# 마이페이지
+def mypage(request):
+   return render(request, "member/mypage.html")

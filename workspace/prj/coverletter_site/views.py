@@ -14,10 +14,6 @@ from .plagiarism_check_model import document_rate_check
 def index(request):
    return render(request, "coverletter_site/index.html")
 
-# 마이페이지
-def mypage(request):
-   return render(request, "coverletter_site/mypage.html")
-
 # 이용방법
 def howtouse(request):
    return render(request, "coverletter_site/howtouse.html")
