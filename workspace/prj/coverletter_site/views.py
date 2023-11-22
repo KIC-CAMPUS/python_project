@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import CoverLetter
 from .forms import CoverLetterForm
@@ -25,10 +26,11 @@ def characters_count(requset):
    return render(requset, "coverletter_site/count.html")
 
 # 문서 업로드
-class CoverLetterCreated(CreateView):
+class CoverLetterCreated(LoginRequiredMixin, CreateView):
    model = CoverLetter
    form_class = CoverLetterForm
    success_url = reverse_lazy('result_list')
+   login_url = reverse_lazy('login')
 
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       coverletter = form.save(commit=False)
@@ -40,10 +42,11 @@ class CoverLetterCreated(CreateView):
       return reps
 
 # 자소서 목록
-class CoverLetterList(ListView):
+class CoverLetterList(LoginRequiredMixin, ListView):
    model = CoverLetter
    ordering = ['-pk']
    paginate_by = 5
+   login_url = reverse_lazy('login')
 
    def get_queryset(self) -> QuerySet[Any]:
       user = self.request.user
