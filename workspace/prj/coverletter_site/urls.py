@@ -10,5 +10,5 @@ urlpatterns = [
    path("check/", views.spelling_check),
    path("count/", views.characters_count),
    path("detail/", views.detail),
-   path("details/", views.details),
+   path("detail/1/", views.details),
 ]
