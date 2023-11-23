@@ -11,77 +11,21 @@
     </div>
     <div class="linebox"></div>
     <div class="card-body">
-        <table>
-            <tr>
-                <th class="upload_th">
-                    <h5>문서 유형</h5>
-                    <div class="upload_tr"></div>
-                </th>
-                <td>
-                    <select class="custom-select" style="width:120px; height:40px">
-                        <option selected>선택</option>
-                        <option value="test">자기소개서</option>
-                        <option value="aaa">aaa</option>
-                        <option value="bbb">bbb</option>
-                    </select>
-                    <div class="upload_tr"></div>
-                </td>
-            </tr>
-            <tr>
-                <th class="upload_th">
-                    <h5>검사 설정</h5>
-                    <div class="upload_tr"></div>
-                </th>
-                <td class="align-text-top">
-                    <span>
-                        인용/출처 표시 문장
-                        <span class="upload_select_text">제외</span>
-                    </span>
-                    <div class="upload_tr"></div>
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    <h5>검사 명</h5>
-                    <div class="upload_tr"></div>
-                </th>
-                <td>
-                    <input class="form-control" type="search" style="width: 300px">
-                    <div class="upload_tr"></div>
-                </td>
-            </tr>
-            <tr>
-                <th class="upload_th">
-                    <h5>검사 문서</h5>
-                    <div class="upload_tr"></div>
-                </th>
-                <td>
-                    <div class="card text-center" style="width:900px">
-                        <div class="card-header">
-                            파일명
-                        </div>
-                        <div class="card-body"> <!-- 이력서 입력 또는 파일 첨부 -->
-                            <h5 class="card-title">파일을 첨부해주세요</h5>
-                            <p class="card-text text-muted">첨부 가능한 확장자명(.csv)</p>
-                        </div>
-                    </div>
-                    <div class="upload_tr"></div>
-                    <label class="btn btn-primary" for="input-file" style="width: 100px;">
-                        파일 첨부
-                    </label>
-                    <input type="file" id="input-file" style="display:none;">
-                </td>
-            </tr>
-        </table>
-        <div class="linebox_table"></div>
-        <div class="d-flex justify-content-end">
-            <div class="m-2">
-                <a type="button" class="btn btn-primary" href="/result_list" style="width: 150px">표절 검사</a>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                {% csrf_token %}
+                {{ form }}
             </div>
-            <div class="m-2">
-                <a type="submit" class="btn btn-light" href="/" style="width: 150px">취소</a>
+            <div class="linebox_table"></div>
+            <div class="d-flex justify-content-end">
+                <div class="m-2">
+                    <input type="submit" class="btn btn-primary" style="width: 150px"/>
+                </div>
+                <div class="m-2">
+                    <a type="button" class="btn btn-light" href="{% url 'result_list' %}" style="width: 150px">취소</a>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endblock%}

@@ -66,14 +66,17 @@
                         </div>
                     </div>
                     <div class="upload_tr"></div>
-                    <button type="submit" class="btn btn-primary" style="width: 100px">파일 첨부</button>
+                    <label class="btn btn-primary" for="input-file" style="width: 100px;">
+                        파일 첨부
+                    </label>
+                    <input type="file" id="input-file" style="display:none;">
                 </td>
             </tr>
         </table>
         <div class="linebox_table"></div>
         <div class="d-flex justify-content-end">
             <div class="m-2">
-                <a type="button" class="btn btn-primary" href="/result_list" style="width: 150px">표절검사</a>
+                <a type="button" class="btn btn-primary" href="/result_list" style="width: 150px">표절 검사</a>
             </div>
             <div class="m-2">
                 <a type="submit" class="btn btn-light" href="/" style="width: 150px">취소</a>
@@ -81,4 +84,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock%}
