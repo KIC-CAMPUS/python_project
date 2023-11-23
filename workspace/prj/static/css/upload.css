@@ -75,3 +75,19 @@
 .table_border_bottom{
     border-bottom: 1px solid #01aaef;
 }
+
+.input-file-button{
+  padding: 6px 25px;
+  background-color:#FF6600;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.count_box{
+    width: 2px;
+    background-color: #01aaef;
+    height: 25px;
+    margin-left: 15px;
+    margin-right: 15px;
+}

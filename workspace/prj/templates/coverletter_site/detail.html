@@ -18,10 +18,16 @@
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="button">검색</button>
                 <div class="upload_tr"></div>
             </div>
+            <div class="container">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary" style="width: 100px; height: 30px"><span class="align-text-top" style="font-size:15px;">즐겨찾기</span></button>
+                </div>
+            </div>
             <div class="linebox"></div>
             <table class="table table-hover text-center">
                 <thead>
                 <tr>
+                    <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll"></th>
                     <th>번호</th>
                     <th>이력서 명</th>
                     <th>표절률</th>
@@ -30,57 +36,45 @@
                 </tr>
                 </thead>
                 <tbody> <!-- 테이블 바디부분을 누르면 상세창으로 이동 -->
-                {% for coverletter in coverletter_list %}
                 <tr>
-                    <td>{{ coverletter.pk }}</td>
-                    <td>{{ coverletter.title }}</td>
-                    <td>{{ coverletter.rate }}</td>
+                    <td onclick="event.stopPropagation();"><input type="checkbox" name="chk"
+                                                                  style="width: 15px; height: 15px;">
+                    <td>1</td>
+                    <td>김자바의 이력서</td>
+                    <td>60%</td>
                     <td>카피킬러피셜 표절의심</td>
                     <td><a class="btn btn-outline-secondary align-middle" type="button"
-                           style="width:70px; height:30px; font-size:11px" href="{% url 'detail_detail' pk=coverletter.pk %}">상세보기</a></td>
+                           style="width:70px; height:30px; font-size:11px" href="/detail/1">상세보기</a></td>
                 </tr>
-                {% endfor %}
+                <tr>
+                    <td onclick="event.stopPropagation();"><input type="checkbox" name="chk"
+                                                                  style="width: 15px; height: 15px;">
+                    <td>2</td>
+                    <td>보노보노의 이력서</td>
+                    <td>0%</td>
+                    <td>표절 아님</td>
+                    <td><a class="btn btn-outline-secondary align-middle" type="button"
+                           style="width:70px; height:30px; font-size:11px" href="/detail/1">상세보기</a></td>
+                </tr>
                 </tbody>
             </table>
             <div class="container d-flex justify-content-end">
                 <div class="m-2">
-                    <button type="submit" class="btn btn-primary" style="width: 150px">전체 다운로드</button>
+                    <a type="button" class="btn btn-primary" href="/upload" style="width: 150px">문서 업로드</a>
                 </div>
                 <div class="m-2">
-                    <a type="button" class="btn btn-light" href="/result_list" style="width: 150px">검사 목록</a>
+                    <button type="submit" class="btn btn-light" style="width: 150px">삭제</button>
                 </div>
-            </div>
-            <div class="container d-flex justify-content-end">
-                <span class="text-muted">(.csv 확장자로 다운로드 가능합니다)</span>
-                <!-- alert창을 띄우거나 팝업창을 띄워 확장자에 대한 설명이나 여러 확장자 선택을 하게 만드는 방법도 좋은 것 같습니다. 고민... -->
             </div>
         </form>
         <div class="linebox_table"></div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.previous_page_number }}">
-                        Previous
-                    </a>
-                </li>
-                {% endif %}
-
-                {% for page_no in page_obj.paginator.page_range %}
-                    <li class="page-item">
-                        <a class="page-link" href="{% url 'result_list' %}?page={{page_no}}">
-                            {{ page_no }}
-                        </a>
-                    </li>
-                {% endfor %}
-
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.next_page_number }}">
-                        Next
-                    </a>
-                </li>
-                {% endif %}
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>
     </div>
