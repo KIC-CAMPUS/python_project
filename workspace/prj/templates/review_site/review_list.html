@@ -13,6 +13,7 @@
                 <td>작성자</td>
                 <td>이용 후기</td>
                 <td>작성일</td>
+                <td>#</td>
             </tr>
             {% for review in review_list %}
             <tr>
@@ -20,6 +21,8 @@
                 <td>{{ review.author }}</td>
                 <td>{{ review.title }}</td>
                 <td>{{ review.create_at }}</td>
+                <td><a class="btn btn-outline-secondary align-middle" type="button"
+                    style="width:70px; height:30px; font-size:11px" href="{% url 'review_detail' pk=review.pk %}">상세보기</a></td>
             </tr>
             {% endfor %}
         </table>
