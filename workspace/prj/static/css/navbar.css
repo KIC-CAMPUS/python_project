@@ -38,4 +38,6 @@
     margin-right: 25px;
 }
 
-
+#table_border_zero{
+    border-top: 0px;
+}
