@@ -10,7 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import CoverLetter
 from .forms import CoverLetterForm
-from .plagiarism_check_model import document_rate_check
+from .verification_model.read_document import document_rate_check
+from .verification_model.plagiarism_rate import sentence_plagiarism_rate
 
 # 문서 업로드
 class CoverLetterCreated(LoginRequiredMixin, CreateView):
@@ -22,11 +23,15 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
-      reps = super().form_valid(form)
       if coverletter.document_file != None:
+         reps = super().form_valid(form)
          docs_path = r'%s' % coverletter.document_file.name
          document_rate_check(docs_path)
-      return reps
+         return reps
+      rate = sentence_plagiarism_rate([coverletter.content])
+      print(">>>>>",rate, type(rate))
+      coverletter.rate = rate
+      return super().form_valid(form)
 
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):
