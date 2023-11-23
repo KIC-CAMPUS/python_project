@@ -2,13 +2,16 @@ from typing import Any
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 from .models import Review, Reply
 
 # 이용 후기 작성
-class ReviewCreated(CreateView):
+class ReviewCreated(LoginRequiredMixin, CreateView):
    model = Review
    fields = ('title', 'content', 'upload_file')
+   login_url = reverse_lazy('login')
 
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       review = form.save(commit=False)
@@ -30,7 +33,8 @@ class ReviewDetail(DetailView):
       context = super().get_context_data(**kwargs)
       context['reply_list'] = Reply.objects.filter(review = self.get_object()).all()
       return context
-   
+
+# 이용 후기 수정
 class ReviewEdit(UpdateView):
    model = Review
    fields = ('title', 'content', 'upload_file')

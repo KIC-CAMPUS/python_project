@@ -1,0 +1,53 @@
+{% extends "base/main.html" %}
+{% block main_area %}
+
+<div class="container">
+    <div class="row d-flex align-items-center h-100">
+        <div class="col-lg-12">
+            <span class="upload_title"><h1>맞춤법 검사</h1></span>
+        </div>
+    </div>
+    <div class="upload_tr"></div>
+    <div class="row row-cols-md-2">
+        <div class="col mb-2">
+            <div class="card border-primary" style="height: 735px">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <h5 class="card-title" style="font-weight: bold">검사 문장</h5>
+                            <div class="linebox_detail"></div>
+                            <textarea class="form-control" rows="3" style="height: 550px; resize: none;"
+                                      placeholder="검사 시작을 눌러주세요&#13;&#10;최대 4000자까지 검사가 가능합니다"></textarea>
+                        </div>
+                        <div class="card-body d-flex justify-content-center">
+                            <div class="m-2">
+                                <button type="button" class="btn btn-primary" style="width: 150px">검사하기</button>
+                            </div>
+                            <div class="m-2">
+                                <button type="reset" class="btn btn-light" style="width: 150px">초기화</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="card border-primary" style="height: 735px">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h5 class="card-title" style="font-weight: bold">검사 결과</h5>
+                        <div class="linebox_detail"></div>
+                        <textarea class="form-control" rows="3"
+                                  style="height: 550px; resize: none; background-color: #F5F5F5;" readonly></textarea>
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+                        <button class="btn btn-primary" style="width: 150px" onclick="window.location.reload()">재검사
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

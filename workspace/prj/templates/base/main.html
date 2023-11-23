@@ -12,13 +12,13 @@
    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-   {% include 'base/header.html' %}
    {% include 'base/navbar.html' %}
    {% block main_area %}
    {% endblock %}
 
    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}" crossorigin="anonymous"></script>
    <script src="{% static 'js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+   <script src="{% static 'js/list_checkbox.js' %}" crossorigin="anonymous"></script>
    <div class="fixed-bottom">
       {% include 'base/footer.html' %}
    </div>

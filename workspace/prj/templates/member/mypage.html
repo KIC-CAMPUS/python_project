@@ -1,137 +1,61 @@
 {% extends "base/main.html" %}
 
+{% block title %}마이페이지{% endblock%}
+
 {% block main_area %}
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button"
-                            role="tab" aria-controls="home" aria-selected="true">내 정보
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
-                            role="tab" aria-controls="profile" aria-selected="false">정보 수정
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button"
-                            role="tab" aria-controls="contact" aria-selected="false">표절 검사
-                    </button>
-                </li>
-            </ul>
+    <div class="d-flex align-items-center h-100">
+        <div class="col-lg-12">
+            <span class="upload_title"><h1>마이페이지</h1></span>
         </div>
+    </div>
+    <div class="linebox"></div>
+    <div class="upload_tr"></div>
+    <div class="card">
         <div class="card-body">
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>기업 이름</th>
-                            <td>가나다라마</td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호</th>
-                            <td>1234</td>
-                        </tr>
-                        <tr>
-                            <th>이메일</th>
-                            <td>abcde@naver.com</td>
-                        </tr>
-                        <tr>
-                            <th>주소</th>
-                            <td>지하</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">기업 이름</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" value="가나다라마">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">비밀번호</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" value="1234">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">이메일</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" value="abcde@naver.com">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">주소</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" value="지하">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">정보 수정</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div> <!-- 마이페이지 두 번째 화면 이전 표절 검사기록(2번 메뉴) -->
-                        <!--   고민    -->
-                        <h3>표절검사 창(이전 기록, 현재 기록 등등)</h3>
-                        <a type="button" href="/upload" class="btn btn-outline-primary">표절검사</a>
-                        <a type="button" href="/result_list" class="btn btn-outline-primary">표절검사리스트</a>
+            <h5 class="card-title" style="font-weight: bold;"><span>산와머니</span></h5>
+            <form>
+                <div class="form-group d-flex justify-content-center">
+                    <div style="width: 100px; height: 40px;">
+                        <span for="exampleInputPassword1" class="align-bottom"
+                              style="margin: 0; font-size: 20px">비밀번호</span>
                     </div>
+                    <input type="password" class="form-control" id="exampleInputPassword1" style="width: 500px;">
                 </div>
-            </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px">확인</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="upload_tr"></div>
+
+    <!-- 비밀번호가 맞으면 나올 마이페이지 -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" style="font-weight: bold;"><span>산와머니</span></h5>
+            <form>
+<!--                <div class="form-group">-->
+<!--                    <label>Password</label>-->
+<!--                    <input type="text" class="form-control">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="exampleInputPassword1">Password</label>-->
+<!--                    <input type="text" class="form-control">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="exampleInputEmail1">Email address</label>-->
+<!--                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">-->
+<!--                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone-->
+<!--                        else.</small>-->
+<!--                </div>-->
+<!--                <div class="form-group form-check">-->
+<!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-primary">Submit</button>-->
+            </form>
         </div>
     </div>
 </div>
-
-<!--<div>-->
-<!--    <div> &lt;!&ndash; 마이페이지 메뉴바 &ndash;&gt;-->
-<!--        <div>-->
-<!--            내 정보-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            표절 검사-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            내 정보 수정-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <hr> &lt;!&ndash; 구분용 &ndash;&gt;-->
-<!--    <div> &lt;!&ndash; 마이페이지 첫 화면 사용자 정보(1번 메뉴) &ndash;&gt;-->
-<!--        <div>-->
-<!--            기업 이름-->
-<!--        </div>-->
-<!--        <hr> &lt;!&ndash; 구분용 &ndash;&gt;-->
-<!--        <div>-->
-<!--            <label>비밀번호 : </label>-->
-<!--            <p>1234</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <hr> &lt;!&ndash; 구분용 &ndash;&gt;-->
-<!--    <div> &lt;!&ndash; 마이페이지 두 번째 화면 이전 표절 검사기록(2번 메뉴) &ndash;&gt;-->
-<!--        &lt;!&ndash;   고민    &ndash;&gt;-->
-<!--        <h1>표절검사 창(이전 기록, 현재 기록 등등)</h1>-->
-<!--        <a type="button" href="/inspection">표절검사</a>-->
-<!--        <a type="button" href="/inspection_list">표절검사리스트</a>-->
-<!--    </div>-->
-<!--    <hr> &lt;!&ndash; 구분용 &ndash;&gt;-->
-<!--    <div> &lt;!&ndash; 마이페이지 세 번째 화면 사용자 정보 수정(3번 메뉴) &ndash;&gt;-->
-<!--        <div>-->
-<!--            <label>기업 이름 : </label>-->
-<!--            <input type="text" value="기업 이름">-->
-<!--        </div>-->
-<!--        <hr> &lt;!&ndash; 구분용 &ndash;&gt;-->
-<!--        <div>-->
-<!--            <label>비밀번호 : </label>-->
-<!--            <input type="password" value="1234">-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <hr> &lt;!&ndash; 구분용 &ndash;&gt;-->
-<!--</div>-->
 {% endblock %}
