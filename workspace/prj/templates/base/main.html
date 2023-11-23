@@ -19,18 +19,6 @@
    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}" crossorigin="anonymous"></script>
    <script src="{% static 'js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
    <script src="{% static 'js/list_checkbox.js' %}" crossorigin="anonymous"></script>
-
-   <script>
-      function searchPost(){
-         let searchValue =
-            document.getElementById("search-input").value.trim();
-         if( searchValue.length > 1){
-            location.href = "search/" + searchValue + "/";
-         } else {
-            alert("검색어를 2글자 이상 작성하세요");
-         }
-      }
-   </script>
 <!--   <script src="{% static 'js/like_checkbox.js' %}" crossorigin="anonymous"></script>-->
    <div class="fixed-bottom">
       {% include 'base/footer.html' %}

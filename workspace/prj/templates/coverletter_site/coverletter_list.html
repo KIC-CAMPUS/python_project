@@ -14,11 +14,11 @@
         <div>
             <input class="form-control" id="search-input"
                     type="text" placeholder="검색" style="width: 300px">
-            <span class="input-group-append">
+
             <button class="btn btn-outline-primary my-2 my-sm-0"
                     type="button" onclick="searchPost()" id="search_button">검색</button>
-            <div class="upload_tr"></div>
-            </span>
+
+
         </div>
         <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'cover_letter_delete' %}">
             {% csrf_token %}
@@ -105,4 +105,16 @@
         </nav>
     </div>
 </div>
+
+<script>
+  function searchPost(){
+     let searchValue =
+        document.getElementById("search-input").value.trim();
+     if( searchValue.length > 1){
+        location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
+     } else {
+        alert("검색어를 2글자 이상 작성하세요");
+     }
+  }
+</script>
 {% endblock%}
