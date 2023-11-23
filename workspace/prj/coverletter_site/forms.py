@@ -18,4 +18,6 @@ class CoverLetterForm(forms.ModelForm):
          'document_type': '문서 유형',
          'title': '제목',
          'content': '내용',
-      }  
+      }
+
+
