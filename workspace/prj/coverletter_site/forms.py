@@ -2,7 +2,7 @@ from .models import  CoverLetter
 from django import forms
 
 class CoverLetterForm(forms.ModelForm):
-   document_file = forms.FileField(required=False, label='검사 문서')
+   document_file = forms.FileField(label='검사 문서', required=False)
 
    class Meta:
       model = CoverLetter
@@ -12,7 +12,6 @@ class CoverLetterForm(forms.ModelForm):
          'document_type': forms.Select(attrs={'class': 'custom-select'}),
          'title': forms.TextInput(attrs={'class': 'form-control'}),
          'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
-         'document_file': forms.FileInput(attrs={'class': 'form-control'}),
       }
 
       labels = {

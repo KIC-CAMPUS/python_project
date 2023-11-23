@@ -12,10 +12,10 @@
     <div class="linebox"></div>
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">
-            <table>
+            <div class="form-group row">
                 {% csrf_token %}
                 {{ form }}
-            </table>
+            </div>
             <div class="linebox_table"></div>
             <div class="d-flex justify-content-end">
                 <div class="m-2">
