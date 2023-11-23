@@ -11,12 +11,17 @@
     </div>
     <div class="upload_tr"></div>
     <div>
-        <form class="form-inline my-2 my-lg-0">
-            <div>
-                <input class="form-control" type="search" placeholder="검색" aria-label="Search" style="width: 300px">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="button">검색</button>
-                <div class="upload_tr"></div>
-            </div>
+        <div>
+            <input class="form-control" id="search-input"
+                    type="text" placeholder="검색" style="width: 300px">
+            <span class="input-group-append">
+            <button class="btn btn-outline-primary my-2 my-sm-0"
+                    type="button" onclick="searchPost()" id="search_button">검색</button>
+            <div class="upload_tr"></div>
+            </span>
+        </div>
+        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'cover_letter_delete' %}">
+            {% csrf_token %}
             <div class="linebox"></div>
             <table class="table table-hover text-center">
                 <thead>
@@ -40,7 +45,7 @@
                     <td>{{ coverletter.rate }}</td>
                     <td><a class="btn btn-outline-secondary align-middle" type="button"
                         style="width:70px; height:30px; font-size:11px" href="{% url 'coverletter_detail' pk=coverletter.pk %}">상세보기</a></td>
-                    <td onclick="event.stopPropagation();"><input type="checkbox" name="chk" style="width: 15px; height: 15px;">
+                    <td onclick="event.stopPropagation();"><input type="checkbox" name="chk" value="{{coverletter.pk}}" style="width: 15px; height: 15px;">
                     </td>
                 </tr>
                 {% endfor %}
