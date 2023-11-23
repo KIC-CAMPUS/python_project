@@ -54,7 +54,7 @@
     .content-box ul {
         list-style-type: disc;
     }
-    img {
+    .img {
         max-width: 100px;
         height: auto;
     }
