@@ -19,3 +19,9 @@ def join(request):
 # 마이페이지
 def mypage(request):
    return render(request, "member/mypage.html")
+
+def findid(request):
+   return render(request, "member/findid.html")
+
+def findpassword(request):
+   return render(request, "member/findpassword.html")

@@ -10,5 +10,10 @@
       {{ form | crispy }}
       <input type="submit" class="btn btn-primary">
    </form>
+   <div style="float: right">
+      <a href="{% url 'findid' %}">아이디 찾기&nbsp;&nbsp;</a>|
+      <a href="{% url 'findpassword' %}">&nbsp;비밀번호 찾기&nbsp;&nbsp;</a>|
+      <a href="{% url 'join'%}">&nbsp;회원가입</a>
+   </div>
 </div>
 {% endblock%}
