@@ -20,8 +20,7 @@ def join(request):
 def mypage(request):
    return render(request, "member/mypage.html")
 
-def findid(request):
-   return render(request, "member/findid.html")
-
-def findpassword(request):
-   return render(request, "member/findpassword.html")
+# 페이지 볼려고 추가했습니다. 무시하셔도 될거 같아요
+# 마이페이지 수정
+def mypage_edit(request):
+   return render(request, "member/mypage_edit.html")
