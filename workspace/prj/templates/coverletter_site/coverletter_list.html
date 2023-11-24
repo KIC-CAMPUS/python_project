@@ -1,5 +1,5 @@
 {% extends "base/main.html" %}
-
+{% load static %}
 {% block title %}검사 목록{% endblock%}
 
 {% block main_area %}
@@ -9,16 +9,14 @@
             <span class="upload_title"><h1>검사 목록</h1></span>
         </div>
     </div>
-    <div class="upload_tr"></div>
     <div>
         <div style="height: 50px">
-            <div>
-                <input class="form-control" id="search-input"
-                       type="text" placeholder="검색" style="width: 300px">
-                <button class="btn btn-outline-primary my-2 my-sm-0"
-                        type="button" onclick="searchPost()" id="search_button">검색
-                </button>
-            </div>
+            <input class="form-control" id="search-input"
+                   type="text" placeholder="검색" style="width: 300px">
+
+            <button class="btn btn-outline-primary my-2 my-sm-0"
+                    type="button" onclick="searchPost()" id="search_button">검색
+            </button>
             <div class="d-flex justify-content-end">
                 <div class="btn-group dropleft" style="width: 70px;">
                     <button type="button"
@@ -28,32 +26,51 @@
                         정렬
                     </button>
                     <div class="dropdown-menu">
-                        <button class="dropdown-item" data-sort-value="all">전체</button>
-                        <button class="dropdown-item" data-sort-value="latest">날짜 최신순</button>
-                        <button class="dropdown-item" data-sort-value="high">표절률 높은순</button>
-                        <button class="dropdown-item" data-sort-value="low">표절률 낮은순</button>
+                        <a class="dropdown-item" href="#">전체</a>
+                        <a class="dropdown-item" href="#">날짜 최신순</a>
+                        <a class="dropdown-item" href="#">표절률 높은순</a>
+                        <a class="dropdown-item" href="#">표절률 낮은순</a>
+                        <a class="dropdown-item" href="#">즐겨찾기만</a>
+                        <a class="dropdown-item" href="#">즐겨찾기 제외</a>
                     </div>
                 </div>
             </div>
         </div>
         <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'cover_letter_delete' %}">
             {% csrf_token %}
-            <div class="linebox"></div>
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
                 <thead>
                 <tr>
+                    <th>
+                        <div class="d-flex justify-content-center">
+                            <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
+                                 style="width: 20px; height: 20px;"
+                                 class="star-icon " id="star_chkAll1">
+                            <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
+                                 style="width: 20px; height: 20px; display: none;"
+                                 class="star-icon" id="star_chkAll2">
+                        </div> <!-- 즐겨찾기 -->
+                    </th>
                     <th>번호</th>
                     <th>등록일</th>
                     <th>문서 구분</th>
                     <th>이력서 명</th>
                     <th>표절률</th>
-                    <th>#</th>
+                    <th>검사 결과</th>
                     <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll"></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for coverletter in coverletter_list %}
                 <tr>
+                    <td>
+                        <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
+                             style="width: 20px; height: 20px;"
+                             class="star-icon" name="star1">
+                        <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
+                             style="width: 20px; height: 20px; display: none;"
+                             class="star-icon" name="star2">
+                    </td>
                     <td>{{ coverletter.pk }}</td>
                     <td>{{ coverletter.create_at }}</td>
                     <td>{{ coverletter.document_type }}</td>
@@ -126,23 +143,13 @@
 
 <script>
     function searchPost(){
-        let searchValue =
-            document.getElementById("search-input").value.trim();
-        if( searchValue.length > 1){
-            location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
-        } else {
-            alert("검색어를 2글자 이상 작성하세요");
-        }
+       let searchValue =
+          document.getElementById("search-input").value.trim();
+       if( searchValue.length > 1){
+          location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
+       } else {
+          alert("검색어를 2글자 이상 작성하세요");
+       }
     }
-
-    document.querySelectorAll('.dropdown-item').forEach(function(item) {
-        item.addEventListener('click', function() {
-            let sortValue = item.dataset.sortValue.trim();
-            console.log('선택된 정렬 값:', sortValue);
-
-            // 선택된 값에 기반하여 원하는 동작 수행
-            location.href = location.origin + "/coverletter/list/sort/" + sortValue + "/";
-        });
-    });
 </script>
 {% endblock%}

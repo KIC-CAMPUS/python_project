@@ -1,14 +1,33 @@
 {% extends "base/main.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}메인 페이지{% endblock%}
+{% block title %}회원가입{% endblock%}
 
 {% block main_area %}
 <div class="container">
-   <form method="post" enctype="application/x-www-form-urlencoded">
-      {% csrf_token %}
-      {{ form | crispy }}
-      <input type="submit" class="btn btn-primary">
-   </form>
+    <div class="d-flex align-items-center h-100">
+        <div class="col-lg-12">
+            <span class="upload_title"><h1>회원가입</h1></span>
+        </div>
+    </div>
+    <div class="upload_tr"></div>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="application/x-www-form-urlencoded">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="d-flex justify-content-end">
+                    <div class="m-2">
+                        <input type="submit" class="btn btn-primary" style="width: 150px;">
+                    </div>
+                    <div class="m-2">
+                        <a type="button" class="btn btn-light" href="/" style="width: 150px;">
+                            취소
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock%}

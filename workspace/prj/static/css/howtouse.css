@@ -2,15 +2,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 50%;
+        width: 100%;
         margin: 0 auto;
         position: relative;
     }
 
     .circle p {
         position: relative;
-        width: 140px;
-        height: 140px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
         background-color: #e9ecef;
         display: flex;
@@ -22,8 +22,8 @@
     .circle p:not(:last-child)::after {
         content: ">";
         position: absolute;
-        right: -100px;
-        top: 50%;
+        right: -120px;
+        top: 40%;
         font-size: 100px;
         color: #868e96;
         transform: translateY(-50%);
@@ -33,7 +33,7 @@
         position: relative;
         z-index: 1;
     }
-    .container {
+    .container_box {
         display: flex;
         align-items: center;
     }

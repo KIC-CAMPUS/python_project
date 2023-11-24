@@ -50,10 +50,10 @@
   padding-bottom: 50px;
 }
 footer{
-  height: 150px;
+  height: 160px;
   position : relative;
   /*border-top: 3px solid #01aaef;*/
-  background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+  background-color: #e9ecef;
 }
 
 .imgbox{
