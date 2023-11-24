@@ -14,8 +14,6 @@ urlpatterns = [
 
    # 페이지 볼려고 추가했습니다. 무시하셔도 될거 같아요
    path("mypage/edit/", views.mypage_edit, name='mypage_edit'),
-   # 즐겨착기
-   path(r'^like/$', views.post_like, name='post_like'),
    # 정렬
    path('mypage/sort/<q>/', views.Mypage_CoverLetterSortList.as_view()),
    # 검색

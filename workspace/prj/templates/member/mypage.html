@@ -145,11 +145,12 @@
                             {% for coverletter in coverletter_list %}
                             <tr>
                                 <td>
-                                    <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
-                                         style="width: 20px; height: 20px;" class="star-icon" name="star1">
-                                    <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
-                                         style="width: 20px; height: 20px; display: none;" class="star-icon"
-                                         name="star2">
+                                    <input type="checkbox" class="star-checkbox" name="star" id="star-checkbox" {% if checkbox %}checked{% endif %}>
+                                    <label for="star-checkbox" class="star-label">
+                                        <img src="{% if checkbox %}{% static 'images/whitestar.png' %}{% else %}{% static 'images/yellowstar.png' %}{% endif %}"
+                                             alt="{% if checkbox %}즐겨찾기 ON{% else %}즐겨찾기 OFF{% endif %}"
+                                             class="star-icon">
+                                    </label>
                                 </td>
                                 <td>{{ coverletter.pk }}</td>
                                 <td>{{ coverletter.create_at }}</td>

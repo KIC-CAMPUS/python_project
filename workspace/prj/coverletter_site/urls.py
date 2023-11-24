@@ -10,5 +10,5 @@ urlpatterns = [
    path('list/search/<str:q>/', views.PostSearch.as_view()),
    path('list/sort/<q>/', views.CoverLetterSortList.as_view()),
    path("list/", views.CoverLetterSortList.as_view(), name=''),
-   # path(r'^like/$', views.post_like, name='post_like'),
+   path('like/', views.post_like, name='coverletter_like'),
 ]

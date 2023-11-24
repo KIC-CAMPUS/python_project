@@ -25,13 +25,13 @@ class CoverLetter(models.Model):
 # 즐겨찾기
 class Like(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)
-   post = models.ForeignKey(CoverLetter, on_delete=models.CASCADE)
+   coverletter = models.ForeignKey(CoverLetter, on_delete=models.CASCADE)
    created_at = models.DateTimeField(auto_now_add=True)
    updated_at = models.DateTimeField(auto_now=True)
 
    # 한번만 누를수 있음
    class Meta:
       unique_together = (
-         ('user', 'post')
+         ('user', 'coverletter')
       )
       
