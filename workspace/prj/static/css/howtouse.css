@@ -33,7 +33,7 @@
         position: relative;
         z-index: 1;
     }
-    .container {
+    .container_box {
         display: flex;
         align-items: center;
     }

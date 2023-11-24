@@ -1,15 +1,43 @@
 {% extends "base/main.html" %}
+
+{% block title %}후기 상세{% endblock%}
 {% block main_area %}
-<div class="container">
-   <!-- 제목및 헤더 -->
-   <h3>{{ review.title }}</h3>
+<div class="container" style="width: 1000px;">
+    <!-- 제목및 헤더
+    <h3>{{ review.title }}</h3>
 
-   <!-- 본문 -->
-   <div>
-      {{ review.content }}
-   </div>
-
-   <!-- 수정 버튼 -->
-   <a type="button" href="{% url 'review_edit' pk=review.pk %}" class="btn btn-light">수정</a>
+    &lt;!&ndash; 본문 &ndash;&gt;
+    <div>
+       {{ review.content }}
+    </div>-->
+    <h3 style="font-weight: bold;">
+        <!-- 작성한 제목 나오는 곳 -->
+        <span>{{ review.title }}</span>
+    </h3>
+    <div class="upload_tr"></div>
+    <div class="upload_tr"></div>
+    <div class="d-flex justify-content-end">
+        <!-- 날짜 나오는 곳 -->
+        <h6>등록일 : <span>2023.11.24</span></h6>
+    </div>
+    <!--        <div class="card" style="border-top: 3px solid rgb(226, 226, 226);">-->
+    <div class="card">
+        <div class="card-body">
+            <!-- 작성한 내용 나오는 곳 -->
+            <div>
+                {{ review.content }}
+            </div>
+        </div>
+    </div>
+    <div class="upload_tr"></div>
+    <div>
+        <h5>By. <span style="color: #01aaef;">산와머니</span></h5> <!-- 이름 나오는 곳 -->
+    </div>
+    <div class="upload_tr"></div>
+    <div class="d-flex justify-content-end">
+        <a type="button" class="btn btn-primary" href="/review/edit" style="width: 150px; height: 40px">수정</a>
+    </div>
 </div>
+<!-- 수정 버튼 -->
+<!--   <a type="button" href="{% url 'review_edit' pk=review.pk %}" class="btn btn-light">수정</a>-->
 {% endblock %}

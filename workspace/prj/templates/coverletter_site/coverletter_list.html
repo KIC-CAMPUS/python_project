@@ -1,5 +1,5 @@
 {% extends "base/main.html" %}
-
+{% load static %}
 {% block title %}검사 목록{% endblock%}
 
 {% block main_area %}
@@ -9,43 +9,78 @@
             <span class="upload_title"><h1>검사 목록</h1></span>
         </div>
     </div>
-    <div class="upload_tr"></div>
     <div>
-        <div>
+        <div style="height: 50px">
             <input class="form-control" id="search-input"
-                    type="text" placeholder="검색" style="width: 300px">
+                   type="text" placeholder="검색" style="width: 300px">
 
             <button class="btn btn-outline-primary my-2 my-sm-0"
-                    type="button" onclick="searchPost()" id="search_button">검색</button>
-
-
+                    type="button" onclick="searchPost()" id="search_button">검색
+            </button>
+            <div class="d-flex justify-content-end">
+                <div class="btn-group dropleft" style="width: 70px;">
+                    <button type="button"
+                            class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-expanded="false" id="cat_button">
+                        정렬
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">전체</a>
+                        <a class="dropdown-item" href="#">날짜 최신순</a>
+                        <a class="dropdown-item" href="#">표절률 높은순</a>
+                        <a class="dropdown-item" href="#">표절률 낮은순</a>
+                        <a class="dropdown-item" href="#">즐겨찾기만</a>
+                        <a class="dropdown-item" href="#">즐겨찾기 제외</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'cover_letter_delete' %}">
             {% csrf_token %}
-            <div class="linebox"></div>
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
                 <thead>
                 <tr>
+                    <th>
+                        <div class="d-flex justify-content-center">
+                            <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
+                                 style="width: 20px; height: 20px;"
+                                 class="star-icon " id="star_chkAll1">
+                            <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
+                                 style="width: 20px; height: 20px; display: none;"
+                                 class="star-icon" id="star_chkAll2">
+                        </div> <!-- 즐겨찾기 -->
+                    </th>
                     <th>번호</th>
                     <th>등록일</th>
                     <th>문서 구분</th>
                     <th>이력서 명</th>
                     <th>표절률</th>
-                    <th>#</th>
+                    <th>검사 결과</th>
                     <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll"></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for coverletter in coverletter_list %}
                 <tr>
+                    <td>
+                        <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
+                             style="width: 20px; height: 20px;"
+                             class="star-icon" name="star1">
+                        <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
+                             style="width: 20px; height: 20px; display: none;"
+                             class="star-icon" name="star2">
+                    </td>
                     <td>{{ coverletter.pk }}</td>
                     <td>{{ coverletter.create_at }}</td>
                     <td>{{ coverletter.document_type }}</td>
                     <td>{{ coverletter.title }}</td>
                     <td>{{ coverletter.rate }}</td>
                     <td><a class="btn btn-outline-secondary align-middle" type="button"
-                        style="width:70px; height:30px; font-size:11px" href="{% url 'coverletter_detail' pk=coverletter.pk %}">상세보기</a></td>
-                    <td onclick="event.stopPropagation();"><input type="checkbox" name="chk" value="{{coverletter.pk}}" style="width: 15px; height: 15px;">
+                           style="width:70px; height:30px; font-size:11px"
+                           href="{% url 'coverletter_detail' pk=coverletter.pk %}">상세보기</a></td>
+                    <td onclick="event.stopPropagation();"><input type="checkbox" name="chk" value="{{coverletter.pk}}"
+                                                                  style="width: 15px; height: 15px;">
                     </td>
                 </tr>
                 {% endfor %}
@@ -87,11 +122,11 @@
                 {% endif %}
 
                 {% for page_no in page_obj.paginator.page_range %}
-                    <li class="page-item">
-                        <a class="page-link" href="{% url 'result_list' %}?page={{page_no}}">
-                            {{ page_no }}
-                        </a>
-                    </li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'result_list' %}?page={{page_no}}">
+                        {{ page_no }}
+                    </a>
+                </li>
                 {% endfor %}
 
                 {% if page_obj.has_next %}
@@ -107,14 +142,14 @@
 </div>
 
 <script>
-  function searchPost(){
-     let searchValue =
-        document.getElementById("search-input").value.trim();
-     if( searchValue.length > 1){
-        location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
-     } else {
-        alert("검색어를 2글자 이상 작성하세요");
-     }
-  }
+    function searchPost(){
+       let searchValue =
+          document.getElementById("search-input").value.trim();
+       if( searchValue.length > 1){
+          location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
+       } else {
+          alert("검색어를 2글자 이상 작성하세요");
+       }
+    }
 </script>
 {% endblock%}

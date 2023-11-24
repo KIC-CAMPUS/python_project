@@ -53,12 +53,12 @@ footer{
   height: 150px;
   position : relative;
   /*border-top: 3px solid #01aaef;*/
-  background-color: rgb(80, 255, 249);
+  background-color: black;
 }
 
 .imgbox{
     position: relative;
-    bottom: 100px;
+    bottom: 70px;
 }
 
 .img_site{

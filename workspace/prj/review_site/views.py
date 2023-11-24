@@ -38,3 +38,9 @@ class ReviewDetail(DetailView):
 class ReviewEdit(UpdateView):
    model = Review
    fields = ('title', 'content', 'upload_file')
+
+
+
+from django.shortcuts import render
+def edit(request):
+   return render(request, "review_site/review_edit.html")

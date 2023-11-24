@@ -52,7 +52,7 @@ def find_most_similar(sentence1, sentences):
 
    return most_similar_sentence, max_similarity
 
-df = pd.read_csv(r"D:\gb_jbh_0630\project\django\main_project\temp\jupyter\ResumeDatas.csv")
+df = pd.read_csv(r"C:\Users\KITCOOP\Desktop\ResumeDatas.csv")
 sentences = df["answer"].tolist()
 
 # 입력 문장과 비교 대상 문장 간의 유사도 계산
