@@ -1,5 +1,5 @@
 {% extends "base/main.html" %}
-
+{% load static %}
 {% block title %}검사 목록{% endblock%}
 
 {% block main_area %}
@@ -55,7 +55,21 @@
                 <tbody>
                 {% for coverletter in coverletter_list %}
                 <tr>
-                    <td><input type="button" class="like" name="{{ coverletter.id }}" value="Like"></td>
+                    {% if not coverletter.bookmark %}
+                    <td>
+                        <button class="like" name="{{ coverletter.id }}"
+                                style="border: none; cursor: pointer; background: none; width: 20px; height: 20px; padding: 0;">
+                            <img src="{% static 'images/whitestar.png' %}" alt="Like" width="20" height="20">
+                        </button>
+                    </td>
+                    {% else %}
+                    <td>
+                        <button class="like" name="{{ coverletter.id }}"
+                                style="border: none; cursor: pointer; background: none; width: 20px; height: 20px; padding: 0;">
+                            <img src="{% static 'images/yellowstar.png' %}" alt="Like" width="20" height="20">
+                        </button>
+                    </td>
+                    {% endif %}
                     <td>{{ coverletter.pk }}</td>
                     <td>{{ coverletter.create_at }}</td>
                     <td>{{ coverletter.document_type }}</td>
@@ -156,18 +170,13 @@
         $.ajax({
             type: "post",
             url: "{% url 'coverletter_like' %}",
-            data: JSON.stringify(datas),
-            headers:{
-                "Content-Type" : "application/json",
-                "X-HTTP-Method-Override" : "POST",
-            },
-            dataType: "json",
+            data: datas,
             success: function(response){
                 console.log('성공함')
             },
             error: function(request, status, error){
                 alert("로그인이 필요합니다.")
-                window.location.replace("login/")
+                location.href = location.origin + "/login/"
             },
         });
     })

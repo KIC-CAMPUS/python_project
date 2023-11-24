@@ -7,7 +7,6 @@ from django.urls import reverse_lazy
 from .forms import UserForm
 from coverletter_site.views import CoverLetterList, coverLetterDelete
 
-from coverletter_site.models import CoverLetter
 
 
 # 회원가입
@@ -28,6 +27,12 @@ def join(request):
 class MypageView(CoverLetterList):
    template_name = "member/mypage.html"
 
+   def get_queryset(self):
+      return super().get_queryset().filter(bookmark=True)
+
+
+
+
 # 페이지 볼려고 추가했습니다. 무시하셔도 될거 같아요
 # 마이페이지 수정
 def mypage_edit(request):
@@ -37,17 +42,7 @@ def mypage_coverLetterDelete(request):
    coverLetterDelete(request)
    return redirect(reverse_lazy('mypage'))
 
-def post_like(request):
-   if request.method == 'POST':
-      pk = request.POST.get('pk', None)  # ajax 통신을 통해서 template에서 POST방식으로 전달
-      post = get_object_or_404(CoverLetter, pk=pk)
-      post_like, post_like_created = post.like_set.get_or_create(user=request.user)
-
-      if not post_like_created:
-         post_like.delete()
-
-      return HttpResponse(content_type="application/json")
-
+# 검색
 class PostSearch(MypageView):
    def get_queryset(self):
       q = self.kwargs['q']
@@ -56,6 +51,7 @@ class PostSearch(MypageView):
       ).distinct()
       return post_list
 
+# 정렬
 class Mypage_CoverLetterSortList(MypageView):
    def get_queryset(self):
       q = self.kwargs['q']

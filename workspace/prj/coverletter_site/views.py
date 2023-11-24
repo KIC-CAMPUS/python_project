@@ -83,16 +83,18 @@ def coverLetterDelete(request):
    return redirect(reverse_lazy('result_list'))
 
 
-def post_like(request):
+def coverletter_bookmark(request):
    if request.method == 'POST':
       pk = request.POST.get('pk', None)  # ajax 통신을 통해서 template에서 POST방식으로 전달
+      print("pk:", pk)
       post = get_object_or_404(CoverLetter, pk=pk)
-      post_like, post_like_created = post.like_set.get_or_create(user=request.user)
+      print("post:", post)
 
-      if not post_like_created:
-         post_like.delete()
+      post.bookmark = not post.bookmark
+      print(post.bookmark)
+      post.save()
 
-      return HttpResponse(content_type="application/json")
+      return HttpResponse()
 
 class PostSearch(CoverLetterList):
    def get_queryset(self):

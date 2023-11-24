@@ -121,16 +121,7 @@
                         <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
                             <thead>
                             <tr>
-                                <th>
-                                    <div class="d-flex justify-content-center">
-                                        <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
-                                             style="width: 20px; height: 20px;"
-                                             class="star-icon " id="star_chkAll1">
-                                        <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
-                                             style="width: 20px; height: 20px; display: none;"
-                                             class="star-icon" id="star_chkAll2">
-                                    </div> <!-- 즐겨찾기 -->
-                                </th>
+
                                 <th>번호</th>
                                 <th>날짜</th>
                                 <th>이력서 명</th>
@@ -144,14 +135,6 @@
                             <tbody> <!-- 테이블 바디부분을 누르면 상세창으로 이동 -->
                             {% for coverletter in coverletter_list %}
                             <tr>
-                                <td>
-                                    <input type="checkbox" class="star-checkbox" name="star" id="star-checkbox" {% if checkbox %}checked{% endif %}>
-                                    <label for="star-checkbox" class="star-label">
-                                        <img src="{% if checkbox %}{% static 'images/whitestar.png' %}{% else %}{% static 'images/yellowstar.png' %}{% endif %}"
-                                             alt="{% if checkbox %}즐겨찾기 ON{% else %}즐겨찾기 OFF{% endif %}"
-                                             class="star-icon">
-                                    </label>
-                                </td>
                                 <td>{{ coverletter.pk }}</td>
                                 <td>{{ coverletter.create_at }}</td>
                                 <td>{{ coverletter.document_type }}</td>

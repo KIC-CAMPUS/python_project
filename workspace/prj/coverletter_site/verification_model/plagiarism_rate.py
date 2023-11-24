@@ -3,6 +3,7 @@ from .boyer_moore_algorithm import boyer_moore
 from .stopword import remove_stopwords_and_special_characters
 from nltk import word_tokenize
 import pandas as pd
+import os
 
 # 표절률 구하는 함수
 def boyer_moore_matching_sentences(tokens1, tokens2):
@@ -52,9 +53,9 @@ def find_most_similar(sentence1, sentences):
 
    return most_similar_sentence, max_similarity
 
-df = pd.read_csv(r"C:\Users\KITCOOP\Desktop\r\character_ok.csv")
-sentences = df["Sentence"].tolist()
-
+data_path = r'%s' % os.getcwd() + '/coverletter_site/verification_model/data/ResumeDatas.csv'
+df = pd.read_csv(data_path)
+sentences = df["answer"].tolist()
 
 def split_and_save_to_list(text):
    # 텍스트를 줄별로 나누기
