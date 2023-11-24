@@ -9,8 +9,6 @@ urlpatterns = [
    path("mypage/", views.mypage, name='mypage'),
    path("findid/", views.findid, name='findid'),
    path("findpassword/", views.findpassword, name='findpassword'),
-   path("id_success/", views.id_success, name='id_success'),
-   path("pw_success/", views.pw_success, name='pw_success'),
    path("findid_/", views.findid_, name='findid_'),
    path("findpw_/", views.findpw_, name='findpw_'),
 ]

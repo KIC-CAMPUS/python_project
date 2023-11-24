@@ -80,9 +80,5 @@ def findid(request):
 def findpassword(request):
    return render(request, "member/findpassword.html")
 
-def id_success(request):
-   return render(request, "member/id_success.html")
 
-def pw_success(request):
-   return render(request, "member/pw_success.html")
 
