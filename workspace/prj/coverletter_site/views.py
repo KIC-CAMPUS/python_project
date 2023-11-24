@@ -28,7 +28,7 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
          docs_path = r'%s' % coverletter.document_file.name
          document_rate_check(docs_path)
          return reps
-      rate = sentence_plagiarism_rate([coverletter.content])
+      rate = sentence_plagiarism_rate(coverletter.content)
       print(">>>>>",rate, type(rate))
       coverletter.rate = rate
       return super().form_valid(form)
