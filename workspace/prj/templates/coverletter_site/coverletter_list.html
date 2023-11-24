@@ -9,14 +9,16 @@
             <span class="upload_title"><h1>검사 목록</h1></span>
         </div>
     </div>
+    <div class="upload_tr"></div>
     <div>
         <div style="height: 50px">
-            <input class="form-control" id="search-input"
-                   type="text" placeholder="검색" style="width: 300px">
-
-            <button class="btn btn-outline-primary my-2 my-sm-0"
-                    type="button" onclick="searchPost()" id="search_button">검색
-            </button>
+            <div>
+                <input class="form-control" id="search-input"
+                       type="text" placeholder="검색" style="width: 300px">
+                <button class="btn btn-outline-primary my-2 my-sm-0"
+                        type="button" onclick="searchPost()" id="search_button">검색
+                </button>
+            </div>
             <div class="d-flex justify-content-end">
                 <div class="btn-group dropleft" style="width: 70px;">
                     <button type="button"
@@ -26,51 +28,48 @@
                         정렬
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">전체</a>
-                        <a class="dropdown-item" href="#">날짜 최신순</a>
-                        <a class="dropdown-item" href="#">표절률 높은순</a>
-                        <a class="dropdown-item" href="#">표절률 낮은순</a>
-                        <a class="dropdown-item" href="#">즐겨찾기만</a>
-                        <a class="dropdown-item" href="#">즐겨찾기 제외</a>
+                        <button class="dropdown-item" data-sort-value="all">전체</button>
+                        <button class="dropdown-item" data-sort-value="latest">날짜 최신순</button>
+                        <button class="dropdown-item" data-sort-value="high">표절률 높은순</button>
+                        <button class="dropdown-item" data-sort-value="low">표절률 낮은순</button>
                     </div>
                 </div>
             </div>
         </div>
         <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'cover_letter_delete' %}">
             {% csrf_token %}
-            <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
+            <div class="linebox"></div>
+            <table class="table table-hover text-center">
                 <thead>
                 <tr>
-                    <th>
-                        <div class="d-flex justify-content-center">
-                            <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
-                                 style="width: 20px; height: 20px;"
-                                 class="star-icon " id="star_chkAll1">
-                            <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
-                                 style="width: 20px; height: 20px; display: none;"
-                                 class="star-icon" id="star_chkAll2">
-                        </div> <!-- 즐겨찾기 -->
-                    </th>
+                    <th><input type="checkbox"></th>
                     <th>번호</th>
                     <th>등록일</th>
                     <th>문서 구분</th>
                     <th>이력서 명</th>
                     <th>표절률</th>
-                    <th>검사 결과</th>
+                    <th>#</th>
                     <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll"></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for coverletter in coverletter_list %}
                 <tr>
+                    {% if not coverletter.bookmark %}
                     <td>
-                        <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
-                             style="width: 20px; height: 20px;"
-                             class="star-icon" name="star1">
-                        <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
-                             style="width: 20px; height: 20px; display: none;"
-                             class="star-icon" name="star2">
+                        <button class="like" name="{{ coverletter.id }}"
+                                style="border: none; cursor: pointer; background: none; width: 20px; height: 20px; padding: 0;">
+                            <img src="{% static 'images/whitestar.png' %}" alt="Like" width="20" height="20">
+                        </button>
                     </td>
+                    {% else %}
+                    <td>
+                        <button class="like" name="{{ coverletter.id }}"
+                                style="border: none; cursor: pointer; background: none; width: 20px; height: 20px; padding: 0;">
+                            <img src="{% static 'images/yellowstar.png' %}" alt="Like" width="20" height="20">
+                        </button>
+                    </td>
+                    {% endif %}
                     <td>{{ coverletter.pk }}</td>
                     <td>{{ coverletter.create_at }}</td>
                     <td>{{ coverletter.document_type }}</td>
@@ -140,16 +139,46 @@
         </nav>
     </div>
 </div>
-
+{% endblock %}
+{% block js %}
 <script>
     function searchPost(){
-       let searchValue =
-          document.getElementById("search-input").value.trim();
-       if( searchValue.length > 1){
-          location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
-       } else {
-          alert("검색어를 2글자 이상 작성하세요");
-       }
+        let searchValue =
+            document.getElementById("search-input").value.trim();
+        if( searchValue.length > 1){
+            location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
+        } else {
+            alert("검색어를 2글자 이상 작성하세요");
+        }
     }
+
+    document.querySelectorAll('.dropdown-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            let sortValue = item.dataset.sortValue.trim();
+            console.log('선택된 정렬 값:', sortValue);
+
+            // 선택된 값에 기반하여 원하는 동작 수행
+            location.href = location.origin + "/coverletter/list/sort/" + sortValue + "/";
+        });
+    });
+
+    $(".like").click(function(){
+        console.log('실행함')
+        var pk = $(this).attr('name')
+        datas = {'pk': parseInt(pk), 'csrfmiddlewaretoken': '{{ csrf_token }}'}
+        console.log(datas)
+        $.ajax({
+            type: "post",
+            url: "{% url 'coverletter_like' %}",
+            data: datas,
+            success: function(response){
+                console.log('성공함')
+            },
+            error: function(request, status, error){
+                alert("로그인이 필요합니다.")
+                location.href = location.origin + "/login/"
+            },
+        });
+    })
 </script>
 {% endblock%}
