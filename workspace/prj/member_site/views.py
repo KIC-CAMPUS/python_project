@@ -3,10 +3,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.urls import reverse_lazy
+from django.views.generic import ListView
 
 from .forms import UserForm
 from coverletter_site.views import CoverLetterList, coverLetterDelete
 
+from coverletter_site.models import CoverLetter
 
 
 # 회원가입
@@ -29,6 +31,18 @@ class MypageView(CoverLetterList):
 
    def get_queryset(self):
       return super().get_queryset().filter(bookmark=True)
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+
+      # Calculate bookmark counts
+      context['document_type_1_count'] = CoverLetter.objects.filter(document_type=1).count()
+      context['document_type_2_count'] = CoverLetter.objects.filter(document_type=2).count()
+      context['document_type_3_count'] = CoverLetter.objects.filter(document_type=3).count()
+      context['document_type_4_count'] = CoverLetter.objects.filter(document_type=4).count()
+      context['document_type_5_count'] = CoverLetter.objects.filter(document_type=5).count()
+
+      return context
 
 
 
@@ -65,3 +79,4 @@ class Mypage_CoverLetterSortList(MypageView):
          self.ordering = ['rate']
 
       return super().get_queryset()
+
