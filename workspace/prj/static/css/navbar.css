@@ -41,3 +41,26 @@
 #table_border_zero{
     border-top: 0px;
 }
+
+
+/* 24일 css 추가 */
+#wrapper{
+  height: auto;
+  min-height: calc(100vh - 300px); /* footer 높이를 빼준다. */
+  padding-bottom: 50px;
+}
+footer{
+  height: 150px;
+  position : relative;
+  /*border-top: 3px solid #01aaef;*/
+  background-color: rgb(80, 255, 249);
+}
+
+.imgbox{
+    position: relative;
+    bottom: 100px;
+}
+
+.img_site{
+    margin-left: 15px;
+}

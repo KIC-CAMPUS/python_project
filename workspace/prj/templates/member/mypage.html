@@ -112,8 +112,6 @@
                                     <a class="dropdown-item" href="#">날짜 최신순</a>
                                     <a class="dropdown-item" href="#">표절률 높은순</a>
                                     <a class="dropdown-item" href="#">표절률 낮은순</a>
-                                    <a class="dropdown-item" href="#">즐겨찾기만</a>
-                                    <a class="dropdown-item" href="#">즐겨찾기 제외</a>
                                 </div>
                             </div>
                         </div>
@@ -213,105 +211,13 @@
             </div>
             <!-- 즐겨찾기한 게시판 나오는 곳 여기까지 -->
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px">정보 수정</button>
+                <a type="button" class="btn btn-primary" href="/mypage/edit" style="width: 150px; height: 40px">정보 수정</a>
             </div>
         </div>
     </div>
 </div>
 <!-- 여기까지 -->
 
-
-<br><br><br><br><br>
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title" style="font-weight: bold;"><span>산와머니</span></h3>
-            <h5 class="card-title" style="font-weight: bold;"><span>닉네임(정보수정 누르면 나오는 화면)</span></h5>
-            <div class="upload_tr"></div>
-            <div class="container">
-                <div class="d-flex justify-content-center">
-                    <form>
-                        <div class="form-group">
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <span class="align-bottom"
-                                          style="margin: 0; font-size: 20px">이름</span>
-                                </div>
-                                <input type="text" class="form-control" maxlength="14" style="width: 400px"
-                                       readonly>
-                                <div class="button_size">
-                                    <button type="button" class="btn btn-primary" style="width: 120px">중복검사</button>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <span class="align-bottom"
-                                          style="margin: 0; font-size: 20px">닉네임</span>
-                                </div>
-                                <input type="text" class="form-control" maxlength="14" style="width: 400px"
-                                       readonly>
-                                <div class="button_size">
-                                    <button type="button" class="btn btn-primary" style="width: 120px">중복검사</button>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <span class="align-bottom"
-                                          style="margin: 0; font-size: 20px">생일</span>
-                                </div>
-                                <input type="date" class="form-control" style="width: 400px" readonly>
-                            </div>
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <span class="align-bottom"
-                                          style="margin: 0; font-size: 20px">전화번호</span>
-                                </div>
-                                <input type="text" class="form-control" maxlength="14" style="width: 400px"
-                                       readonly>
-                            </div>
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <span class="align-bottom"
-                                          style="margin: 0; font-size: 20px">ID</span>
-                                </div>
-                                <input type="text" class="form-control" maxlength="14" style="width: 400px"
-                                       readonly>
-                                <div class="button_size">
-                                    <button type="button" class="btn btn-primary" style="width: 120px">중복검사</button>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <label for="editPassword" class="align-bottom"
-                                           style="margin: 0; font-size: 20px">비밀번호</label>
-                                </div>
-                                <input type="password" class="form-control" id="editPassword" maxlength="14"
-                                       style="width: 400px" readonly>
-                            </div>
-                            <div class="d-flex justify-content">
-                                <div style="width: 150px; height: 40px; margin-bottom: 20px;">
-                                    <label for="editPasswordCheck" class="align-bottom"
-                                           style="margin: 0; font-size: 20px">비밀번호 확인</label>
-                                </div>
-                                <input type="password" class="form-control" id="editPasswordCheck" maxlength="14"
-                                       style="width: 400px" readonly>
-                            </div>
-                            <div class="card-body d-flex justify-content-center">
-                                <div class="m-2">
-                                    <button type="submit" class="btn btn-primary" href="/mypage" style="width: 150px">수정
-                                        완료
-                                    </button>
-                                </div>
-                                <div class="m-2">
-                                    <a type="button" class="btn btn-light" href="/mypage" style="width: 150px">취소</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- 정보수정 페이지로 옮겼습니다. -->
 
 {% endblock %}
