@@ -7,7 +7,8 @@
             <span class="upload_title"><h1>아이디 찾기</h1></span>
         </div>
     </div>
-    <form>
+    <form method="post" action="{% url 'findid_' %}">
+        {% csrf_token %}
         <div id="div_id_first_name" class="form-group">
             <label for="id_first_name" class="">이름</label>
             <div>
@@ -15,20 +16,18 @@
             </div>
         </div>
         <div id="div_id_birthday" class="form-group">
-            <label for="id_birthday" class=" requiredField">생일</label>
+            <label for="id_birthday" class="requiredField">생일</label>
             <div>
                 <input type="date" name="birthday" class="textinput form-control" required="" id="id_birthday">
             </div>
         </div>
         <div id="div_id_phone" class="form-group">
-            <label for="id_phone" class=" requiredField">전화번호</label>
+            <label for="id_phone" class="requiredField">전화번호</label>
             <div>
                 <input type="text" name="phone" class="textinput form-control" required="" id="id_phone">
             </div>
-            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="float: right">아이디 찾기</button>
     </form>
-    <button class="btn btn-primary" style="float: right">아이디 찾기</button>
 </div>
-
-
 {% endblock %}
