@@ -1,4 +1,5 @@
 temp/
+workspace/prj/coverletter_site/verification_model/data
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,venv,django,jupyternotebooks
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,venv,django,jupyternotebooks
