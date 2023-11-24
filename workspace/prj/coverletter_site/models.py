@@ -17,10 +17,21 @@ class CoverLetter(models.Model):
    rate = models.DecimalField(max_digits=2, decimal_places=1, null=True)
    create_at = models.DateTimeField(auto_now_add=True)
 
-   # like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='like_user_set', through='Like')
+   like_user_set = models.ManyToManyField(User, blank=True, related_name='like_user_set', through='Like')
 
    def __str__(self) -> str:
       return f'[{self.pk}] {self.document_type} :: {self.user}'
 
-# class Like(models.Model):
-#    post = models.ForeignKey(CoverLetter)
+# 즐겨찾기
+class Like(models.Model):
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+   post = models.ForeignKey(CoverLetter, on_delete=models.CASCADE)
+   created_at = models.DateTimeField(auto_now_add=True)
+   updated_at = models.DateTimeField(auto_now=True)
+
+   # 한번만 누를수 있음
+   class Meta:
+      unique_together = (
+         ('user', 'post')
+      )
+      

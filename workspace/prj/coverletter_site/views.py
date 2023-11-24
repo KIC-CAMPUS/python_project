@@ -28,7 +28,7 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
          docs_path = r'%s' % coverletter.document_file.name
          document_rate_check(docs_path)
          return reps
-      rate = sentence_plagiarism_rate([coverletter.content])
+      rate = sentence_plagiarism_rate(coverletter.content)
       print(">>>>>",rate, type(rate))
       coverletter.rate = rate
       return super().form_valid(form)
@@ -46,6 +46,23 @@ class CoverLetterList(LoginRequiredMixin, ListView):
       user = self.request.user
       return super().get_queryset().filter(user=user)
 
+
+class CoverLetterSortList(CoverLetterList):
+   def get_queryset(self):
+      q = self.kwargs['q']
+      if q == "all":
+         self.ordering = ['-pk']
+      elif q == "latest":
+         self.ordering = ['-create_at']
+      elif q == "high":
+         self.ordering = ['-rate']
+      elif q == "low":
+         self.ordering = ['rate']
+
+      return super().get_queryset()
+
+
+
 # 자소서 표절 결과 상세 페이지
 class CoverLetterDetail(DetailView):
    model = CoverLetter
@@ -59,7 +76,7 @@ class CoverLetterDetail(DetailView):
 #       return super(ListView, self).get_queryset().filter(~Q(rate__exact=None), user=user)
 
 # 문서 삭제
-def CoverLetterDelete(request):
+def coverLetterDelete(request):
    if request.method == 'POST':
       pk_list = request.POST.getlist('chk')
       CoverLetter.objects.filter(pk__in=pk_list).delete()
@@ -84,3 +101,5 @@ class PostSearch(CoverLetterList):
          Q(title__contains=q)
       ).distinct()
       return post_list
+
+

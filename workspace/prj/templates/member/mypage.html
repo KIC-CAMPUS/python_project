@@ -92,11 +92,10 @@
                 <div>
                     <div style="height: 50px">
                         <div>
-                            <input class="form-control" type="search" placeholder="이력서 명을 검색해주세요."
-                                   aria-label="Search"
+                            <input class="form-control" id="search-input" type="text" placeholder="이력서 명을 검색해주세요."
                                    style="width: 300px">
                             <button class="btn btn-outline-primary my-2 my-sm-0" type="button"
-                                    id="search_button">검색
+                                    id="search_button" onclick="searchPost()">검색
                             </button>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -108,16 +107,17 @@
                                     정렬
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">전체</a>
-                                    <a class="dropdown-item" href="#">날짜 최신순</a>
-                                    <a class="dropdown-item" href="#">표절률 높은순</a>
-                                    <a class="dropdown-item" href="#">표절률 낮은순</a>
+                                    <button class="dropdown-item" data-sort-value="all">전체</button>
+                                    <button class="dropdown-item" data-sort-value="latest">날짜 최신순</button>
+                                    <button class="dropdown-item" data-sort-value="high">표절률 높은순</button>
+                                    <button class="dropdown-item" data-sort-value="low">표절률 낮은순</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- 여기까지 -->
-                    <form class="form-inline my-2 my-lg-0">
+                    <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'mypage_coverletter_delete' %}">
+                        {% csrf_token %}
                         <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
                             <thead>
                             <tr>
@@ -142,49 +142,29 @@
                             </tr>
                             </thead>
                             <tbody> <!-- 테이블 바디부분을 누르면 상세창으로 이동 -->
+                            {% for coverletter in coverletter_list %}
                             <tr>
                                 <td>
                                     <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
-                                         style="width: 20px; height: 20px;"
-                                         class="star-icon" name="star1">
+                                         style="width: 20px; height: 20px;" class="star-icon" name="star1">
                                     <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
-                                         style="width: 20px; height: 20px; display: none;"
-                                         class="star-icon" name="star2">
+                                         style="width: 20px; height: 20px; display: none;" class="star-icon"
+                                         name="star2">
                                 </td>
-                                <td>1</td>
-                                <td>2023.11.23</td>
-                                <td>김자바의 이력서</td>
-                                <td>60%</td>
-                                <td>표절 의심</td>
-                                <td>
-                                    <a class="btn btn-outline-secondary align-middle" type="button"
-                                       style="width:70px; height:30px; font-size:11px" href="/detail/1">
-                                        상세보기
-                                    </a>
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="chk" style="width: 15px; height: 15px;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="{% static 'images/whitestar.png' %}" alt="즐겨찾기 ON"
-                                         style="width: 20px; height: 20px;"
-                                         class="star-icon" name="star1">
-                                    <img src="{% static 'images/yellowstar.png' %}" alt="즐겨찾기 OFF"
-                                         style="width: 20px; height: 20px; display: none;"
-                                         class="star-icon" name="star2">
-                                </td>
-                                <td>2</td>
-                                <td>2023.11.25</td>
-                                <td>보노보노의 이력서</td>
-                                <td>0%</td>
-                                <td>표절 아님</td>
+                                <td>{{ coverletter.pk }}</td>
+                                <td>{{ coverletter.create_at }}</td>
+                                <td>{{ coverletter.document_type }}</td>
+                                <td>{{ coverletter.title }}</td>
+                                <td>{{ coverletter.rate }}</td>
                                 <td><a class="btn btn-outline-secondary align-middle" type="button"
-                                       style="width:70px; height:30px; font-size:11px" href="/detail/1">상세보기</a>
+                                       style="width:70px; height:30px; font-size:11px"
+                                       href="{% url 'coverletter_detail' pk=coverletter.pk %}">상세보기</a></td>
+                                <td onclick="event.stopPropagation();"><input type="checkbox" name="chk"
+                                                                              value="{{coverletter.pk}}"
+                                                                              style="width: 15px; height: 15px;">
                                 </td>
-                                <td><input type="checkbox" name="chk" style="width: 15px; height: 15px;"></td>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                         <div class="container d-flex justify-content-end">
@@ -197,21 +177,12 @@
                             </div>
                         </div>
                     </form>
-                    <div class="linebox_table"></div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
             <!-- 즐겨찾기한 게시판 나오는 곳 여기까지 -->
             <div class="d-flex justify-content-end">
-                <a type="button" class="btn btn-primary" href="/mypage/edit" style="width: 150px; height: 40px">정보 수정</a>
+                <a type="button" class="btn btn-primary" href="/mypage/edit" style="width: 150px; height: 40px">정보
+                    수정</a>
             </div>
         </div>
     </div>
@@ -219,5 +190,27 @@
 <!-- 여기까지 -->
 
 <!-- 정보수정 페이지로 옮겼습니다. -->
+<script>
+    function searchPost(){
+       let searchValue =
+          document.getElementById("search-input").value.trim();
+       if( searchValue.length > 1){
+          location.href = location.origin + "/mypage/search/" + searchValue + "/";
+       } else {
+          alert("검색어를 2글자 이상 작성하세요");
+       }
+    }
+
+    document.querySelectorAll('.dropdown-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            let sortValue = item.dataset.sortValue.trim();
+            console.log('선택된 정렬 값:', sortValue);
+
+            // 선택된 값에 기반하여 원하는 동작 수행
+            location.href = location.origin + "/mypage/sort/" + sortValue + "/";
+        });
+    });
+</script>
+
 
 {% endblock %}
