@@ -53,7 +53,7 @@ footer{
   height: 150px;
   position : relative;
   /*border-top: 3px solid #01aaef;*/
-  background-color: rgb(80, 255, 249);
+  background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
 }
 
 .imgbox{
