@@ -3,11 +3,8 @@ from django.contrib.auth import login, get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import ListView
 
-from .forms import UserForm
-from .forms import FindUsernameForm
-from .forms import FindpwForm
+from .forms import UserForm, FindUsernameForm, FindpwForm, UpdateForm
 from coverletter_site.views import CoverLetterList, coverLetterDelete
 
 from coverletter_site.models import CoverLetter
@@ -94,8 +91,6 @@ class MypageView(CoverLetterList):
 
 # 페이지 볼려고 추가했습니다. 무시하셔도 될거 같아요
 # 마이페이지 수정
-def mypage_edit(request):
-   return render(request, "member/mypage_edit.html")
 
 def mypage_coverLetterDelete(request):
    coverLetterDelete(request)
@@ -125,3 +120,15 @@ class Mypage_CoverLetterSortList(MypageView):
 
       return super().get_queryset()
 
+
+#회원 정보 수정
+def update(request):
+   if request.method == 'POST':
+      form = UpdateForm(request.POST, instance=request.user)
+      if form.is_valid():
+         form.save()
+         return redirect('mypage')
+   else:
+      form = UpdateForm(instance=request.user)
+   context = {'form': form}
+   return render(request, 'member/mypage_edit.html', context)
