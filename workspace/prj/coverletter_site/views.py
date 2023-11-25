@@ -22,7 +22,7 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
-      rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content)
+      rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content, coverletter.document_type)
       coverletter.rate = float(rate)
       print(list_query_sentence)
       resp = super().form_valid(form)
