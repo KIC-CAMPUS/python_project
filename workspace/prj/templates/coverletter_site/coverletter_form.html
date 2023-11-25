@@ -14,12 +14,62 @@
         <form method="post" enctype="multipart/form-data">
             <div class="form-group row">
                 {% csrf_token %}
-                {{ form }}
+                <table>
+                    <tr>
+                        <th style="width: 115px;">
+                            <h5 style="font-weight: bold;">문서 유형</h5>
+                            <div class="upload_tr"></div>
+                        </th>
+                        <td>
+                            <div class="btn-group dropright" style="width: 100px;">
+                                <button type="button"
+                                        class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    정렬
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" data-sort-value="all">성장 과정</button>
+                                    <button class="dropdown-item" data-sort-value="latest">장점과 단점</button>
+                                    <button class="dropdown-item" data-sort-value="high">지원 동기</button>
+                                    <button class="dropdown-item" data-sort-value="low">입사 후 포부</button>
+                                    <button class="dropdown-item" data-sort-value="low">기타</button>
+                                </div>
+                            </div>
+                            <div class="upload_tr"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding-right: 15px;">
+                            <h5 style="font-weight: bold;">제목</h5>
+                            <div class="upload_tr"></div>
+                        </th>
+                        <td>
+                            <div style="width: 300px">
+                                <input class="form-control" type="text" placeholder="제목을 입력해주세요" name="title">
+                            </div>
+                            <div class="upload_tr"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <h5 style="font-weight: bold;">내용</h5>
+                            <div class="upload_tr"></div>
+                        </th>
+                        <td>
+                            <div style="width: 1000px;">
+                            <textarea class="form-control" style="height: 300px; resize: none;"
+                                      placeholder="내용을 입력해주세요" name="content"></textarea>
+                            </div>
+                            <div class="upload_tr"></div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="linebox_table"></div>
             <div class="d-flex justify-content-end">
                 <div class="m-2">
-                    <input type="submit" class="btn btn-primary" style="width: 150px"/>
+                    <input type="submit" class="btn btn-primary" style="width: 150px" value="작성 완료"/>
                 </div>
                 <div class="m-2">
                     <a type="button" class="btn btn-light" href="{% url 'result_list' %}" style="width: 150px">취소</a>

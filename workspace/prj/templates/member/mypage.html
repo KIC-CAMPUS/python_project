@@ -14,26 +14,6 @@
     <div class="card">
         <div class="card-body">
             <h3 class="card-title" style="font-weight: bold;"><span>산와머니</span></h3>
-            <form>
-                <div class="form-group d-flex justify-content-center">
-                    <div style="width: 100px; height: 40px;">
-                        <span for="checkPassword" class="align-bottom"
-                              style="margin: 0; font-size: 20px">비밀번호</span>
-                    </div>
-                    <input type="password" class="form-control" id="checkPassword" style="width: 500px;">
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px">확인</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="upload_tr"></div>
-
-    <!-- 비밀번호가 맞으면 나올 마이페이지 -->
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title" style="font-weight: bold;"><span>산와머니</span></h3>
             <h5 class="card-title" style="font-weight: bold;"><span>닉네임(마이페이지 비번확인 후 보이는 첫 화면)</span></h5>
             <div class="upload_tr"></div>
             <div class="upload_tr"></div>
@@ -151,6 +131,7 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                        <div class="upload_tr"></div>
                         <div class="container d-flex justify-content-end">
                             <div class="m-2">
                                 <a type="button" class="btn btn-primary" href="{% url 'upload' %}" style="width: 150px">문서
@@ -163,6 +144,7 @@
                     </form>
                 </div>
             </div>
+            <div class="upload_tr"></div>
             <!-- 즐겨찾기한 게시판 나오는 곳 여기까지 -->
             <div class="d-flex justify-content-end">
                 <a type="button" class="btn btn-primary" href="/mypage/edit" style="width: 150px; height: 40px">정보
