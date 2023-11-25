@@ -1,5 +1,7 @@
+from django.contrib import auth, messages
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, get_user_model, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.urls import reverse_lazy
@@ -28,7 +30,7 @@ def join(request):
    return render(request, "member/join.html", {'form': form})
 
 #아이디 찾기
-def findid(request):
+def id_check(request):
    form = FindUsernameForm()
    username = None
 
@@ -45,12 +47,14 @@ def findid(request):
             username = user.username
          except ObjectDoesNotExist as e:
             print(f"ObjectDoesNotExist exception: {e}")
-            username = "일치하는 사용자가 없어요."
+            username = "일치하는 사용자가 없습니다."
 
    return render(request, "member/id_success.html", {'form': form, 'username': username})
 
-#비밀번호 찾기
-def findpw(request):
+
+
+
+def pw_check(request):
    form = FindpwForm()
    password1 = None
 
@@ -64,12 +68,13 @@ def findpw(request):
 
          try:
             user = get_user_model().objects.get(username=username, first_name=first_name, phone=phone, birthday=birthday)
-            password1 = user.password
+
          except ObjectDoesNotExist as e:
             print(f"ObjectDoesNotExist exception: {e}")
-            password1 = "일치하는 사용자가 없어요."
+            password1 = "null"
 
    return render(request, "member/pw_success.html", {'form': form, 'password1': password1})
+
 
 class MypageView(CoverLetterList):
    template_name = "member/mypage.html"
@@ -125,3 +130,9 @@ class Mypage_CoverLetterSortList(MypageView):
 
       return super().get_queryset()
 
+
+def findid(request):
+   return render(request, "member/findid.html")
+
+def findpw(request):
+   return render(request, "member/findpassword.html")

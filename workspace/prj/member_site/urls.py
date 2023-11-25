@@ -14,7 +14,13 @@ urlpatterns = [
    path('mypage/sort/<q>/', views.Mypage_CoverLetterSortList.as_view()),
    # 검색
    path('mypage/search/<str:q>/', views.PostSearch.as_view()),
-   
-   path("findid/", views.findid, name='findid'),
-   path("findpw/", views.findpw, name='findpw'),
+
+   # 아이디, 비밀번호 찾기 페이지가는 로직
+   path('findid/', views.findid, name='findid'),
+   path('findpw/', views.findpw, name='findpw'),
+
+   # 아이디, 비밀번호 찾기 확인 로직
+   path("id_success/", views.id_check, name='id_success'),
+   path("pw_success/", views.pw_check, name='pw_success'),
+
 ]
