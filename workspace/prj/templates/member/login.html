@@ -4,34 +4,30 @@
 {% block title %}로그인{% endblock%}
 
 {% block main_area %}
-<div class="container" style="width: 800px;">
+<div class="container">
     <div class="d-flex align-items-center h-100">
         <div class="col-lg-12">
             <span class="upload_title"><h1>로그인</h1></span>
         </div>
     </div>
     <div class="upload_tr"></div>
-    <div class="d-flex justify-content-center">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-center">
-                    <form method="post" style="width: 800px;">
-                        {% csrf_token %}
-                        {{ form | crispy }}
-                        <div class="upload_tr"></div>
-                        <div class="d-flex justify-content-end">
-                            <input type="submit" class="btn btn-primary" style="width: 150px;" value="로그인">
-                        </div>
-                    </form>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
                 <div class="upload_tr"></div>
-                <div class="d-flex justify-content-center">
-                    <a href="{% url 'findid' %}" style="margin: 5px;">아이디 찾기&nbsp;&nbsp;</a>
-                    <div style="margin: 5px; height: 20px; width: 2px; background-color: rgb(192, 192, 192); position: relative; top: 2px;"></div>
-                    <a href="{% url 'findpassword' %}" style="margin: 5px;">&nbsp;비밀번호 찾기&nbsp;&nbsp;</a>
-                    <div style="margin: 5px; height: 20px; width: 2px; background-color: rgb(192, 192, 192); position: relative; top: 2px;"></div>
-                    <a href="{% url 'join'%}" style="margin: 5px;">&nbsp;회원가입</a>
+                <div class="d-flex justify-content-end">
+                    <input type="submit" class="btn btn-primary" style="width: 150px;" value="로그인">
                 </div>
+            </form>
+            <div class="upload_tr"></div>
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'findid' %}" style="margin: 5px;">아이디 찾기&nbsp;&nbsp;</a>
+                <div style="margin: 5px; height: 20px; width: 2px; background-color: rgb(192, 192, 192); position: relative; top: 2px;"></div>
+                <a href="{% url 'findpassword' %}" style="margin: 5px;">&nbsp;비밀번호 찾기&nbsp;&nbsp;</a>
+                <div style="margin: 5px; height: 20px; width: 2px; background-color: rgb(192, 192, 192); position: relative; top: 2px;"></div>
+                <a href="{% url 'join'%}" style="margin: 5px;">&nbsp;회원가입</a>
             </div>
         </div>
     </div>
