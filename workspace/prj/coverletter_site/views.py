@@ -71,7 +71,6 @@ class CoverLetterDetail(DetailView):
       plagiarism_sentence = list(filter(lambda x: x.result > 0.4, plagiarism_list))
       
       context['max_reulst'] = '%.2f' % (max_reulst * 100)
-      context['sentence_count'] = len(plagiarism_list)
       context['plagiarism_sentence_count'] = len(plagiarism_sentence)
       context['plagiarism_list'] = plagiarism_list
       return context

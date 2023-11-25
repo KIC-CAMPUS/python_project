@@ -24,7 +24,7 @@
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">전체 문장</th>
-                            <td class="table_border_bottom" style="border-top: 0;"><span>{{ sentence_count }}</span>문장</td>
+                            <td class="table_border_bottom" style="border-top: 0;"><span>{{ plagiarism_list | length }}</span>문장</td>
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">의심 문장</th>
@@ -77,8 +77,13 @@
                         <div class="linebox_detail"></div>
                         {% for plagiarism in plagiarism_list %}
                         <div class="card border-danger">
-                            <div class="card-header text-white bg-danger border-danger align-middle"
-                                 style="height: 40px">
+                            <div 
+                                {% if plagiarism.result <= 0.4 %}
+                                    class="card-header text-white bg-success border-success align-middle"
+                                {% else %}
+                                    class="card-header text-white bg-danger border-danger align-middle"
+                                {% endif %}
+                                style="height: 40px">
                                 <h6 class="card-title" id="detail_1">1번 문장</h6>
                                 <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
                             </div>
