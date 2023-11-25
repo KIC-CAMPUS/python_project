@@ -19,7 +19,19 @@ class CoverLetter(models.Model):
    bookmark = models.BooleanField(default=False)
 
    def __str__(self) -> str:
-      return f'[{self.pk}] {self.document_type} :: {self.user}'
+      return f'[{self.pk}] {self.title} :: {self.user}'
    
    def get_rate_per(self):
       return '%2.2f'% (self.rate * 100)
+
+class CoverLetterPlagiarism(models.Model):
+   coverletter = models.ForeignKey(CoverLetter, on_delete=models.CASCADE)
+   query_sentence = models.TextField()
+   most_similar = models.TextField()
+   result = models.DecimalField(max_digits=4, decimal_places=3, null=True)
+
+   def __str__(self) -> str:
+      return f'[{self.pk}] {self.coverletter} {self.query_sentence} :: {self.result}'
+   
+   def get_result_per(self):
+      return '%2.2f'% (self.result * 100)
