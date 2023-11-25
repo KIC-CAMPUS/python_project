@@ -1,3 +1,5 @@
+import nltk
+
 from .jaccard import jaccard_similarity
 from .boyer_moore_algorithm import boyer_moore
 from .stopword import remove_stopwords_and_special_characters
@@ -6,6 +8,7 @@ import pandas as pd
 import os
 from konlpy.tag import Kkma
 
+nltk.download('punkt')
 # 표절률 구하는 함수
 def boyer_moore_matching_sentences(tokens1, tokens2):
    match_count = 0
