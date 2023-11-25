@@ -50,62 +50,21 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-weight: bold">검사 문장</h5>
                         <div class="linebox_detail"></div>
+                        {% for plagiarism in plagiarism_list %}
                         <div class="card">
                             <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
-                                <h6 class="card-title">문장 표절률 : <span>80.0</span>%</h6>
+                                <h6 class="card-title">문장 표절률 : <span>{{ plagiarism.get_result_per }}</span>%</h6>
                             </div>
                             <a class="list-group-item list-group-item-action" href="#detail_1">
                                 <!-- 검사문서의 카드 바디부분을 클릭하면 표절 검사 결과 문장의 번호에 맞게 이동합니다. -->
                                 <div class="card-body">
-                                    <span>저에게 패션이란, 인간이 매일 만나게 되는 "가장 가까운 문화 예술"입니다.</span>
+                                    <span>{{ plagiarism.query_sentence }}</span>
                                 </div>
                             </a>
                         </div>
+                        {% endfor %}
                         <div class="details_br"></div>
-                        <div class="card">
-                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
-                                <h6 class="card-title">문장 표절률 : <span>0.08</span>%</h6>
-                            </div>
-                            <a class="list-group-item list-group-item-action" href="#detail_2">
-                                <div class="card-body">
-                                    <span>오늘 입은 옷이 마음에 들면 그날 하루 기분이 좋아지는 일상적 경험부터, 미적 가치를 표현하기 위해 짓는 오트쿠튀르 의상에 이르기까지, 다양한 경험과 가치를 담을 수 있다고 생각합니다.</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="details_br"></div>
-                        <div class="card">
-                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
-                                <h6 class="card-title">문장 표절률 : <span>0.0</span>%</h6>
-                            </div>
-                            <a class="list-group-item list-group-item-action" href="#detail_3">
-                                <div class="card-body">
-                                    <span>대학교를 다니면서 느낀 것은 패션이 위치해있는 자리가 모호하다는 것이었습니다.</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="details_br"></div>
-                        <div class="card">
-                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
-                                <h6 class="card-title">문장 표절률 : <span>0.0</span>%</h6>
-                            </div>
-                            <a class="list-group-item list-group-item-action" href="#detail_4">
-                                <div class="card-body">
-                                    <span>패션은 산업적으로는 소비자의 마음을 끌어야하는 "상업적 대상"이지만, 미술적으로는 작가의 의도를 담는 "예술적 대상"이 되기도 했습니다.</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="details_br"></div>
-                        <div class="card">
-                            <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
-                                <h6 class="card-title">문장 표절률 : <span>0.2</span>%</h6>
-                            </div>
-                            <a class="list-group-item list-group-item-action" href="#detail_5">
-                                <div class="card-body">
-                                    <span>처음엔 두 대상이 겹쳐질 수 없다고 생각했습니다.</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="details_br"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -116,6 +75,7 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-weight: bold">표절 검사 결과</h5>
                         <div class="linebox_detail"></div>
+                        {% for plagiarism in plagiarism_list %}
                         <div class="card border-danger">
                             <div class="card-header text-white bg-danger border-danger align-middle"
                                  style="height: 40px">
@@ -123,7 +83,7 @@
                                 <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
                             </div>
                             <div class="card-body">
-                                <span>저에게 패션이란, 인간이 매일 만나게 되는 "가장 가까운 문화 예술"입니다.</span>
+                                <span>{{ plagiarism.query_sentence }}</span>
                             </div>
                             <div class="card-body">
                                 <span>'저'</span>,<span>'패션'</span>,<span
@@ -131,46 +91,7 @@
                             </div>
                         </div>
                         <div class="details_br"></div>
-                        <div class="card border-success">
-                            <div class="card-header text-white bg-success border-danger align-middle"
-                                 style="height: 40px">
-                                <h6 class="card-title" id="detail_2">2번 문장</h6>
-                            </div>
-                            <div class="card-body">
-                                <span>오늘 입은 옷이 마음에 들면 그날 하루 기분이 좋아지는 일상적 경험부터, 미적 가치를 표현하기 위해 짓는 오트쿠튀르 의상에 이르기까지, 다양한 경험과 가치를 담을 수 있다고 생각합니다.</span>
-                            </div>
-                        </div>
-                        <div class="details_br"></div>
-                        <div class="card border-success">
-                            <div class="card-header text-white bg-success border-danger align-middle"
-                                 style="height: 40px">
-                                <h6 class="card-title" id="detail_3">3번 문장</h6>
-                            </div>
-                            <div class="card-body">
-                                <span>대학교를 다니면서 느낀 것은 패션이 위치해있는 자리가 모호하다는 것이었습니다.</span>
-                            </div>
-                        </div>
-                        <div class="details_br"></div>
-                        <div class="card border-success">
-                            <div class="card-header text-white bg-success border-danger align-middle"
-                                 style="height: 40px">
-                                <h6 class="card-title" id="detail_4">4번 문장</h6>
-                            </div>
-                            <div class="card-body">
-                                <span>패션은 산업적으로는 소비자의 마음을 끌어야하는 "상업적 대상"이지만, 미술적으로는 작가의 의도를 담는 "예술적 대상"이 되기도 했습니다.</span>
-                            </div>
-                        </div>
-                        <div class="details_br"></div>
-                        <div class="card border-success">
-                            <div class="card-header text-white bg-success border-danger align-middle"
-                                 style="height: 40px">
-                                <h6 class="card-title" id="detail_5">5번 문장</h6>
-                            </div>
-                            <div class="card-body">
-                                <span>처음엔 두 대상이 겹쳐질 수 없다고 생각했습니다.</span>
-                            </div>
-                        </div>
-                        <div class="details_br"></div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

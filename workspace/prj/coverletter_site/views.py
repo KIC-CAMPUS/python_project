@@ -3,14 +3,13 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import CoverLetter
+from .models import CoverLetter, CoverLetterPlagiarism
 from .forms import CoverLetterForm
-from .verification_model.read_document import document_rate_check
 from .verification_model.plagiarism_rate import sentence_plagiarism_rate
 
 # 문서 업로드
@@ -23,17 +22,17 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
-      if coverletter.document_file != None:
-         reps = super().form_valid(form)
-         docs_path = r'%s' % coverletter.document_file.name
-         document_rate_check(docs_path)
-         return reps
-      rate = sentence_plagiarism_rate(coverletter.content)
-      print(">>>>>",rate, type(rate))
+      rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content)
       coverletter.rate = rate
-      return super().form_valid(form)
-
-
+      print(list_query_sentence)
+      resp = super().form_valid(form)
+      for query in list_query_sentence:
+         cl_plagiarism = CoverLetterPlagiarism(coverletter = coverletter)
+         cl_plagiarism.query_sentence = query['query_sentence']
+         cl_plagiarism.most_similar = query['most_similar']
+         cl_plagiarism.result = float(query['result'])
+         cl_plagiarism.save()
+      return resp
 
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):
@@ -45,7 +44,6 @@ class CoverLetterList(LoginRequiredMixin, ListView):
    def get_queryset(self) -> QuerySet[Any]:
       user = self.request.user
       return super().get_queryset().filter(user=user)
-
 
 class CoverLetterSortList(CoverLetterList):
    def get_queryset(self):
@@ -61,19 +59,14 @@ class CoverLetterSortList(CoverLetterList):
 
       return super().get_queryset()
 
-
-
 # 자소서 표절 결과 상세 페이지
 class CoverLetterDetail(DetailView):
    model = CoverLetter
 
-# 자소서 표절 결과 목록
-# class CoverLetterResultList(CoverLetterList):
-#    template_name = "coverletter_site/detail.html"
-
-#    def get_queryset(self) -> QuerySet[Any]:
-#       user = self.request.user
-#       return super(ListView, self).get_queryset().filter(~Q(rate__exact=None), user=user)
+   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+      context = super().get_context_data(**kwargs)
+      context['plagiarism_list'] = CoverLetterPlagiarism.objects.filter(coverletter=self.object)
+      return context
 
 # 문서 삭제
 def coverLetterDelete(request):
@@ -82,17 +75,12 @@ def coverLetterDelete(request):
       CoverLetter.objects.filter(pk__in=pk_list).delete()
    return redirect(reverse_lazy('result_list'))
 
-
 def coverletter_bookmark(request):
    if request.method == 'POST':
       pk = request.POST.get('pk', None)  # ajax 통신을 통해서 template에서 POST방식으로 전달
-
       post = get_object_or_404(CoverLetter, pk=pk)
-
       post.bookmark = not post.bookmark
-
       post.save()
-
       return HttpResponse()
 
 class PostSearch(CoverLetterList):

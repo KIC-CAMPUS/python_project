@@ -60,21 +60,16 @@ sentences = df["Sentence"].tolist()
 
 def split_and_save_to_list(text):
    # 텍스트를 줄별로 나누기
-
    lines = re.split('[\n|.]', text)
-
    # 빈 줄 제거 및 공백 제거하여 리스트에 저장
    result_list = [line.strip() for line in lines if line.strip()]
-
    return result_list
 
 # 입력 문장과 비교 대상 문장 간의 유사도 계산
 def sentence_plagiarism_rate(sentence1, sentences=sentences):
+   list_query_sentence = []
    # 전체 문장의 유사도 합 초기화
-
    list_sentence = split_and_save_to_list(sentence1)
-
-
    # print("sentence1 : ", sentence1)
    # print("--------------------------------------")
    # print("list_sentence : ", list_sentence[1])
@@ -85,7 +80,6 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
       most_similar, similarity_score = find_most_similar(query_sentence, sentences)
       print("------------------------------------")
       print(f"For sentence {n + 1}, Input sentence: '{query_sentence}', Most similar sentence: '{most_similar}' Similarity Score: {similarity_score:.4f}")
-
 
       filtered_sentence1 = remove_stopwords_and_special_characters(most_similar)
       filtered_sentence2 = remove_stopwords_and_special_characters(query_sentence)
@@ -101,14 +95,15 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
       # matchwordCount = boyer_moore(most_similar, query_sentence)
 
       result = boyer_moore_matching_sentences(tokens1, tokens2)
-
+      list_query_sentence.append({'query_sentence': query_sentence, 'most_similar': most_similar, 'result':round(result, 3)})
       total_ratio += result
       print("result : ", result)
 
    print("total_ratio : ",total_ratio)
    average_ratio = total_ratio / len(list_sentence)
    rounded_average_ratio = round(average_ratio, 3)
+   percentage_ratio = rounded_average_ratio
 
-   return rounded_average_ratio
+   return percentage_ratio, list_query_sentence
 # sentence1 = df["answer"][20000]
 # sentence_plagiarism_rate = reulst_sentence([sentence1])
