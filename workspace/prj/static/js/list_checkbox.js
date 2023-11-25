@@ -12,3 +12,15 @@ $(document).ready(function() {
         else $("#cbx_chkAll").prop("checked", true);
     });
 });
+
+//$(document).ready(function(){
+//        $('#star-checkbox').change(function(){
+//            if($(this).is(':checked')){
+//                $('.star-icon').attr('src', '{% static 'images/whitestar.png' %}');
+//                $('.star-icon').attr('alt', '즐겨찾기 ON');
+//            } else {
+//                $('.star-icon').attr('src', '{% static 'images/yellowstar.png' %}');
+//                $('.star-icon').attr('alt', '즐겨찾기 OFF');
+//            }
+//        });
+//    });

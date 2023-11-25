@@ -53,9 +53,9 @@ def find_most_similar(sentence1, sentences):
 
    return most_similar_sentence, max_similarity
 
-data_path = r'%s' % os.getcwd() + '/coverletter_site/verification_model/data/ResumeDatas.csv'
+data_path = r'%s' % os.getcwd() + '/coverletter_site/verification_model/data/goal_ok.csv'
 df = pd.read_csv(data_path)
-sentences = df["answer"].tolist()
+sentences = df["Sentence"].tolist()
 
 def split_and_save_to_list(text):
    # 텍스트를 줄별로 나누기

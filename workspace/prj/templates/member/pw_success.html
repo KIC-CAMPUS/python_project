@@ -1,0 +1,15 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block main_area %}
+<div class="container">
+    {% if password1 %}
+        <h1>확인된 비밀번호: {{ password1 }}</h1>
+    {% else %}
+        <p>일치하는 사용자가 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'login' %}" class="btn btn-primary" style="float: right">로그인</a>
+</div>
+
+
+
+{% endblock %}
