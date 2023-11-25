@@ -1,8 +1,7 @@
-/* body {
-  margin: 0; *//* body의 기본 margin 제거 *//*
-  padding: 0; *//* body의 기본 padding 제거 *//*
+/*body {
+  margin: 0;
+  padding: 0;
   background: url('../images/bonobono.jpg') center/cover no-repeat fixed;
-  *//* 이미지 파일 경로 설정, 중앙 정렬, 커버(Cover)하는 방식으로 크기 조절, 반복하지 않도록 설정, 고정 배경으로 설정 *//*
 }
 
 .card{
@@ -65,7 +64,7 @@ footer{
   height: 160px;
   position : relative;
   /*border-top: 3px solid #01aaef;*/
-  background-color: #e9ecef;
+  /*background-color: #e9ecef;*/
 }
 
 .imgbox{
