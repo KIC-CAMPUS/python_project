@@ -15,7 +15,7 @@ class CoverLetter(models.Model):
    title = models.CharField(max_length=100)
    content = models.TextField()
    
-   rate = models.DecimalField(max_digits=3, decimal_places=3, null=True)
+   rate = models.DecimalField(max_digits=5, decimal_places=3, null=True)
    create_at = models.DateTimeField(auto_now_add=True)
 
    bookmark = models.BooleanField(default=False)
@@ -33,7 +33,7 @@ class CoverLetterPlagiarism(models.Model):
    coverletter = models.ForeignKey(CoverLetter, on_delete=models.CASCADE)
    query_sentence = models.TextField()
    most_similar = models.TextField()
-   result = models.DecimalField(max_digits=4, decimal_places=3, null=True)
+   result = models.DecimalField(max_digits=6, decimal_places=3, null=True)
 
    def __str__(self) -> str:
       return f'[{self.pk}] {self.coverletter} {self.query_sentence} :: {self.result}'
