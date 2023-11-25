@@ -72,7 +72,7 @@
                     {% endif %}
                     <td>{{ coverletter.pk }}</td>
                     <td>{{ coverletter.create_at }}</td>
-                    <td>{{ coverletter.document_type }}</td>
+                    <td>{{ coverletter.get_document_type_str }}</td>
                     <td>{{ coverletter.title }}</td>
                     <td>{{ coverletter.get_rate_per }}%</td>
                     <td><a class="btn btn-outline-secondary align-middle" type="button"
