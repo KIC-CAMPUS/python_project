@@ -86,12 +86,11 @@ def coverLetterDelete(request):
 def coverletter_bookmark(request):
    if request.method == 'POST':
       pk = request.POST.get('pk', None)  # ajax 통신을 통해서 template에서 POST방식으로 전달
-      print("pk:", pk)
+
       post = get_object_or_404(CoverLetter, pk=pk)
-      print("post:", post)
 
       post.bookmark = not post.bookmark
-      print(post.bookmark)
+
       post.save()
 
       return HttpResponse()
