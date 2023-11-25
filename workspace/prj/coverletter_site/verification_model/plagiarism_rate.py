@@ -108,7 +108,7 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
    print("total_ratio : ",total_ratio)
    average_ratio = total_ratio / len(list_sentence)
    rounded_average_ratio = round(average_ratio, 3)
-   percentage_ratio = rounded_average_ratio * 100
+   percentage_ratio = rounded_average_ratio
 
    return percentage_ratio
 # sentence1 = df["answer"][20000]
