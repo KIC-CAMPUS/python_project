@@ -84,8 +84,9 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
    total_ratio = 0
    for n, query_sentence in enumerate(list_sentence):
       most_similar, similarity_score = find_most_similar(query_sentence, sentences)
+      print("------------------------------------")
       print(f"For sentence {n + 1}, Input sentence: '{query_sentence}', Most similar sentence: '{most_similar}' Similarity Score: {similarity_score:.4f}")
-      print("------")
+
 
       filtered_sentence1 = remove_stopwords_and_special_characters(most_similar)
       filtered_sentence2 = remove_stopwords_and_special_characters(query_sentence)
@@ -108,7 +109,8 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
    print("total_ratio : ",total_ratio)
    average_ratio = total_ratio / len(list_sentence)
    rounded_average_ratio = round(average_ratio, 3)
-   return rounded_average_ratio
+   percentage_ratio = rounded_average_ratio * 100
 
+   return percentage_ratio
 # sentence1 = df["answer"][20000]
 # sentence_plagiarism_rate = reulst_sentence([sentence1])
