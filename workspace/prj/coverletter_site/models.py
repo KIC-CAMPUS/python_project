@@ -12,12 +12,14 @@ class CoverLetter(models.Model):
    document_type = models.CharField(max_length=100, choices=document_type_list)
    title = models.CharField(max_length=100, blank=True)
    content = models.TextField(blank=True)
-   document_file = models.FileField(upload_to="documents/%Y/%m/%d/", null=True)
    
-   rate = models.DecimalField(max_digits=2, decimal_places=1, null=True)
+   rate = models.DecimalField(max_digits=3, decimal_places=3, null=True)
    create_at = models.DateTimeField(auto_now_add=True)
 
    bookmark = models.BooleanField(default=False)
 
    def __str__(self) -> str:
       return f'[{self.pk}] {self.document_type} :: {self.user}'
+   
+   def get_rate_per(self):
+      return '%2.2f'% (self.rate * 100)

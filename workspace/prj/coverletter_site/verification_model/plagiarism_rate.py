@@ -4,7 +4,7 @@ from .stopword import remove_stopwords_and_special_characters
 from nltk import word_tokenize
 import pandas as pd
 import os
-from konlpy.tag import Kkma
+import re
 
 # 표절률 구하는 함수
 def boyer_moore_matching_sentences(tokens1, tokens2):
@@ -61,8 +61,7 @@ sentences = df["Sentence"].tolist()
 def split_and_save_to_list(text):
    # 텍스트를 줄별로 나누기
 
-   kkma = Kkma()
-   lines = kkma.sentences(text)
+   lines = re.split('[\n|.]', text)
 
    # 빈 줄 제거 및 공백 제거하여 리스트에 저장
    result_list = [line.strip() for line in lines if line.strip()]
@@ -84,8 +83,9 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
    total_ratio = 0
    for n, query_sentence in enumerate(list_sentence):
       most_similar, similarity_score = find_most_similar(query_sentence, sentences)
+      print("------------------------------------")
       print(f"For sentence {n + 1}, Input sentence: '{query_sentence}', Most similar sentence: '{most_similar}' Similarity Score: {similarity_score:.4f}")
-      print("------")
+
 
       filtered_sentence1 = remove_stopwords_and_special_characters(most_similar)
       filtered_sentence2 = remove_stopwords_and_special_characters(query_sentence)
@@ -108,7 +108,8 @@ def sentence_plagiarism_rate(sentence1, sentences=sentences):
    print("total_ratio : ",total_ratio)
    average_ratio = total_ratio / len(list_sentence)
    rounded_average_ratio = round(average_ratio, 3)
-   return rounded_average_ratio
+   percentage_ratio = rounded_average_ratio
 
+   return percentage_ratio
 # sentence1 = df["answer"][20000]
 # sentence_plagiarism_rate = reulst_sentence([sentence1])
