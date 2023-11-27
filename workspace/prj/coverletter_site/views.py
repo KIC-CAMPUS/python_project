@@ -31,6 +31,7 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
          cl_plagiarism.query_sentence = query['query_sentence']
          cl_plagiarism.most_similar = query['most_similar']
          cl_plagiarism.result = float(query['result'])
+         cl_plagiarism.sequence_number = query['sequence_number']
          cl_plagiarism.save()
       return resp
 
@@ -65,7 +66,7 @@ class CoverLetterDetail(DetailView):
 
    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
       context = super().get_context_data(**kwargs)
-      plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object)
+      plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object).order_by('sequence_number')
       
       max_reulst = max(map(lambda x: x.result, plagiarism_list))
       plagiarism_sentence = list(filter(lambda x: x.result > 0.4, plagiarism_list))
