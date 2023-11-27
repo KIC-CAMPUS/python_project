@@ -48,7 +48,19 @@ class CoverLetterList(LoginRequiredMixin, ListView):
 
    def get_queryset(self) -> QuerySet[Any]:
       user = self.request.user
-      return super().get_queryset().filter(user=user)
+      qs = super().get_queryset().filter(user=user)
+      
+      self.search = self.request.GET.get('search', '').strip()
+      qs = qs.filter(Q(title__contains=self.search))
+      return qs
+   
+   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+      context = super().get_context_data(**kwargs)
+      context['query_string'] = ''
+      if self.search:
+         context['query_string'] += '&search=' + self.search
+      print(context['query_string'])
+      return context
 
 class CoverLetterSortList(CoverLetterList):
    def get_queryset(self):
@@ -94,13 +106,3 @@ def coverletter_bookmark(request):
       post.bookmark = not post.bookmark
       post.save()
       return HttpResponse()
-
-class PostSearch(CoverLetterList):
-   def get_queryset(self):
-      q = self.kwargs['q']
-      post_list = super().get_queryset().filter(
-         Q(title__contains=q)
-      ).distinct()
-      return post_list
-
-

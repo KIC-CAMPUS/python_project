@@ -12,13 +12,13 @@
     <div class="upload_tr"></div>
     <div>
         <div style="height: 50px">
-            <div>
-                <input class="form-control" id="search-input"
-                       type="text" placeholder="검색" style="width: 300px">
+            <form>
+                <input class="form-control" id="search-input" name="search"
+                       type="text" placeholder="검색" style="width: 300px" minlength="2">
                 <button class="btn btn-outline-primary my-2 my-sm-0"
-                        type="button" onclick="searchPost()" id="search_button">검색
+                        type="submit" id="search_button">검색
                 </button>
-            </div>
+            </form>
             <div class="d-flex justify-content-end">
                 <div class="btn-group dropleft" style="width: 70px;">
                     <button type="button"
@@ -114,7 +114,7 @@
             <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.previous_page_number }}">
+                    <a class="page-link" href="{% url 'result_list' %}?page={{ page_obj.previous_page_number }}{{ query_string }}">
                         Previous
                     </a>
                 </li>
@@ -122,7 +122,7 @@
 
                 {% for page_no in page_obj.paginator.page_range %}
                 <li class="page-item">
-                    <a class="page-link" href="{% url 'result_list' %}?page={{page_no}}">
+                    <a class="page-link" href="{% url 'result_list' %}?page={{page_no}}{{ query_string }}">
                         {{ page_no }}
                     </a>
                 </li>
@@ -130,7 +130,7 @@
 
                 {% if page_obj.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.next_page_number }}">
+                    <a class="page-link" href="{% url 'result_list' %}?page={{page_obj.next_page_number }}{{ query_string }}">
                         Next
                     </a>
                 </li>
@@ -142,16 +142,6 @@
 {% endblock %}
 {% block js %}
 <script>
-    function searchPost(){
-        let searchValue =
-            document.getElementById("search-input").value.trim();
-        if( searchValue.length > 1){
-            location.href = location.origin + "/coverletter/list/search/" + searchValue + "/";
-        } else {
-            alert("검색어를 2글자 이상 작성하세요");
-        }
-    }
-
     document.querySelectorAll('.dropdown-item').forEach(function(item) {
         item.addEventListener('click', function() {
             let sortValue = item.dataset.sortValue.trim();
