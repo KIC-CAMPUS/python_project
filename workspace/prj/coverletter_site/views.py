@@ -3,12 +3,12 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import CoverLetter
+from .models import CoverLetter, CoverLetterPlagiarism
 from .forms import CoverLetterForm
 from .verification_model.plagiarism_rate import sentence_plagiarism_rate
 
@@ -22,9 +22,17 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
-      rate = sentence_plagiarism_rate(coverletter.content)
-      coverletter.rate = rate
-      return super().form_valid(form)
+      rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content, coverletter.document_type)
+      coverletter.rate = float(rate)
+      print(list_query_sentence)
+      resp = super().form_valid(form)
+      for query in list_query_sentence:
+         cl_plagiarism = CoverLetterPlagiarism(coverletter = coverletter)
+         cl_plagiarism.query_sentence = query['query_sentence']
+         cl_plagiarism.most_similar = query['most_similar']
+         cl_plagiarism.result = float(query['result'])
+         cl_plagiarism.save()
+      return resp
 
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):
@@ -54,6 +62,18 @@ class CoverLetterSortList(CoverLetterList):
 # 자소서 표절 결과 상세 페이지
 class CoverLetterDetail(DetailView):
    model = CoverLetter
+
+   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+      context = super().get_context_data(**kwargs)
+      plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object)
+      
+      max_reulst = max(map(lambda x: x.result, plagiarism_list))
+      plagiarism_sentence = list(filter(lambda x: x.result > 0.4, plagiarism_list))
+      
+      context['max_reulst'] = '%.2f' % (max_reulst * 100)
+      context['plagiarism_sentence_count'] = len(plagiarism_sentence)
+      context['plagiarism_list'] = plagiarism_list
+      return context
 
 # 문서 삭제
 def coverLetterDelete(request):
