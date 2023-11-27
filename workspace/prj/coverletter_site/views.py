@@ -24,7 +24,7 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
 
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
-      rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content)
+      rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content, coverletter.document_type)
       coverletter.rate = float(rate)
       print(list_query_sentence)
       resp = super().form_valid(form)
@@ -70,7 +70,14 @@ class CoverLetterDetail(DetailView):
 
    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
       context = super().get_context_data(**kwargs)
-      context['plagiarism_list'] = CoverLetterPlagiarism.objects.filter(coverletter=self.object)
+      plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object)
+      
+      max_reulst = max(map(lambda x: x.result, plagiarism_list))
+      plagiarism_sentence = list(filter(lambda x: x.result > 0.4, plagiarism_list))
+      
+      context['max_reulst'] = '%.2f' % (max_reulst * 100)
+      context['plagiarism_sentence_count'] = len(plagiarism_sentence)
+      context['plagiarism_list'] = plagiarism_list
       return context
 
 # 문서 삭제

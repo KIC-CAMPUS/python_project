@@ -11,24 +11,24 @@
         <div class="col mb-4">
             <div class="card border-primary">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-weight: bold"><span>김자바</span>의 이력서</h5>
+                    <h5 class="card-title" style="font-weight: bold"><span>{{coverletter.title}}</span> 자기소개서</h5>
                     <div class="linebox_detail"></div>
                     <table class="table">
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">표절률</th>
-                            <td class="table_border_bottom" style="border-top: 0;">8.7%</td>
+                            <td class="table_border_bottom" style="border-top: 0;">{{ coverletter.get_rate_per }}%</td>
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">최고 표절률</th>
-                            <td class="table_border_bottom" style="border-top: 0;">80.0%</td>
+                            <td class="table_border_bottom" style="border-top: 0;">{{ max_reulst }}%</td>
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">전체 문장</th>
-                            <td class="table_border_bottom" style="border-top: 0;"><span>40</span>문장</td>
+                            <td class="table_border_bottom" style="border-top: 0;"><span>{{ plagiarism_list | length }}</span>문장</td>
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">의심 문장</th>
-                            <td class="table_border_bottom" style="border-top: 0;"><span>10</span>문장</td>
+                            <td class="table_border_bottom" style="border-top: 0;"><span>{{ plagiarism_sentence_count }}</span>문장</td>
                         </tr>
                     </table>
                 </div>
@@ -77,8 +77,13 @@
                         <div class="linebox_detail"></div>
                         {% for plagiarism in plagiarism_list %}
                         <div class="card border-danger">
-                            <div class="card-header text-white bg-danger border-danger align-middle"
-                                 style="height: 40px">
+                            <div 
+                                {% if plagiarism.result <= 0.4 %}
+                                    class="card-header text-white bg-success border-success align-middle"
+                                {% else %}
+                                    class="card-header text-white bg-danger border-danger align-middle"
+                                {% endif %}
+                                style="height: 40px">
                                 <h6 class="card-title" id="detail_1">1번 문장</h6>
                                 <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
                             </div>

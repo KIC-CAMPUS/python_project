@@ -35,12 +35,7 @@ class ReviewDetail(DetailView):
       return context
 
 # 이용 후기 수정
-class ReviewEdit(UpdateView):
+class ReviewUpdateView(UpdateView):
    model = Review
    fields = ('title', 'content', 'upload_file')
-
-
-
-from django.shortcuts import render
-def edit(request):
-   return render(request, "review_site/review_edit.html")
+   template_name = 'review_site/review_edit.html'
