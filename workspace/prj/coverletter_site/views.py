@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
@@ -34,6 +34,10 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
          cl_plagiarism.sequence_number = query['sequence_number']
          cl_plagiarism.save()
       return resp
+   
+   def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+      super().post(request, *args, **kwargs)
+      return HttpResponse(self.success_url)
 
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):

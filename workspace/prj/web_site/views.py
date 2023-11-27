@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
-from hanspell import spell_checker
+# from hanspell import spell_checker
 import json
 
 # 메인
@@ -14,8 +14,8 @@ def howtouse(request):
 
 def spelling_check_api(text_to_check):
     if text_to_check:  # 입력값이 있는지 확인
-        spelled_text = spell_checker.check(text_to_check)
-        checked_text = spelled_text.checked
+        # spelled_text = spell_checker.check(text_to_check)
+        # checked_text = spelled_text.checked
         return {'corrected_text': checked_text}
     return {'error': 'Invalid input.'}
 
