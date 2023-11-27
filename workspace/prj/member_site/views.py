@@ -23,7 +23,6 @@ def join(request):
          join_user = form.save()
          login(request, join_user)
          return render(request, "member/join_success.html")
-
    # GET
    else :
       form = UserForm()
@@ -51,9 +50,6 @@ def id_check(request):
 
    return render(request, "member/id_success.html", {'form': form, 'username': username})
 
-
-
-
 def pw_check(request):
    form = FindpwForm()
    password1 = None
@@ -75,7 +71,6 @@ def pw_check(request):
 
    return render(request, "member/pw_success.html", {'form': form, 'password1': password1})
 
-
 class MypageView(CoverLetterList):
    template_name = "member/mypage.html"
 
@@ -93,9 +88,6 @@ class MypageView(CoverLetterList):
       context['document_type_5_count'] = CoverLetter.objects.filter(document_type=5, user=user).count()
 
       return context
-
-
-
 
 # 페이지 볼려고 추가했습니다. 무시하셔도 될거 같아요
 # 마이페이지 수정

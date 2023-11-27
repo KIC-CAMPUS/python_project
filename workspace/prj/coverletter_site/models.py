@@ -33,6 +33,7 @@ class CoverLetterPlagiarism(models.Model):
    query_sentence = models.TextField()
    most_similar = models.TextField()
    result = models.DecimalField(max_digits=6, decimal_places=3, null=True)
+   sequence_number = models.IntegerField()
 
    def __str__(self) -> str:
       return f'[{self.pk}] {self.coverletter} {self.query_sentence} :: {self.result}'

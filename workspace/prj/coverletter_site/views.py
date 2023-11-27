@@ -3,7 +3,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
@@ -35,8 +35,13 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
          cl_plagiarism.query_sentence = query['query_sentence']
          cl_plagiarism.most_similar = query['most_similar']
          cl_plagiarism.result = float(query['result'])
+         cl_plagiarism.sequence_number = query['sequence_number']
          cl_plagiarism.save()
       return resp
+   
+   def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+      super().post(request, *args, **kwargs)
+      return HttpResponse(self.success_url)
 
 
 # 자소서 목록
@@ -70,7 +75,7 @@ class CoverLetterDetail(DetailView):
 
    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
       context = super().get_context_data(**kwargs)
-      plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object)
+      plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object).order_by('sequence_number')
       
       max_reulst = max(map(lambda x: x.result, plagiarism_list))
       plagiarism_sentence = list(filter(lambda x: x.result > 0.4, plagiarism_list))
