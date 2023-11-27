@@ -19,11 +19,11 @@ def boyer_moore_matching_sentences(tokens1, tokens2):
       pat_words = tokens2.split()
 
    pat_length = len(pat_words)
-   match_word_count = boyer_moore(tokens1, tokens2)
+   match_word_count = boyer_moore(src_words, pat_words)
 
    match_c = 0  # Initialize match_c outside the conditional blocks
-   denom = 0    # Initialize denom outside the conditional blocks
-   ratio = 0    # Initialize ratio outside the conditional blocks
+   denom = 0  # Initialize denom outside the conditional blocks
+   ratio = 0  # Initialize ratio outside the conditional blocks
 
    # 문장의 각 단어에 대해 Boyer-Moore 알고리즘 실행
    for i in range(0, len(src_words) - 1, 2):
@@ -33,13 +33,18 @@ def boyer_moore_matching_sentences(tokens1, tokens2):
    if match_word_count < 1:
       match_c = match_count * 2
       denom = pat_length + len(src_words)
-      ratio = match_c / denom
+
+      if denom == 0:
+         ratio = 0  # 또는 다른 적절한 값으로 설정
+      else:
+         ratio = match_c / denom
 
       return ratio
 
    else:
       return 1
-   
+
+
 # 여러 문장중에서 입력한 문장과 가장 가까운 유사도 구하기
 def find_most_similar(sentence1, sentences):
    max_similarity = 0
