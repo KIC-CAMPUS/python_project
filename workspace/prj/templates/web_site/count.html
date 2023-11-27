@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="count_box"></div>
                                 <div>
-                                    <span style="font-weight: bold"><span>공백 제외 : 총 <span class="total_characters_no_spaces">0</span> 자</span></span>
+                                    <span style="font-weight: bold">공백 제외: <span class="total_characters_no_spaces">0</span>자</span><span style="font-weight: bold">( <span class="total_bytes_no_spaces" >0</span> Byte)</span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -35,10 +35,7 @@
                             </div>
                             <div class="card-body d-flex justify-content-center">
                                 <div class="m-2">
-                                    <button type="button" class="btn btn-primary" style="width: 150px" id="checkButton">검사하기</button>
-                                </div>
-                                <div class="m-2">
-                                    <button id="resetButton" type="reset" class="btn btn-light" style="width: 150px">초기화</button>
+                                    <button id="resetButton" type="reset" class="btn btn-primary" style="width: 150px" onclick="resetValues()">초기화</button>
                                 </div>
                             </div>
                         </div>
@@ -52,62 +49,34 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const inputText = document.getElementById('inputText');
-        const totalCharactersSpan = document.querySelector('.total_characters');
-        const totalCharactersNoSpacesSpan = document.querySelector('.total_characters_no_spaces');
-        const totalBytesSpan = document.querySelector('.total_bytes');
-        const totalBytesNoSpacesSpan = document.querySelector('.total_bytes_no_spaces');
 
-        const checkButton = document.getElementById('checkButton');
-        if (checkButton) {
-            checkButton.addEventListener('click', function () {
-                const text = inputText.value;
-
-                fetch('/count/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken()
-                    },
-                    body: JSON.stringify({ text: text })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    totalCharactersSpan.textContent = data.total_characters;
-                    totalCharactersNoSpacesSpan.textContent = data.total_characters_without_spaces;
-                    totalBytesSpan.textContent = data.total_bytes;
-                    totalBytesNoSpacesSpan.textContent = data.total_bytes_without_spaces;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+        if (inputText) {
+            inputText.addEventListener('input', function () {
+                updateCounters(inputText.value);
             });
-        } else {
-            console.error('Button not found.');
-        }
 
-        const resetButton = document.getElementById('resetButton');
-        if (resetButton) {
-            resetButton.addEventListener('click', function () {
-                resetValues();
+            inputText.addEventListener('keydown', function (event) {
+                if (event.key === 'Backspace' || event.key === 'Delete') {
+                    updateCounters(inputText.value.slice(0, -1));
+                } else if (event.key.length === 1) {
+                    updateCounters(inputText.value + event.key);
+                }
             });
-        } else {
-            console.error('Reset button not found.');
         }
     });
 
-    function getCSRFToken() {
-        const csrfTokenInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
-        return csrfTokenInput ? csrfTokenInput.value : '';
-    }
+    function updateCounters(text) {
+        const totalCharacters = text.length;
+        const totalBytes = new Blob([text], { type: 'text/plain' }).size;
+        const textWithoutSpaces = text.replace(/\s/g, '');
+        const totalCharactersNoSpaces = textWithoutSpaces.length;
+        const totalBytesNoSpaces = new Blob([textWithoutSpaces], { type: 'text/plain' }).size;
 
-    const resetButton = document.getElementById('resetButton');
-        if (resetButton) {
-            resetButton.addEventListener('click', function () {
-                resetValues();
-            });
-        } else {
-            console.error('Reset button not found.');
-        }
+        document.querySelector('.total_characters').innerText = totalCharacters;
+        document.querySelector('.total_bytes').innerText = totalBytes;
+        document.querySelector('.total_characters_no_spaces').innerText = totalCharactersNoSpaces;
+        document.querySelector('.total_bytes_no_spaces').innerText = totalBytesNoSpaces;
+    }
 
     function resetValues() {
         fetch('/reset/', {
@@ -122,16 +91,16 @@
                 const totalBytesNoSpacesSpan = document.querySelector('.total_bytes_no_spaces');
 
                 if (totalCharactersSpan) {
-                    totalCharactersSpan.textContent = 0;  // 값 초기화
+                    totalCharactersSpan.innerText = 0;  // innerText를 사용하여 값 초기화
                 }
                 if (totalCharactersNoSpacesSpan) {
-                    totalCharactersNoSpacesSpan.textContent = 0;  // 값 초기화
+                    totalCharactersNoSpacesSpan.innerText = 0;  // innerText를 사용하여 값 초기화
                 }
                 if (totalBytesSpan) {
-                    totalBytesSpan.textContent = 0;  // 값 초기화
+                    totalBytesSpan.innerText = 0;  // innerText를 사용하여 값 초기화
                 }
                 if (totalBytesNoSpacesSpan) {
-                    totalBytesNoSpacesSpan.textContent = 0;  // 값 초기화
+                    totalBytesNoSpacesSpan.innerText = 0;  // innerText를 사용하여 값 초기화
                 }
             }
         })
