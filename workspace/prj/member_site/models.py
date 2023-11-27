@@ -5,3 +5,6 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
    birthday =  models.DateField()
    phone = models.CharField(max_length=16)
+
+# class UserInfo(models.Model):
+#

@@ -1,5 +1,5 @@
 {% extends "base/main.html" %}
-
+{% load static %}
 {% block title %}마이페이지{% endblock%}
 
 {% block main_area %}
@@ -13,19 +13,12 @@
     <div class="upload_tr"></div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title" style="font-weight: bold;"><span>산와머니</span></h5>
-            <form>
-                <div class="form-group d-flex justify-content-center">
-                    <div style="width: 100px; height: 40px;">
-                        <span for="exampleInputPassword1" class="align-bottom"
-                              style="margin: 0; font-size: 20px">비밀번호</span>
-                    </div>
-                    <input type="password" class="form-control" id="exampleInputPassword1" style="width: 500px;">
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px">확인</button>
-                </div>
-            </form>
+            <h3 class="card-title" style="font-weight: bold;"><span>정보 수정</span></h3>
+            <div class="d-flex justify-content-end">
+                <a type="button" class="btn btn-primary"
+                   style="width: 150px; height: 40px">정보
+                    수정</a>
+            </div>
         </div>
     </div>
     <div class="upload_tr"></div>
@@ -33,29 +26,165 @@
     <!-- 비밀번호가 맞으면 나올 마이페이지 -->
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title" style="font-weight: bold;"><span>산와머니</span></h5>
-            <form>
-<!--                <div class="form-group">-->
-<!--                    <label>Password</label>-->
-<!--                    <input type="text" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="exampleInputPassword1">Password</label>-->
-<!--                    <input type="text" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="exampleInputEmail1">Email address</label>-->
-<!--                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">-->
-<!--                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone-->
-<!--                        else.</small>-->
-<!--                </div>-->
-<!--                <div class="form-group form-check">-->
-<!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--                    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-<!--                </div>-->
-<!--                <button type="submit" class="btn btn-primary">Submit</button>-->
-            </form>
+            <h3 class="card-title" style="font-weight: bold;"><span>검색 목록</span></h3>
+            <h5 class="card-title" style="font-weight: bold;">
+                <span>닉네임</span>
+            </h5>
+            <div class="upload_tr"></div>
+            <div class="upload_tr"></div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            <div class="text-center" style="font-weight: bold; width: 150px">
+                                <h4>성장 과정</h4>
+                            </div>
+                            <div class="text-center" style="font-weight: bold; width: 150px;">
+                                <h4>장점과 단점</h4>
+                            </div>
+                            <div class="text-center" style="font-weight: bold; width: 150px;">
+                                <h4>지원 동기</h4>
+                            </div>
+                            <div class="text-center" style="font-weight: bold; width: 150px;">
+                                <h4>입사 후 포부</h4>
+                            </div>
+                            <div class="text-center" style="font-weight: bold; width: 150px;">
+                                <h4>기타</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="upload_tr"></div>
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            <div class="text-center"
+                                 style="font-weight: bold; width: 150px; text-decoration: underline;">
+                                <h5><span>{{ document_type_1_count }}</span>건</h5>
+                            </div>
+                            <div class="text-center"
+                                 style="font-weight: bold; width: 150px; text-decoration: underline;">
+                                <h5><span>{{ document_type_2_count }}</span>건</h5>
+                            </div>
+                            <div class="text-center"
+                                 style="font-weight: bold; width: 150px; text-decoration: underline;">
+                                <h5><span>{{ document_type_3_count }}</span>건</h5>
+                            </div>
+                            <div class="text-center"
+                                 style="font-weight: bold; width: 150px; text-decoration: underline;">
+                                <h5><span>{{ document_type_4_count }}</span>건</h5>
+                            </div>
+                            <div class="text-center"
+                                 style="font-weight: bold; width: 150px; text-decoration: underline;">
+                                <h5><span>{{ document_type_5_count }}</span>건</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="upload_tr"></div>
+            <!-- 즐겨찾기한 게시판 나오는 곳 -->
+            <div class="container">
+                <div class="upload_tr"></div>
+                <div>
+                    <div style="height: 50px">
+                        <div>
+                            <input class="form-control" id="search-input" type="text" placeholder="이력서 명을 검색해주세요."
+                                   style="width: 300px">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="button"
+                                    id="search_button" onclick="searchPost()">검색
+                            </button>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group dropleft" style="width: 70px;">
+                                <button type="button"
+                                        class="btn btn-outline-primary my-2 my-sm-0 dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        aria-expanded="false" id="cat_button">
+                                    정렬
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" data-sort-value="all">전체</button>
+                                    <button class="dropdown-item" data-sort-value="latest">날짜 최신순</button>
+                                    <button class="dropdown-item" data-sort-value="high">표절률 높은순</button>
+                                    <button class="dropdown-item" data-sort-value="low">표절률 낮은순</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 여기까지 -->
+                    <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'mypage_coverletter_delete' %}">
+                        {% csrf_token %}
+                        <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
+                            <thead>
+                            <tr>
+
+                                <th>번호</th>
+                                <th>날짜</th>
+                                <th>이력서 명</th>
+                                <th>표절률</th>
+                                <th>표절 결과</th>
+                                <th>검사 결과</th>
+                                <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll">
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody> <!-- 테이블 바디부분을 누르면 상세창으로 이동 -->
+                            {% for coverletter in coverletter_list %}
+                            <tr>
+                                <td>{{ coverletter.pk }}</td>
+                                <td>{{ coverletter.create_at }}</td>
+                                <td>{{ coverletter.document_type }}</td>
+                                <td>{{ coverletter.title }}</td>
+                                <td>{{ coverletter.get_rate_per }}%</td>
+                                <td><a class="btn btn-outline-secondary align-middle" type="button"
+                                       style="width:70px; height:30px; font-size:11px"
+                                       href="{% url 'coverletter_detail' pk=coverletter.pk %}">상세보기</a></td>
+                                <td onclick="event.stopPropagation();"><input type="checkbox" name="chk"
+                                                                              value="{{coverletter.pk}}"
+                                                                              style="width: 15px; height: 15px;">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="container d-flex justify-content-end">
+                            <div class="m-2">
+                                <a type="button" class="btn btn-primary" href="{% url 'upload' %}" style="width: 150px">문서
+                                    업로드</a>
+                            </div>
+                            <div class="m-2">
+                                <button type="submit" class="btn btn-light" style="width: 150px">삭제</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!-- 여기까지 -->
+
+<!-- 정보수정 페이지로 옮겼습니다. -->
+<script>
+    function searchPost(){
+       let searchValue =
+          document.getElementById("search-input").value.trim();
+       if( searchValue.length > 1){
+          location.href = location.origin + "/mypage/search/" + searchValue + "/";
+       } else {
+          alert("검색어를 2글자 이상 작성하세요");
+       }
+    }
+
+    document.querySelectorAll('.dropdown-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            let sortValue = item.dataset.sortValue.trim();
+            console.log('선택된 정렬 값:', sortValue);
+
+            // 선택된 값에 기반하여 원하는 동작 수행
+            location.href = location.origin + "/mypage/sort/" + sortValue + "/";
+        });
+    });
+</script>
+
+
 {% endblock %}

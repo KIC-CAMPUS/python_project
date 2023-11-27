@@ -91,3 +91,26 @@
     margin-left: 15px;
     margin-right: 15px;
 }
+
+.like{
+    position: relative;
+    bottom: 2px
+}
+
+/* 23일 css 추가 */
+#search_button{
+    position: relative;
+    bottom : 38px;
+    left: 310px;
+}
+
+.button_size{
+    position: relative;
+    left: 10px;
+}
+
+#cat_button{
+    position: relative;
+    bottom: 76px;
+}
+/* 23일 css 추가 여기까지 */

@@ -19,6 +19,20 @@
     ```console
     pip install python-docx
     ```
+
+- 판다스
+    ```console
+    pip install pandas
+    ```
+
+- 한국어 형태소 분리기
+    ```console
+    pip install konlpy
+    ```
+- 자연어 처리 라이브러리
+    ```
+    pip install nltk
+    ```
     
 ## 💻장고 프로젝트 생성
 - 프로젝트 디렉토리 생성

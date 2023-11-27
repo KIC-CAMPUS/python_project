@@ -1,6 +1,17 @@
+/*body {
+  margin: 0;
+  padding: 0;
+  background: url('../images/bonobono.jpg') center/cover no-repeat fixed;
+}
+
+.card{
+    background: none;
+}*/
+
  nav{
     margin-bottom: 10px;
     height: 80px
+    background-color: rgba(0, 0, 0, 0);
  }
 
  .nav_line{
@@ -38,4 +49,29 @@
     margin-right: 25px;
 }
 
+#table_border_zero{
+    border-top: 0px;
+}
 
+
+/* 24일 css 추가 */
+#wrapper{
+  height: auto;
+  min-height: calc(100vh - 300px); /* footer 높이를 빼준다. */
+  padding-bottom: 50px;
+}
+footer{
+  height: 160px;
+  position : relative;
+  /*border-top: 3px solid #01aaef;*/
+  /*background-color: #e9ecef;*/
+}
+
+.imgbox{
+    position: relative;
+    bottom: 100px;
+}
+
+.img_site{
+    margin-left: 15px;
+}

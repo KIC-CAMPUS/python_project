@@ -12,16 +12,16 @@
         <div class="col mb-2">
             <div class="card border-primary" style="height: 735px">
                 <div class="card-body">
-                    <form>
+                    <form id="spellingCheckForm">
                         <div class="form-group">
                             <h5 class="card-title" style="font-weight: bold">검사 문장</h5>
                             <div class="linebox_detail"></div>
-                            <textarea class="form-control" rows="3" style="height: 550px; resize: none;"
+                            <textarea id="inputText" class="form-control" rows="3" style="height: 550px; resize: none;"
                                       placeholder="검사 시작을 눌러주세요&#13;&#10;최대 4000자까지 검사가 가능합니다"></textarea>
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div class="m-2">
-                                <button type="button" class="btn btn-primary" style="width: 150px">검사하기</button>
+                                <button id="checkButton" type="button" class="btn btn-primary" style="width: 150px">검사하기</button>
                             </div>
                             <div class="m-2">
                                 <button type="reset" class="btn btn-light" style="width: 150px">초기화</button>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <h5 class="card-title" style="font-weight: bold">검사 결과</h5>
                         <div class="linebox_detail"></div>
-                        <textarea class="form-control" rows="3"
+                        <textarea id="resultText" class="form-control" rows="3"
                                   style="height: 550px; resize: none; background-color: #F5F5F5;" readonly></textarea>
                     </div>
                     <div class="card-body d-flex justify-content-center">
@@ -49,5 +49,36 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const spellingCheckForm = document.getElementById('spellingCheckForm');
+        const inputText = document.getElementById('inputText');
+        const resultText = document.getElementById('resultText');
+        const checkButton = document.getElementById('checkButton'); // 검사 시작 버튼
 
+        if (checkButton) { // 버튼이 정상적으로 찾아졌는지 확인
+            checkButton.addEventListener('click', function () {
+                // 서버로 텍스트 전송 (AJAX 사용)
+                fetch('/check/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}' // Django CSRF 토큰 전달
+                    },
+                    body: JSON.stringify({ text: inputText.value })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // 검사 결과 표시
+                    resultText.value = data.corrected_text;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        } else {
+            console.error('Button not found.');
+        }
+    });
+</script>
 {% endblock %}

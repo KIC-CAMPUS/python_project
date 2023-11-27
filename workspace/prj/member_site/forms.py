@@ -26,3 +26,4 @@ class FindpwForm(forms.Form):
     first_name = forms.CharField(label="이름")
     phone = forms.CharField(label="전화번호")
     birthday = forms.DateField(label="생일", widget=forms.TextInput(attrs={'type': 'date'}))
+
