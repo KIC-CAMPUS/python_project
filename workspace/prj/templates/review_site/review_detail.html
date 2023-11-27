@@ -2,6 +2,7 @@
 
 {% block title %}후기 상세{% endblock%}
 {% block main_area %}
+
 <div class="container" style="width: 1000px;">
     <!-- 제목및 헤더
     <h3>{{ review.title }}</h3>
@@ -45,5 +46,57 @@
             <a type="button" class="btn btn-light" href="/review/list" style="width: 150px; height: 40px">목록</a>
         </div>
     </div>
+        <!-- 댓글 섹션 -->
+        <div class="comment-section">
+            {% for comment in review.comment_set.all %}
+                <div class="comment">
+                    <div class="comment-content">
+                        <p>{{ comment.content }}</p>
+                    </div>
+                    <div class="comment-info">
+                        <p>작성자: {{ comment.author }}, 등록일: {{ comment.created_at }}</p>
+                    </div>
+                    {% if request.user == comment.author %}
+                        <div class="delete-button">
+                            <a href="{% url 'delete_comment' comment.id %}" onclick="return confirmDelete(event)">삭제</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+            <!-- 댓글 입력 폼 -->
+            <form method="post" action="{% url 'add_comment' pk=review.pk %}">
+                {% csrf_token %}
+                <div class="form-group mt-3">
+                    <label for="comment">댓글 작성</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="return confirmLogin()">댓글 등록</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script>
+    function confirmDelete(event) {
+        if (!confirm("정말로 삭제하시겠습니까?")) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+
+    const isAuthenticated = {{ user.is_authenticated|lower }};
+
+    function confirmLogin() {
+        if (!isAuthenticated) {
+            alert("로그인이 필요합니다.");
+            window.location.href = "{% url 'login' %}";
+            return false;
+        }
+        return true;
+    }
+
+</script>
 {% endblock %}
