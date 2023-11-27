@@ -47,15 +47,20 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):
    model = CoverLetter
-   ordering = ['-pk']
    paginate_by = 5
+   ordering = ['-pk']
    login_url = reverse_lazy('login')
 
    def get_queryset(self) -> QuerySet[Any]:
-      self.rate = self.request.GET.get('rate', '').strip()
-      if self.rate == 'high':
+      self.sort_string = self.request.GET.get('sort', '').strip()
+
+      if self.sort_string == 'latest':
+         self.ordering = ['-pk']
+      elif self.sort_string == 'old':
+         self.ordering = ['pk']
+      elif self.sort_string == 'high':
          self.ordering = ['-rate']
-      elif self.rate == 'low':
+      elif self.sort_string == 'low':
          self.ordering = ['rate']
 
       user = self.request.user
@@ -70,24 +75,10 @@ class CoverLetterList(LoginRequiredMixin, ListView):
       context['query_string'] = ''
       if self.search:
          context['query_string'] += '&search=' + self.search
-      if self.rate:
-         context['query_string'] += '&rate=' + self.rate
+      if self.sort_string:
+         context['query_string'] += '&sort=' + self.sort_string
       print(context['query_string'])
       return context
-
-class CoverLetterSortList(CoverLetterList):
-   def get_queryset(self):
-      q = self.kwargs['q']
-      if q == "all":
-         self.ordering = ['-pk']
-      elif q == "latest":
-         self.ordering = ['-create_at']
-      elif q == "high":
-         self.ordering = ['-rate']
-      elif q == "low":
-         self.ordering = ['rate']
-
-      return super().get_queryset()
 
 # 자소서 표절 결과 상세 페이지
 class CoverLetterDetail(DetailView):

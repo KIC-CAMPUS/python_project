@@ -7,7 +7,5 @@ urlpatterns = [
    path("list/", views.CoverLetterList.as_view(), name='result_list'),
    path("<int:pk>/", views.CoverLetterDetail.as_view(), name='coverletter_detail'),
    path("delete/", views.coverLetterDelete, name='cover_letter_delete'),
-   path('list/sort/<q>/', views.CoverLetterSortList.as_view()),
-   path("list/", views.CoverLetterSortList.as_view(), name=''),
    path('like/', views.coverletter_bookmark, name='coverletter_like'),
 ]
