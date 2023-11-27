@@ -84,13 +84,13 @@ class MypageView(CoverLetterList):
 
    def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
-
+      user = self.request.user
       # Calculate bookmark counts
-      context['document_type_1_count'] = CoverLetter.objects.filter(document_type=1).count()
-      context['document_type_2_count'] = CoverLetter.objects.filter(document_type=2).count()
-      context['document_type_3_count'] = CoverLetter.objects.filter(document_type=3).count()
-      context['document_type_4_count'] = CoverLetter.objects.filter(document_type=4).count()
-      context['document_type_5_count'] = CoverLetter.objects.filter(document_type=5).count()
+      context['document_type_1_count'] = CoverLetter.objects.filter(document_type=1, user=user).count()
+      context['document_type_2_count'] = CoverLetter.objects.filter(document_type=2, user=user).count()
+      context['document_type_3_count'] = CoverLetter.objects.filter(document_type=3, user=user).count()
+      context['document_type_4_count'] = CoverLetter.objects.filter(document_type=4, user=user).count()
+      context['document_type_5_count'] = CoverLetter.objects.filter(document_type=5, user=user).count()
 
       return context
 
