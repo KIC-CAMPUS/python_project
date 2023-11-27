@@ -92,7 +92,7 @@ def sentence_plagiarism_rate(sentence1, document_type):
       # matchwordCount = boyer_moore(most_similar, query_sentence)
 
       result = boyer_moore_matching_sentences(tokens1, tokens2)
-      list_query_sentence.append({'query_sentence': query_sentence, 'most_similar': most_similar, 'result':round(result, 3)})
+      list_query_sentence.append({'sequence_number': n ,'query_sentence': query_sentence, 'most_similar': most_similar, 'result':round(result, 3)})
       total_ratio += result
       print("result : ", result)
 
