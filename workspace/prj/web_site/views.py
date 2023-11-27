@@ -28,37 +28,4 @@ def spelling_check(request):
         return render(request, "web_site/check.html")
 
 def characters_count(request):
-    if request.method == 'POST':
-        return handle_characters_count(request)
-    else:
-        return render(request, "web_site/count.html")
-
-
-def handle_characters_count(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        text_to_count = data.get('text', '')
-
-        total_characters = len(text_to_count)
-        total_bytes = len(text_to_count.encode('utf-8'))
-
-        text_without_spaces = text_to_count.replace(' ', '')  # 공백 제외한 텍스트
-
-        total_characters_without_spaces = len(text_without_spaces)
-        total_bytes_without_spaces = len(text_without_spaces.encode('utf-8'))
-
-        response_data = {
-            'total_characters': total_characters,
-            'total_bytes': total_bytes,
-            'total_characters_without_spaces': total_characters_without_spaces,
-            'total_bytes_without_spaces': total_bytes_without_spaces,
-        }
-
-        return JsonResponse(response_data)
-    else:
-        return JsonResponse({'error': 'Invalid request'})
-
-
-def reset_values(request):
-    response_data = {'message': 'Values reset successfully'}
-    return JsonResponse(response_data)
+    return render(request, "web_site/count.html")
