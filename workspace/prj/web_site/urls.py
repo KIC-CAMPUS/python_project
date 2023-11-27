@@ -6,4 +6,5 @@ urlpatterns = [
    path("howtouse/", views.howtouse, name='howtouse'),
    path("check/", views.spelling_check),
    path("count/", views.characters_count),
+   path("reset/", views.reset_values, name='reset_values'),
 ]
