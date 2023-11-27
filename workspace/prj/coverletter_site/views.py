@@ -52,6 +52,12 @@ class CoverLetterList(LoginRequiredMixin, ListView):
    login_url = reverse_lazy('login')
 
    def get_queryset(self) -> QuerySet[Any]:
+      self.rate = self.request.GET.get('rate', '').strip()
+      if self.rate == 'high':
+         self.ordering = ['-rate']
+      elif self.rate == 'low':
+         self.ordering = ['rate']
+
       user = self.request.user
       qs = super().get_queryset().filter(user=user)
       
@@ -64,6 +70,8 @@ class CoverLetterList(LoginRequiredMixin, ListView):
       context['query_string'] = ''
       if self.search:
          context['query_string'] += '&search=' + self.search
+      if self.rate:
+         context['query_string'] += '&rate=' + self.rate
       print(context['query_string'])
       return context
 

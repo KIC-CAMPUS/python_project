@@ -146,9 +146,12 @@
         item.addEventListener('click', function() {
             let sortValue = item.dataset.sortValue.trim();
             console.log('선택된 정렬 값:', sortValue);
-
             // 선택된 값에 기반하여 원하는 동작 수행
-            location.href = location.origin + "/coverletter/list/sort/" + sortValue + "/";
+            url = location.origin + '/coverletter/list/' + '?rate=' + sortValue;
+            const url_serach_params = new URLSearchParams(location.search);
+            const search = url_serach_params.get('search');
+            if (search) url += '&search=' + search;
+            location.href = url
         });
     });
 
