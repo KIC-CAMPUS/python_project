@@ -24,11 +24,15 @@
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">전체 문장</th>
-                            <td class="table_border_bottom" style="border-top: 0;"><span>{{ plagiarism_list | length }}</span>문장</td>
+                            <td class="table_border_bottom" style="border-top: 0;">
+                                <span>{{ plagiarism_list | length }}</span>문장
+                            </td>
                         </tr>
                         <tr>
                             <th class="table_border_bottom" style="border-top: 0;">의심 문장</th>
-                            <td class="table_border_bottom" style="border-top: 0;"><span>{{ plagiarism_sentence_count }}</span>문장</td>
+                            <td class="table_border_bottom" style="border-top: 0;">
+                                <span>{{ plagiarism_sentence_count }}</span>문장
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -37,10 +41,13 @@
         <div class="col mb-4">
             <div class="card border-primary">
                 <div class="card-body ">
-                    <h5 class="card-title" style="font-weight: bold">그래프같이 시각화 할수 있는 자료놓는 곳</h5>
+                    <h5 class="card-title" style="font-weight: bold">표절률 그래프</h5>
                     <div class="linebox_detail"></div>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                    <div class="chart-wrapper">
+                        <div class="rate-chart" style="height: 300px; width: 400px;">
+                            <canvas id='rate-chart'></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,7 +71,7 @@
                         </div>
                         {% endfor %}
                         <div class="details_br"></div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -77,30 +84,56 @@
                         <div class="linebox_detail"></div>
                         {% for plagiarism in plagiarism_list %}
                         <div class="card border-danger">
-                            <div 
-                                {% if plagiarism.result <= 0.4 %}
-                                    class="card-header text-white bg-success border-success align-middle"
-                                {% else %}
-                                    class="card-header text-white bg-danger border-danger align-middle"
-                                {% endif %}
-                                style="height: 40px">
-                                <h6 class="card-title" id="detail_1">1번 문장</h6>
-                                <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
-                            </div>
-                            <div class="card-body">
-                                <span>{{ plagiarism.query_sentence }}</span>
-                            </div>
-                            <div class="card-body">
-                                <span>'저'</span>,<span>'패션'</span>,<span
-                                    style="color: red">'인간'</span>,<span>'매일'</span>,<span>'가장'</span>,<span>'문화'</span>,<span>'예술'</span>
-                            </div>
+                            <div {% if plagiarism.result <= 0.4 %}
+                            class="card-header text-white bg-success border-success align-middle"
+                            {% else %}
+                            class="card-header text-white bg-danger border-danger align-middle"
+                            {% endif %}
+                            style="height: 40px">
+                            <h6 class="card-title" id="detail_1">1번 문장</h6>
+                            <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
                         </div>
-                        <div class="details_br"></div>
-                        {% endfor %}
+                        <div class="card-body">
+                            <span>{{ plagiarism.query_sentence }}</span>
+                        </div>
+                        <div class="card-body">
+                            <span>'저'</span>,<span>'패션'</span>,<span
+                                style="color: red">'인간'</span>,<span>'매일'</span>,<span>'가장'</span>,<span>'문화'</span>,<span>'예술'</span>
+                        </div>
                     </div>
+                    <div class="details_br"></div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+{% if coverletter.get_rate_per %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    const rateCtx = document.getElementById('rate-chart').getContext('2d');
+    const rateChart = new Chart(rateCtx, {
+        type: 'pie',
+        data: {
+        labels: ['표절', '표절x'],
+        datasets: [{
+            label: '표절 통계',
+            data: [{{ coverletter.get_rate_per }}, {{ coverletter.get_rate_per_not }}],
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    })
+    </script>
+{% endif %}
 {% endblock %}

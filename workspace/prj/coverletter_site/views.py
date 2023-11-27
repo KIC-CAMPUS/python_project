@@ -1,4 +1,5 @@
 from typing import Any
+
 from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.forms.models import BaseModelForm
@@ -20,12 +21,15 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    login_url = reverse_lazy('login')
 
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
       rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content, coverletter.document_type)
       coverletter.rate = float(rate)
       print(list_query_sentence)
       resp = super().form_valid(form)
+
+      # 표절 데이터 처리
       for query in list_query_sentence:
          cl_plagiarism = CoverLetterPlagiarism(coverletter = coverletter)
          cl_plagiarism.query_sentence = query['query_sentence']
@@ -38,6 +42,7 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
       super().post(request, *args, **kwargs)
       return HttpResponse(self.success_url)
+
 
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):

@@ -24,6 +24,9 @@ class CoverLetter(models.Model):
    
    def get_rate_per(self):
       return '%2.2f'% (self.rate * 100)
+
+   def get_rate_per_not(self):
+      return '%2.2f' % (100 - self.rate * 100)
    
    def get_document_type_str(self):
       return document_type_list[self.document_type - 1][1]
