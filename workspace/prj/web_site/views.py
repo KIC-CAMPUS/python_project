@@ -57,3 +57,8 @@ def handle_characters_count(request):
         return JsonResponse(response_data)
     else:
         return JsonResponse({'error': 'Invalid request'})
+
+
+def reset_values(request):
+    response_data = {'message': 'Values reset successfully'}
+    return JsonResponse(response_data)
