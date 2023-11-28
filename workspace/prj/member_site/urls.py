@@ -8,8 +8,6 @@ urlpatterns = [
    path("join/", views.join, name='join'),
    path("mypage/", views.MypageView.as_view(), name='mypage'),
    path("mypage/delete", views.mypage_coverLetterDelete, name='mypage_coverletter_delete'),
-   # 페이지 볼려고 추가했습니다. 무시하셔도 될거 같아요
-   path("mypage/edit/", views.mypage_edit, name='mypage_edit'),
    # 정렬
    path('mypage/sort/<q>/', views.Mypage_CoverLetterSortList.as_view()),
    # 검색
@@ -23,4 +21,6 @@ urlpatterns = [
    path("id_success/", views.id_check, name='id_success'),
    path("pw_success/", views.pw_check, name='pw_success'),
 
+   # 회원 정보 수정
+   path("member/update/", views.update, name='user_update'),
 ]
