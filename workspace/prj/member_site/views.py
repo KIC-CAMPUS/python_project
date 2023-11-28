@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, get_user_model
+from django.contrib.auth.password_validation import validate_password, password_validators_help_texts
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ValidationError
 
 from .forms import UserForm, UpdateForm, FindUsernameForm
 from .models import User
@@ -135,12 +137,17 @@ def reset_password(request):
          try :
             user_pk = request.session.get('reset_user')
             user = User.objects.get(pk=user_pk)
+            validate_password(password1)
             user.password = make_password(password1)
             user.save()
             request.session['reset_user'] = None
             return redirect('login')
-         except User.DoesNotExist:
-            print('비밀번호끼리 일치하지 않음.')
+         except ValidationError:
+            return render(request, 'member/pw_change.html', {
+               'form_error_list': password_validators_help_texts()
+            })
       else :
-         print('비밀 번호가 일치하지 않음.')
+         return render(request, 'member/pw_change.html', {
+               'form_error_list': ['비밀 번호가 서로 일치하지 않습니다.']
+            })
    return render(request, 'member/pw_change.html')
