@@ -62,8 +62,7 @@
                             <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
                                 <h6 class="card-title">문장 표절률 : <span>{{ plagiarism.get_result_per }}</span>%</h6>
                             </div>
-                            <a class="list-group-item list-group-item-action" href="#detail_1">
-                                <!-- 검사문서의 카드 바디부분을 클릭하면 표절 검사 결과 문장의 번호에 맞게 이동합니다. -->
+                            <a class="list-group-item list-group-item-action" href="#detail_{{plagiarism.sequence_number}}">
                                 <div class="card-body">
                                     <span>{{ plagiarism.query_sentence }}</span>
                                 </div>
@@ -71,7 +70,6 @@
                         </div>
                         {% endfor %}
                         <div class="details_br"></div>
-
                     </div>
                 </div>
             </div>
@@ -84,22 +82,22 @@
                         <div class="linebox_detail"></div>
                         {% for plagiarism in plagiarism_list %}
                         <div class="card border-danger">
-                            <div {% if plagiarism.result <= 0.4 %}
+                            <div {% if plagiarism.result <= 0.5 %}
                             class="card-header text-white bg-success border-success align-middle"
                             {% else %}
                             class="card-header text-white bg-danger border-danger align-middle"
                             {% endif %}
                             style="height: 40px">
-                            <h6 class="card-title" id="detail_1">1번 문장</h6>
-                            <!-- 검사 문장에서 첫 번째를 클릭하면 여기로 옵니다. -->
+                            <h6 class="card-title" id="detail_{{plagiarism.sequence_number}}">{{ plagiarism.sequence_number|add:1 }}번 문장</h6>
                         </div>
                         <div class="card-body">
                             <span>{{ plagiarism.query_sentence }}</span>
                         </div>
+                        {% if plagiarism.result > 0.5 %}
                         <div class="card-body">
-                            <span>'저'</span>,<span>'패션'</span>,<span
-                                style="color: red">'인간'</span>,<span>'매일'</span>,<span>'가장'</span>,<span>'문화'</span>,<span>'예술'</span>
+                            <span>{{ plagiarism.most_similar }}</span>
                         </div>
+                        {% endif %}
                     </div>
                     <div class="details_br"></div>
                     {% endfor %}
