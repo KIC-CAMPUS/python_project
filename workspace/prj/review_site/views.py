@@ -1,16 +1,11 @@
-from typing import Any
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-
-from .models import Review, Reply
-
 from django.shortcuts import get_object_or_404, redirect
-from .models import Review, Comment
 
-from django.shortcuts import get_object_or_404
+from .models import Review, Comment
 
 # 이용 후기 작성
 class ReviewCreated(LoginRequiredMixin, CreateView):
@@ -32,12 +27,6 @@ class ReviewList(ListView):
 # 이용 후기 조회
 class ReviewDetail(DetailView):
    model = Review
-
-   # 댓글 목록 임시로 만듦..
-   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-      context = super().get_context_data(**kwargs)
-      context['reply_list'] = Reply.objects.filter(review = self.get_object()).all()
-      return context
 
 # 이용 후기 수정
 class ReviewUpdateView(UpdateView):
