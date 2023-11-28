@@ -22,11 +22,11 @@
                             <div class="linebox_detail"></div>
                             <div class="card-body d-flex justify-content-center">
                                 <div>
-                                    <span style="font-weight: bold"><span>공백 포함 : 총 <span class="total_characters">0</span> 자</span><span>( <span class="total_bytes">0</span> Byte)</span></span>
+                                    <span style="font-weight: bold"><span>공백 포함 : 총 <span id="total_characters">0</span> 자</span><span>( <span id="total_bytes">0</span> Byte)</span></span>
                                 </div>
                                 <div class="count_box"></div>
                                 <div>
-                                    <span style="font-weight: bold">공백 제외: <span class="total_characters_no_spaces">0</span>자</span><span style="font-weight: bold">( <span class="total_bytes_no_spaces" >0</span> Byte)</span>
+                                    <span style="font-weight: bold">공백 제외: <span id="total_characters_no_spaces">0</span>자</span><span style="font-weight: bold">( <span id="total_bytes_no_spaces" >0</span> Byte)</span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -72,41 +72,18 @@
         const totalCharactersNoSpaces = textWithoutSpaces.length;
         const totalBytesNoSpaces = new Blob([textWithoutSpaces], { type: 'text/plain' }).size;
 
-        document.querySelector('.total_characters').innerText = totalCharacters;
-        document.querySelector('.total_bytes').innerText = totalBytes;
-        document.querySelector('.total_characters_no_spaces').innerText = totalCharactersNoSpaces;
-        document.querySelector('.total_bytes_no_spaces').innerText = totalBytesNoSpaces;
+        document.getElementById('total_characters').innerText = totalCharacters;
+        document.getElementById('total_bytes').innerText = totalBytes;
+        document.getElementById('total_characters_no_spaces').innerText = totalCharactersNoSpaces;
+        document.getElementById('total_bytes_no_spaces').innerText = totalBytesNoSpaces;
     }
 
     function resetValues() {
-        fetch('/reset/', {
-            method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message === 'Values reset successfully') {
-                const totalCharactersSpan = document.querySelector('.total_characters');
-                const totalCharactersNoSpacesSpan = document.querySelector('.total_characters_no_spaces');
-                const totalBytesSpan = document.querySelector('.total_bytes');
-                const totalBytesNoSpacesSpan = document.querySelector('.total_bytes_no_spaces');
-
-                if (totalCharactersSpan) {
-                    totalCharactersSpan.innerText = 0;  // innerText를 사용하여 값 초기화
-                }
-                if (totalCharactersNoSpacesSpan) {
-                    totalCharactersNoSpacesSpan.innerText = 0;  // innerText를 사용하여 값 초기화
-                }
-                if (totalBytesSpan) {
-                    totalBytesSpan.innerText = 0;  // innerText를 사용하여 값 초기화
-                }
-                if (totalBytesNoSpacesSpan) {
-                    totalBytesNoSpacesSpan.innerText = 0;  // innerText를 사용하여 값 초기화
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        const inputText = document.getElementById('inputText');
+        document.getElementById('total_characters').innerText = 0;
+        document.getElementById('total_bytes').innerText = 0;
+        document.getElementById('total_characters_no_spaces').innerText = 0;
+        document.getElementById('total_bytes_no_spaces').innerText = 0;
     }
 </script>
 {% endblock %}
