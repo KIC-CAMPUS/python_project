@@ -13,14 +13,15 @@ urlpatterns = [
    # 검색
    path('mypage/search/<str:q>/', views.PostSearch.as_view()),
 
-   # 아이디, 비밀번호 찾기 페이지가는 로직
+   # 아이디페이지가는 로직
    path('findid/', views.findid, name='findid'),
-   path('findpw/', views.findpw, name='findpw'),
-
-   # 아이디, 비밀번호 찾기 확인 로직
+   # 아이디 확인 로직
    path("id_success/", views.id_check, name='id_success'),
-   path("pw_success/", views.pw_check, name='pw_success'),
 
    # 회원 정보 수정
    path("member/update/", views.update, name='user_update'),
+
+   # 비밀번호 재설정
+   path('member/password/', views.reset_password_go, name='reset_password_go'),
+   path('member/password/reset', views.reset_password, name='reset_password'),
 ]
