@@ -121,11 +121,12 @@ def reset_password_go(request):
          request.session['reset_user'] = user.pk
          return redirect('reset_password')
       except User.DoesNotExist:
-         print('인증 실패')
+         return render(request, 'member/findpassword.html',{
+               'form_error': '회원의 정보가 일치하지 않습니다.'
+            })
    return render(request, 'member/findpassword.html')
 
 def reset_password(request):
-
    if request.method == 'POST':
       password1 = request.POST.get('password1')
       password2 = request.POST.get('password2')
@@ -139,7 +140,7 @@ def reset_password(request):
             request.session['reset_user'] = None
             return redirect('login')
          except User.DoesNotExist:
-            print('인증 실패')
+            print('비밀번호끼리 일치하지 않음.')
       else :
          print('비밀 번호가 일치하지 않음.')
    return render(request, 'member/pw_change.html')
