@@ -15,11 +15,6 @@
     pip install crispy-bootstrap4
     ```
 
-- 워드와 같은 문서 파일을 다루는 라이브러리
-    ```console
-    pip install python-docx
-    ```
-
 - 판다스
     ```console
     pip install pandas

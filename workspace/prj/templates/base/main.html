@@ -11,6 +11,44 @@
     {% block head_content %}
     {% endblock %}
     <title>{% block title %}{% endblock %}</title>
+
+    <style>
+        /* 각 댓글 스타일 */
+        .comment {
+            position: relative; /* 상대적 위치 지정 */
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 댓글 내용 스타일 */
+        .comment-content {
+            margin-bottom: 80px;
+            font-size: 16px;
+        }
+
+        /* 작성자와 등록일 스타일 */
+        .comment-info {
+            position: absolute; /* 절대적 위치 지정 */
+            bottom: 0; /* 아래에 위치 */
+            left: 10; /* 왼쪽에 위치 */
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* 삭제 버튼 스타일 */
+        .delete-button {
+            position: absolute; /* 절대적 위치 지정 */
+            bottom: 0; /* 위에 위치 */
+            right: 0; /* 오른쪽에 위치 */
+            margin-bottom: 20px;
+            margin-right: 20px;
+            color: red;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 {% include 'base/navbar.html' %}

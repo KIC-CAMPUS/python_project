@@ -1,8 +1,9 @@
 from typing import Any
+
 from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
@@ -20,12 +21,15 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
    login_url = reverse_lazy('login')
 
    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+
       coverletter = form.save(commit=False)
       coverletter.user = self.request.user
       rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content, coverletter.document_type)
       coverletter.rate = float(rate)
       print(list_query_sentence)
       resp = super().form_valid(form)
+
+      # 표절 데이터 처리
       for query in list_query_sentence:
          cl_plagiarism = CoverLetterPlagiarism(coverletter = coverletter)
          cl_plagiarism.query_sentence = query['query_sentence']
@@ -34,31 +38,47 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
          cl_plagiarism.sequence_number = query['sequence_number']
          cl_plagiarism.save()
       return resp
+   
+   def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+      super().post(request, *args, **kwargs)
+      return HttpResponse(self.success_url)
+
 
 # 자소서 목록
 class CoverLetterList(LoginRequiredMixin, ListView):
    model = CoverLetter
-   ordering = ['-pk']
    paginate_by = 5
+   ordering = ['-pk']
    login_url = reverse_lazy('login')
 
    def get_queryset(self) -> QuerySet[Any]:
-      user = self.request.user
-      return super().get_queryset().filter(user=user)
+      self.sort_string = self.request.GET.get('sort', '').strip()
 
-class CoverLetterSortList(CoverLetterList):
-   def get_queryset(self):
-      q = self.kwargs['q']
-      if q == "all":
+      if self.sort_string == 'latest':
          self.ordering = ['-pk']
-      elif q == "latest":
-         self.ordering = ['-create_at']
-      elif q == "high":
+      elif self.sort_string == 'old':
+         self.ordering = ['pk']
+      elif self.sort_string == 'high':
          self.ordering = ['-rate']
-      elif q == "low":
+      elif self.sort_string == 'low':
          self.ordering = ['rate']
 
-      return super().get_queryset()
+      user = self.request.user
+      qs = super().get_queryset().filter(user=user)
+      
+      self.search = self.request.GET.get('search', '').strip()
+      qs = qs.filter(Q(title__contains=self.search))
+      return qs
+   
+   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+      context = super().get_context_data(**kwargs)
+      context['query_string'] = ''
+      if self.search:
+         context['query_string'] += '&search=' + self.search
+      if self.sort_string:
+         context['query_string'] += '&sort=' + self.sort_string
+      print(context['query_string'])
+      return context
 
 # 자소서 표절 결과 상세 페이지
 class CoverLetterDetail(DetailView):
@@ -90,13 +110,3 @@ def coverletter_bookmark(request):
       post.bookmark = not post.bookmark
       post.save()
       return HttpResponse()
-
-class PostSearch(CoverLetterList):
-   def get_queryset(self):
-      q = self.kwargs['q']
-      post_list = super().get_queryset().filter(
-         Q(title__contains=q)
-      ).distinct()
-      return post_list
-
-
