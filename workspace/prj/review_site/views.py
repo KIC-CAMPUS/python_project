@@ -1,16 +1,16 @@
 from typing import Any
-
-from django.core.exceptions import PermissionDenied
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
-from .forms import ReplyForm
 from .models import Review, Reply
 
+from django.shortcuts import get_object_or_404, redirect
+from .models import Review, Comment
+
+from django.shortcuts import get_object_or_404
 
 # 이용 후기 작성
 class ReviewCreated(LoginRequiredMixin, CreateView):
@@ -37,7 +37,6 @@ class ReviewDetail(DetailView):
    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
       context = super().get_context_data(**kwargs)
       context['reply_list'] = Reply.objects.filter(review = self.get_object()).all()
-      context['reply_form'] = ReplyForm
       return context
 
 # 이용 후기 수정
@@ -45,3 +44,24 @@ class ReviewUpdateView(UpdateView):
    model = Review
    fields = ('title', 'content', 'upload_file')
    template_name = 'review_site/review_edit.html'
+
+# 댓글 등록
+def add_comment(request, pk):
+   review = get_object_or_404(Review, pk=pk)
+   if request.method == 'POST':
+      content = request.POST.get('comment')
+      author = request.user if request.user.is_authenticated else None
+      if author:
+         Comment.objects.create(review=review, content=content, author=author)
+      else:
+         return redirect(reverse('login'))
+   return redirect('review_detail', pk=pk)
+
+# 댓글 삭제
+def delete_comment(request, comment_id):
+   comment = get_object_or_404(Comment, pk=comment_id)
+   if request.user == comment.author:
+      comment.delete()
+      return redirect('review_detail', pk=comment.review.pk)
+   else:
+      return HttpResponse("삭제 권한이 없습니다.")

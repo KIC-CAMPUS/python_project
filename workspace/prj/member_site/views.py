@@ -1,13 +1,13 @@
 from django.contrib import auth, messages
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, get_user_model, authenticate
+from django.contrib.auth import login, get_user_model, authenticate, update_session_auth_hash
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 
-from .forms import UserForm
+from .forms import UserForm, CustomPasswordChangeForm
 from .forms import FindUsernameForm
 from .forms import FindpwForm
 from coverletter_site.views import CoverLetterList, coverLetterDelete
@@ -128,3 +128,17 @@ def findid(request):
 
 def findpw(request):
    return render(request, "member/findpassword.html")
+
+
+def password_edit_view(request):
+   if request.method == 'POST':
+      password_change_form = CustomPasswordChangeForm(request.user, request.POST)
+      if password_change_form.is_valid():
+         user = password_change_form.save()
+         update_session_auth_hash(request, user)
+         messages.success(request, "비밀번호를 성공적으로 변경하였습니다.")
+         return redirect('index')
+   else:
+      password_change_form = CustomPasswordChangeForm(request.user)
+
+   return render(request, 'member/findpassword.html', {'password_change_form': password_change_form})
