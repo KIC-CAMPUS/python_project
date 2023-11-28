@@ -139,11 +139,11 @@ def password_edit_view(request):
          user = password_change_form.save()
          update_session_auth_hash(request, user)
          messages.success(request, "비밀번호를 성공적으로 변경하였습니다.")
-         return redirect('index')
+         return redirect('mypage')
    else:
       password_change_form = CustomPasswordChangeForm(request.user)
 
-   return render(request, 'member/findpassword.html', {'password_change_form': password_change_form})
+   return render(request, 'member/editpassword.html', {'password_change_form': password_change_form})
 
 #회원 정보 수정
 def update(request):
@@ -157,3 +157,6 @@ def update(request):
    context = {'form': form}
    return render(request, 'member/mypage_edit.html', context)
 
+
+def pw_edit_success(request):
+   return render(request, "member/mypage.html")

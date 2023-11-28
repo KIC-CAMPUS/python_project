@@ -23,4 +23,6 @@ urlpatterns = [
 
    # 회원 정보 수정
    path("member/update/", views.update, name='user_update'),
+
+   path("pw_edit/", views.password_edit_view, name='pw_edit'),
 ]

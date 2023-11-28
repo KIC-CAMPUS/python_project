@@ -1,8 +1,12 @@
+from django.core.exceptions import ValidationError
+
 from .models import User
 from django import forms
 
 from django.forms import PasswordInput
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
+
+
 
 class UserForm(UserCreationForm):
     username = forms.CharField(label="ID")
@@ -28,6 +32,7 @@ class FindpwForm(forms.Form):
     birthday = forms.DateField(label="생일", widget=forms.TextInput(attrs={'type': 'date'}))
 
 
+# 비밀번호 재설정
 class CustomPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super(CustomPasswordChangeForm, self).__init__(*args, **kwargs)
