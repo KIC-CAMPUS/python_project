@@ -17,9 +17,11 @@ class Review(models.Model):
 
 # 이용 후기 댓글
 class Reply(models.Model):
-   author = models.ForeignKey(User, on_delete=models.CASCADE)
    review = models.ForeignKey(Review, on_delete=models.CASCADE)
-   content = models.TextField()
-
-   create_at = models.DateTimeField(auto_now_add=True)
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+   content = models.CharField(max_length=200)
+   created_at = models.DateTimeField(auto_now_add=True)
    updated_at = models.DateTimeField(auto_now=True)
+
+   def __str__(self):
+      return self.content

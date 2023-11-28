@@ -1,11 +1,16 @@
 from typing import Any
+
+from django.core.exceptions import PermissionDenied
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
+from .forms import ReplyForm
 from .models import Review, Reply
+
 
 # 이용 후기 작성
 class ReviewCreated(LoginRequiredMixin, CreateView):
@@ -32,6 +37,7 @@ class ReviewDetail(DetailView):
    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
       context = super().get_context_data(**kwargs)
       context['reply_list'] = Reply.objects.filter(review = self.get_object()).all()
+      context['reply_form'] = ReplyForm
       return context
 
 # 이용 후기 수정
