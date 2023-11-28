@@ -24,4 +24,6 @@ urlpatterns = [
    # 비밀번호 재설정
    path('member/password/', views.reset_password_go, name='reset_password_go'),
    path('member/password/reset', views.reset_password, name='reset_password'),
+   path("member/pw_edit/", views.password_edit_view, name='pw_edit'),
+
 ]

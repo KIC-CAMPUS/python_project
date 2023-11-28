@@ -1,14 +1,15 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, get_user_model
-from django.contrib.auth.password_validation import validate_password, password_validators_help_texts
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import login, get_user_model, update_session_auth_hash
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.hashers import make_password
-from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password, password_validators_help_texts
 
-from .forms import UserForm, UpdateForm, FindUsernameForm
+from .forms import UserForm, UpdateForm, FindUsernameForm, CustomPasswordChangeForm
 from .models import User
+
 from coverletter_site.views import CoverLetterList, coverLetterDelete
 from coverletter_site.models import CoverLetter
 
@@ -40,12 +41,12 @@ def id_check(request):
          birthday = form.cleaned_data['birthday']
 
          try:
-               user = get_user_model().objects.get(first_name=first_name, phone=phone, birthday=birthday)
-               print(f"Username found: {user.username}")
-               username = user.username
+            user = get_user_model().objects.get(first_name=first_name, phone=phone, birthday=birthday)
+            print(f"Username found: {user.username}")
+            username = user.username
          except ObjectDoesNotExist as e:
-               print(f"ObjectDoesNotExist exception: {e}")
-               username = "일치하는 사용자가 없어요."
+            print(f"ObjectDoesNotExist exception: {e}")
+            username = "일치하는 사용자가 없어요."
 
    return render(request, "member/id_success.html", {'form': form, 'username': username})
 
@@ -97,6 +98,23 @@ class Mypage_CoverLetterSortList(MypageView):
 
 def findid(request):
    return render(request, "member/findid.html")
+
+def findpw(request):
+   return render(request, "member/findpassword.html")
+
+# 비밀번호 변경
+def password_edit_view(request):
+   if request.method == 'POST':
+      password_change_form = CustomPasswordChangeForm(request.user, request.POST)
+      if password_change_form.is_valid():
+         user = password_change_form.save()
+         update_session_auth_hash(request, user)
+         messages.success(request, "비밀번호를 성공적으로 변경하였습니다.")
+         return redirect('mypage')
+   else:
+      password_change_form = CustomPasswordChangeForm(request.user)
+
+   return render(request, 'member/editpassword.html', {'password_change_form': password_change_form})
 
 #회원 정보 수정
 def update(request):
@@ -151,3 +169,4 @@ def reset_password(request):
                'form_error_list': ['비밀 번호가 서로 일치하지 않습니다.']
             })
    return render(request, 'member/pw_change.html')
+
