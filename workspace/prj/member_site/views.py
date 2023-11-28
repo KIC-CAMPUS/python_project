@@ -1,13 +1,14 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, get_user_model, update_session_auth_hash
+from django.contrib.auth import login, get_user_model, update_session_auth_hash, logout
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.password_validation import validate_password, password_validators_help_texts
 
-from .forms import UserForm, UpdateForm, FindUsernameForm, CustomPasswordChangeForm, CustomPasswordChangeForm, CheckPasswordForm
+from .forms import UserForm, UpdateForm, FindUsernameForm, CustomPasswordChangeForm, CustomPasswordChangeForm, \
+    CheckPasswordForm
 from .models import User
 
 from coverletter_site.views import CoverLetterList, coverLetterDelete
@@ -32,25 +33,26 @@ def join(request):
 
 # 아이디 찾기
 def id_check(request):
-   form = FindUsernameForm()
-   username = None
+    form = FindUsernameForm()
+    username = None
 
-   if request.method == "POST":
-      form = FindUsernameForm(request.POST)
-      if form.is_valid():
-         first_name = form.cleaned_data['first_name']
-         phone = form.cleaned_data['phone']
-         birthday = form.cleaned_data['birthday']
+    if request.method == "POST":
+        form = FindUsernameForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            phone = form.cleaned_data['phone']
+            birthday = form.cleaned_data['birthday']
 
-         try:
-            user = get_user_model().objects.get(first_name=first_name, phone=phone, birthday=birthday)
-            print(f"Username found: {user.username}")
-            username = user.username
-         except ObjectDoesNotExist as e:
-            print(f"ObjectDoesNotExist exception: {e}")
-            username = "일치하는 사용자가 없어요."
+            try:
+                user = get_user_model().objects.get(first_name=first_name, phone=phone, birthday=birthday)
+                print(f"Username found: {user.username}")
+                username = user.username
+            except ObjectDoesNotExist as e:
+                print(f"ObjectDoesNotExist exception: {e}")
+                username = "일치하는 사용자가 없어요."
 
-   return render(request, "member/id_success.html", {'form': form, 'username': username})
+    return render(request, "member/id_success.html", {'form': form, 'username': username})
+
 
 class MypageView(CoverLetterList):
     template_name = "member/mypage.html"
@@ -70,9 +72,11 @@ class MypageView(CoverLetterList):
 
         return context
 
+
 def mypage_coverLetterDelete(request):
     coverLetterDelete(request)
     return redirect(reverse_lazy('mypage'))
+
 
 # 검색
 class PostSearch(MypageView):
@@ -103,8 +107,10 @@ class Mypage_CoverLetterSortList(MypageView):
 def findid(request):
     return render(request, "member/findid.html")
 
+
 def findpw(request):
-   return render(request, "member/findpassword.html")
+    return render(request, "member/findpassword.html")
+
 
 # 비밀번호 변경
 def password_edit_view(request):
@@ -120,7 +126,8 @@ def password_edit_view(request):
 
     return render(request, 'member/editpassword.html', {'password_change_form': password_change_form})
 
-#회원 정보 수정
+
+# 회원 정보 수정
 
 # 회원 정보 수정
 def update(request):
@@ -178,14 +185,29 @@ def reset_password(request):
             })
     return render(request, 'member/pw_change.html')
 
+
 def password_check(request):
     if request.method == 'POST':
         password_form = CheckPasswordForm(request.user, request.POST)
 
         if password_form.is_valid():
-
             return redirect('/member/update')
     else:
         password_form = CheckPasswordForm(request.user)
 
     return render(request, 'member/password_check.html', {'password_form': password_form})
+
+
+def profile_delete_view(request):
+    if request.method == 'POST':
+        password_form = CheckPasswordForm(request.user, request.POST)
+
+        if password_form.is_valid():
+            request.user.delete()
+            logout(request)
+            messages.success(request, "회원탈퇴가 완료되었습니다.")
+            return redirect('/')
+    else:
+        password_form = CheckPasswordForm(request.user)
+
+    return render(request, 'member/delete.html', {'password_form': password_form})

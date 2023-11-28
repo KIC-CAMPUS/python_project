@@ -1,0 +1,75 @@
+{% extends "base/main.html" %}
+{% load static %}
+
+{% block main_area %}
+<div class="container">
+    <div class="justify-content-center" style="width: 1000px;">
+        <div class="d-flex align-items-center h-100">
+            <div class="col-lg-12">
+                <span class="upload_title"><h1>회원 탈퇴</h1></span>
+            </div>
+        </div>
+        <div class="upload_tr"></div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+                        <p><strong>{{ user.username }}</strong> 회원님의 계정이 삭제됩니다.<br>탈퇴시 개인정보 및 이용정보가
+                            삭제되며
+                            복구할 수
+                            없습니다. <br>본인의 비밀번호를 입력한 후 하단의 유의사항 동의에 체크하세요.</p>
+                        <div class="mb-4 md-form">
+                            <div style="font-weight: bold;">
+                                <label name="label_password" for="{{ password_form.password.id_for_label }}"><i
+                                        class="fas fa-lock"></i>&nbsp;&nbsp;{{ password_form.password.label }}</label>
+                                {{ password_form.password }}
+                                {% if password_form.password.errors %}
+                                <script type="text/javascript">
+                                    document.getElementsByName('password')[0].setAttribute('class',
+                                        'form-control is-invalid')
+                                </script>
+                                {% for error in password_form.password.errors %}
+                            </div>
+                            <div class="invalid-feedback" style="margin-bottom:-10px;">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            <small style="margin-left: 4px; margin-top:8px; margin-bottom: 30px;"
+                                   class="form-text text-muted">
+                                본인인증을 위해 비밀번호를 입력해주세요.
+                            </small>
+                        </div>
+
+                        <label>
+                            <input type="checkbox" name="ck" onClick="checkDisable(this.form)">
+                            <span style="color:#d14040f2; font-weight: bold;">유의사항 동의</span>
+                        </label>
+                        <div style="text-align: center; margin-bottom:-15px;">
+                            <p style="color:gray; margin-bottom: 4px;"><i class="fas fa-exclamation-triangle"></i>&nbsp;{{ user.username }} 계정이 삭제됩니다.</p>
+                            <button type="submit" class="btn btn-primary" style="width: 150px;" name="bt"
+                                    id="detail_btn" disabled="true"><i
+                                    class="fas fa-check"></i>&nbsp;탈퇴하기
+                            </button>
+                            <a onclick="location.href='/users/profile/'" class="btn btn-light" style="width: 150px;"
+                               id="back_btn"><i
+                                    class="fa fa-reply"></i>&nbsp;돌아가기</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function checkDisable(form) {
+        if (form.ck.checked == true) {
+            form.bt.disabled = false;
+        } else {
+            form.bt.disabled = true;
+        }
+    }
+</script>
+
+{% endblock %}
