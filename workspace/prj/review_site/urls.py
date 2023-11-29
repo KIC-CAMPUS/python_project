@@ -8,4 +8,5 @@ urlpatterns = [
    path('<int:pk>/edit/', views.ReviewUpdateView.as_view(), name='review_edit'),
    path('<int:pk>/comment/', views.add_comment, name='add_comment'),
    path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
+   path('comment/<int:comment_id>/edit/', views.comment_edit, name='comment_edit'),
 ]

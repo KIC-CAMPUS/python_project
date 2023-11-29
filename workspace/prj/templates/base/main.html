@@ -38,15 +38,18 @@
             font-size: 14px;
         }
 
-        /* 삭제 버튼 스타일 */
         .delete-button {
-            position: absolute; /* 절대적 위치 지정 */
-            bottom: 0; /* 위에 위치 */
-            right: 0; /* 오른쪽에 위치 */
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .delete-button button,
+        .delete-button a {
             margin-right: 20px;
-            color: red;
-            font-size: 14px;
+            padding: 2px 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>

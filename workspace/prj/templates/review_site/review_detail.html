@@ -41,17 +41,28 @@
     <!-- 댓글 섹션 -->
     <div class="comment-section">
         {% for comment in review.comment_set.all %}
-            <div class="comment">
-                <div class="comment-content">
-                    <p>{{ comment.content }}</p>
-                </div>
-                <div class="comment-info">
-                    <p>작성자: {{ comment.author }}, 등록일: {{ comment.created_at }}</p>
-                </div>
-                {% if request.user == comment.author %}
-                    <div class="delete-button">
-                        <a href="{% url 'delete_comment' comment.id %}" onclick="return confirmDelete(event)">삭제</a>
+            <div class="comment" id="comment-{{ comment.id }}">
+                {% if not comment.editing %}
+                    <div class="comment-content">
+                        <p>{{ comment.content }}</p>
                     </div>
+                    <div class="comment-info">
+                        <p>작성자: {{ comment.author }}, 등록일: {{ comment.created_at }}</p>
+                    </div>
+                    {% if request.user == comment.author %}
+                        <div class="delete-button">
+                            <button onclick="editComment({{ comment.id }})" class=" btn btn-primary delete-button">수정</button>
+                            <a href="{% url 'delete_comment' comment.id %}" onclick="return confirmDelete(event)" class=" btn btn-light delete-button">삭제</a>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <form method="post" action="{% url 'comment_edit' comment_id=comment.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" name="new_comment_text" rows="2">{{ comment.content }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary delete-button">수정 완료</button>
+                    </form>
                 {% endif %}
             </div>
         {% endfor %}
@@ -86,6 +97,20 @@
             return false;
         }
         return true;
+    }
+
+    function editComment(commentId) {
+        const commentContent = document.querySelector(`#comment-${commentId} .comment-content p`).innerText;
+        const editForm = `
+            <form method="post" action="/review/comment/${commentId}/edit/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" name="new_comment_text" rows="2">${commentContent}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary delete-button">수정 완료</button>
+            </form>
+        `;
+        document.querySelector(`#comment-${commentId}`).innerHTML = editForm;
     }
 
 </script>

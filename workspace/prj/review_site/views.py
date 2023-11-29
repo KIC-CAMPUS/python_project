@@ -1,11 +1,14 @@
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404, redirect
+from nltk import pk
 
 from .models import Review, Comment
+
+from django.shortcuts import render, get_object_or_404
 
 # 이용 후기 작성
 class ReviewCreated(LoginRequiredMixin, CreateView):
@@ -54,3 +57,15 @@ def delete_comment(request, comment_id):
       return redirect('review_detail', pk=comment.review.pk)
    else:
       return HttpResponse("삭제 권한이 없습니다.")
+
+
+def comment_edit(request, comment_id):
+   comment = get_object_or_404(Comment, pk=comment_id)
+
+   if request.method == 'POST':
+      new_comment_text = request.POST.get('new_comment_text')
+      comment.content = new_comment_text
+      comment.save()
+      return redirect('review_detail', pk=comment.review.pk)
+
+   return render(request, 'edit_comment.html', {'comment': comment})
