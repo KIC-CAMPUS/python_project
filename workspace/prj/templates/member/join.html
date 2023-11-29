@@ -13,20 +13,22 @@
     <div class="upload_tr"></div>
     <div class="card">
         <div class="card-body">
-            <form method="post" enctype="application/x-www-form-urlencoded">
-                {% csrf_token %}
-                {{ form | crispy }}
-                <div class="d-flex justify-content-end">
-                    <div class="m-2">
-                        <input type="submit" class="btn btn-primary" style="width: 150px;">
+            <div class="d-flex justify-content-center">
+                <form method="post" enctype="application/x-www-form-urlencoded" style="width: 500px;">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="d-flex justify-content-end">
+                        <div class="m-2">
+                            <input type="submit" class="btn btn-primary" style="width: 150px;">
+                        </div>
+                        <div class="m-2">
+                            <a type="button" class="btn btn-light" href="/" style="width: 150px;">
+                                취소
+                            </a>
+                        </div>
                     </div>
-                    <div class="m-2">
-                        <a type="button" class="btn btn-light" href="/" style="width: 150px;">
-                            취소
-                        </a>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
