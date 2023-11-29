@@ -79,17 +79,18 @@ class UpdateForm(UserChangeForm):
     last_name = forms.CharField(label="닉네임")
     phone = forms.CharField(label="전화번호")
     birthday = forms.DateField(label="생일", widget=forms.TextInput(attrs={'type': 'date'}))
+    password = forms.CharField(label="비밀번호", widget=forms.TextInput(attrs={'type': 'hidden'}))
 
     class Meta(UserChangeForm.Meta):
         model = User
         fields = ("first_name", "username",
                 "last_name",
-                "birthday", "phone",)
+                "birthday", "phone", "password")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password'].help_text = "비밀번호를 재설정 해주세요."
-        self.fields['password'].widget = PasswordInput(attrs={'placeholder': ''})
+        # self.fields['password'].help_text = "비밀번호를 재설정 해주세요."
+        # self.fields['password'].widget = PasswordInput(attrs={'placeholder': ''})
 
 class CheckPasswordForm(forms.Form):
     password = forms.CharField(label='비밀번호', widget=forms.PasswordInput(
