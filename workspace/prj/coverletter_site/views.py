@@ -26,7 +26,6 @@ class CoverLetterCreated(LoginRequiredMixin, CreateView):
       coverletter.user = self.request.user
       rate, list_query_sentence = sentence_plagiarism_rate(coverletter.content, coverletter.document_type)
       coverletter.rate = float(rate)
-      print(list_query_sentence)
       resp = super().form_valid(form)
 
       # 표절 데이터 처리

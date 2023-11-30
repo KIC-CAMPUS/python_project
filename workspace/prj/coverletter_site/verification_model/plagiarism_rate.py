@@ -60,9 +60,10 @@ def find_most_similar(sentence1, sentences):
 
 def split_and_save_to_list(text):
    # 텍스트를 줄별로 나누기
+   text = re.sub('[^0-9|a-z|A-Z|ㄱ-ㅎ|가-힣| |.]','', text).strip()
    lines = re.split('[\n|.]', text)
    # 빈 줄 제거 및 공백 제거하여 리스트에 저장
-   result_list = [line.strip() for line in lines if line.strip()]
+   result_list = [line.strip() for line in lines if len(line) > 0]
    return result_list
 
 # 입력 문장과 비교 대상 문장 간의 유사도 계산

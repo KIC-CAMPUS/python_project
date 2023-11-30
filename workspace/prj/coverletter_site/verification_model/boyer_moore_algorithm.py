@@ -3,8 +3,8 @@ def boyer_moore(src, pat):
     string_list = list(src)
     bad_match_table = {}
 
-    print("pattern_list:", pattern_list)
-    print("string_list:", string_list)
+    # print("pattern_list:", pattern_list)
+    # print("string_list:", string_list)
 
     # 패턴이 비어있는 경우 처리
     if not pattern_list or not string_list:
