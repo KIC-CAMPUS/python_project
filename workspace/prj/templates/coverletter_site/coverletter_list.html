@@ -38,11 +38,10 @@
         </div>
         <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'cover_letter_delete' %}">
             {% csrf_token %}
-            <div class="linebox"></div>
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
                 <thead>
                 <tr>
-                    <th><input type="checkbox"></th>
+                    <th></th>
                     <th>번호</th>
                     <th>등록일</th>
                     <th>문서 유형</th>

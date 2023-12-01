@@ -12,22 +12,27 @@
             <a class="btn btn-primary" type="button" href="{% url 'review_create' %}">후기 작성</a>
         </div>
         <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
+            <thead>
             <tr>
-                <td>번호</td>
-                <td>작성자</td>
-                <td>이용 후기</td>
-                <td>작성일</td>
-                <td>상세 보기</td>
+                <th>번호</th>
+                <th>작성자</th>
+                <th>이용 후기</th>
+                <th>작성일</th>
+                <th>상세 보기</th>
             </tr>
+            </thead>
             {% for review in review_list %}
+            <tbody>
             <tr>
                 <td>{{ review.pk }}</td>
                 <td>{{ review.author }}</td>
                 <td>{{ review.title }}</td>
                 <td>{{ review.create_at }}</td>
                 <td><a class="btn btn-outline-secondary align-middle" type="button"
-                    style="width:70px; height:30px; font-size:11px" href="{% url 'review_detail' pk=review.pk %}">상세보기</a></td>
+                       style="width:70px; height:30px; font-size:11px" href="{% url 'review_detail' pk=review.pk %}">상세보기</a>
+                </td>
             </tr>
+            </tbody>
             {% endfor %}
         </table>
         <div class="linebox_table"></div>
@@ -42,11 +47,11 @@
                 {% endif %}
 
                 {% for page_no in page_obj.paginator.page_range %}
-                    <li class="page-item">
-                        <a class="page-link" href="{% url 'review_list' %}?page={{ page_no }}">
-                            {{ page_no }}
-                        </a>
-                    </li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'review_list' %}?page={{ page_no }}">
+                        {{ page_no }}
+                    </a>
+                </li>
                 {% endfor %}
 
                 {% if page_obj.has_next %}

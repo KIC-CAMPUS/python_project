@@ -10,3 +10,7 @@ def howtouse(request):
 
 def characters_count(request):
     return render(request, "web_site/count.html")
+
+
+def characters_check(request):
+    return render(request, "web_site/check.html")
