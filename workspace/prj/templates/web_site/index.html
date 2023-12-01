@@ -2,15 +2,40 @@
 
 {% block title %}메인 페이지{% endblock %}
 
+{% block head_content %}
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
+<style>
+   
+   #main_page {
+      width: 100%;
+      height: 1000px;
+      background-image : url('static/images/office-space.jpg');
+      background-size:cover;
+      padding-bottom: 0px;
+      position: relative;
+      bottom: 60px;
+   }
+   #titles {
+      padding: 6.5em;
+      font-size: 3em;
+      color: aliceblue;
+      text-align: center;
+   }
+   #titles p {
+      font-family: 'Nanum Gothic', sans-serif;
+      text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
+   }
+   #wrapper{
+      padding-bottom: 0px;
+   }
+</style>
+{% endblock %}
 {% block main_area %}
-<!--<ul>-->
-<!--   <li>-->
-<!--      <a href="{% url 'upload' %}" class="btn btn-primary">-->
-<!--         문서 업로드</a>-->
-<!--   </li>-->
-<!--   <li>-->
-<!--      <a href="{% url 'result_list' %}" class="btn btn-outline-primary">-->
-<!--         결과 목록</a>-->
-<!--   </li>-->
-<!--</ul>-->
+<div id="main_page">
+   <div id="titles">
+      <p>환영합니다.</p>
+      <p>보노스캔에 오신 걸,..</p>
+      <a class="btn btn-primary" href="{% url 'upload' %}">지금 검사해보기</a>
+   </div>
+</div>
 {% endblock%}

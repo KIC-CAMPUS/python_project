@@ -1,6 +1,6 @@
 nav {
     margin-bottom: 10px;
-    height: 80px
+    height: 80px;
 }
 
 .nav_line{
@@ -44,7 +44,7 @@ height: 3px;
 #wrapper{
   height: auto;
   min-height: calc(100vh - 300px); /* footer 높이를 빼준다. */
-  padding-bottom: 50px;
+  padding-bottom: 0px;
 }
 footer{
   height: 160px;
