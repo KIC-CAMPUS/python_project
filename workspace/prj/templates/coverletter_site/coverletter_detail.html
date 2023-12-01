@@ -62,7 +62,7 @@
                             <div class="card-header align-middle d-flex justify-content-end" style="height: 40px">
                                 <h6 class="card-title">문장 표절률 : <span>{{ plagiarism.get_result_per }}</span>%</h6>
                             </div>
-                            <a class="list-group-item list-group-item-action" href="#detail_{{plagiarism.sequence_number}}">
+                            <a class="list-group-item-action" href="#detail_{{plagiarism.sequence_number}}">
                                 <div class="card-body">
                                     <span>{{ plagiarism.query_sentence }}</span>
                                 </div>
@@ -81,13 +81,13 @@
                         <h5 class="card-title" style="font-weight: bold">표절 검사 결과</h5>
                         <div class="linebox_detail"></div>
                         {% for plagiarism in plagiarism_list %}
+                        {% if plagiarism.result <= 0.5 %}
+                        <div class="card border-success">
+                            <div class="card-header text-white bg-success border-success align-middle" style="height: 40px">
+                        {% else %}
                         <div class="card border-danger">
-                            <div {% if plagiarism.result <= 0.5 %}
-                            class="card-header text-white bg-success border-success align-middle"
-                            {% else %}
-                            class="card-header text-white bg-danger border-danger align-middle"
-                            {% endif %}
-                            style="height: 40px">
+                            <div class="card-header text-white bg-danger border-danger align-middle" style="height: 40px">
+                        {% endif %}
                             <h6 class="card-title" id="detail_{{plagiarism.sequence_number}}">{{ plagiarism.sequence_number|add:1 }}번 문장</h6>
                         </div>
                         <div class="card-body">

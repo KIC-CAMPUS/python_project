@@ -88,7 +88,7 @@ class CoverLetterDetail(DetailView):
       plagiarism_list = CoverLetterPlagiarism.objects.filter(coverletter=self.object).order_by('sequence_number')
       
       max_reulst = max(map(lambda x: x.result, plagiarism_list))
-      plagiarism_sentence = list(filter(lambda x: x.result > 0.4, plagiarism_list))
+      plagiarism_sentence = list(filter(lambda x: x.result > 0.5, plagiarism_list))
       
       context['max_reulst'] = '%.2f' % (max_reulst * 100)
       context['plagiarism_sentence_count'] = len(plagiarism_sentence)

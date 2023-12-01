@@ -41,8 +41,6 @@ height: 3px;
     border-top: 0px;
 }
 
-
-/* 24일 css 추가 */
 #wrapper{
   height: auto;
   min-height: calc(100vh - 300px); /* footer 높이를 빼준다. */
