@@ -1,29 +1,17 @@
-/*body {
-  margin: 0;
-  padding: 0;
-  background: url('../images/bonobono.jpg') center/cover no-repeat fixed;
-}
-
-.card{
-    background: none;
-}*/
-
- nav{
+nav {
     margin-bottom: 10px;
     height: 80px
-    background-color: rgba(0, 0, 0, 0);
- }
+}
 
- .nav_line{
-    margin-bottom: 60px;
-    background-color: #01aaef;
-    height: 3px;
- }
+.nav_line{
+margin-bottom: 60px;
+background-color: #01aaef;
+height: 3px;
+}
 
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
-
 }
 
 .dropdown-menu{
@@ -75,4 +63,11 @@ footer{
 
 .img_site{
     margin-left: 15px;
+}
+
+#logo{
+    font-weight: bold;
+    font-size: 2em;
+    text-decoration-line: none;
+    color: #01aaef;
 }
