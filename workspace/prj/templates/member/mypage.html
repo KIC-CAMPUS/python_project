@@ -106,13 +106,12 @@
                         <table class="table table-hover text-center" style="border-top: #01aaef 3px solid">
                             <thead>
                             <tr>
-
                                 <th>번호</th>
-                                <th>날짜</th>
+                                <th>등록일</th>
+                                <th>문서 유형</th>
                                 <th>이력서 명</th>
                                 <th>표절률</th>
-                                <th>표절 결과</th>
-                                <th>검사 결과</th>
+                                <th>상세 보기</th>
                                 <th><input type="checkbox" style="width: 15px; height: 15px;" id="cbx_chkAll">
                                 </th>
                             </tr>
@@ -122,7 +121,7 @@
                             <tr>
                                 <td>{{ coverletter.pk }}</td>
                                 <td>{{ coverletter.create_at }}</td>
-                                <td>{{ coverletter.document_type }}</td>
+                                <td>{{ coverletter.get_document_type_str }}</td>
                                 <td>{{ coverletter.title }}</td>
                                 <td>{{ coverletter.get_rate_per }}%</td>
                                 <td><a class="btn btn-outline-secondary align-middle" type="button"
